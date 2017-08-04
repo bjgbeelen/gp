@@ -21,15 +21,12 @@ case class Calendar(name: String,
     result.map(pwSeq ⇒ Week(pwSeq.map(_._2)))
   }
 
-  def filter(filters: Seq[DaySelection]) = filters.foldLeft(days) {
+  def filter(filters: DaySelection*) = filters.toSeq.foldLeft(days) {
     case (days, daySelection) ⇒ days.filter(daySelection.exec)
   }
 }
 
 object Calendar {
-  def Empty =
-    Calendar("", DateTime("2000-01-01"), DateTime("2000-01-01"), Seq.empty)
-
   def apply(name: String,
             from: String,
             to: String,

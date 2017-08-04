@@ -15,6 +15,6 @@ case class WeekDaySelection(dayOfWeeks: Seq[DayOfWeekNumber])
 case class PeriodSelection(from: DayId, to: DayId) extends DaySelection {
   def exec = day ⇒ from <= day.id && to >= day.id
 }
-case class DayIdSelection(ids: Seq[DayId]) extends DaySelection {
-  def exec = _.id in ids
+case class DayIdSelection(ids: DayId*) extends DaySelection {
+  def exec = _.id in ids.toSeq
 }

@@ -1,10 +1,10 @@
 package shifts
 package task
 
-import calendar.DayId
+import calendar._
 
 case class Task private (id: TaskId,
-                         dayId: DayId,
+                         day: Day,
                          label: String,
                          start: Minute,
                          end: Minute,
@@ -17,18 +17,28 @@ case class Task private (id: TaskId,
   def addTags(newTags: Set[Tag]) = copy(tags = tags ++ newTags)
 
   def overlapsWith(task: Task): Boolean =
-    this != task && this.dayId == task.dayId && this.start < task.end && this.end > task.start
+    this != task && this.day == task.day && this.start < task.end && this.end > task.start
+
+  def is(descriptor: Task.Descriptor) = tags.contains(descriptor.tag)
 }
 
 object Task {
-  def apply(dayId: DayId,
+  sealed trait Descriptor {
+    def tag: Tag = this.getClass().getSimpleName().toLowerCase
+  }
+  case object Weekend extends Descriptor
+  case object Night extends Descriptor {
+    override val tag = "nacht"
+  }
+
+  def apply(day: Day,
             label: String,
             start: Minute,
             end: Minute,
             tags: Set[Tag]): Task =
     Task(
-      id = dayId + tags.mkString("_", "_", ""),
-      dayId = dayId,
+      id = day.id + tags.mkString("_", "_", ""),
+      day = day,
       label = label,
       start = start,
       end = end,

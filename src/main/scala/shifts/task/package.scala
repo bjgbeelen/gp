@@ -1,5 +1,8 @@
 package shifts
 
+import calendar._
+import schedule._
+
 package object task {
   type Hour = Int
   type Minute = Int

@@ -26,11 +26,11 @@ object Schedule {
   def plan(tasks: List[Task],
            calendar: Calendar,
            counters: Seq[Counter],
-           constraints: Map[Resource, ResourceConstraints],
+           resourceConstraints: Map[Resource, ResourceConstraints],
            assignments: Map[Resource, Set[Task]] = Map.empty,
            retries: Int = 10,
-           incompleteSchedules: List[IncompleteSchedule] = List.empty): Either[Seq[IncompleteSchedule], (Schedule, Seq[IncompleteSchedule])] = {
-
+           incompleteSchedules: List[IncompleteSchedule] = List.empty)
+    : Either[Seq[IncompleteSchedule], (Schedule, Seq[IncompleteSchedule])] = {
     @tailrec
     def assignByChance(tasks: List[Task],
                        assignments: Map[Resource, Set[Task]])
@@ -42,10 +42,16 @@ object Schedule {
         }))
       case task :: rest =>
         val chanceCalculator = ChanceCalculator(
-          CurrentAssignmentsInfluencer,
-          AbsenceInfluencer,
-          OverlappingTaskInfluencer
-        )(task, counters, constraints, assignments)
+          CurrentAssignmentsInfluencer(counters, resourceConstraints.map {
+            case (resource, constraints) =>
+              (resource -> constraints.desiredNumberOfTasks)
+          }.toMap, assignments),
+          AbsenceInfluencer(resourceConstraints.map {
+            case (resource, constraints) => (resource -> constraints.absence)
+          }),
+          OverlappingTaskInfluencer(resourceConstraints.keys.toList,
+                                    assignments)
+        )(task)
 
         ResourcePicker(chanceCalculator).pick() match {
           case Some(resource) =>
@@ -67,7 +73,13 @@ object Schedule {
 
     assignByChance(tasks, assignments) match {
       case Left(incomplete) if retries > 0 =>
-        plan(tasks, calendar, counters, constraints, assignments, retries - 1, incomplete :: incompleteSchedules)
+        plan(tasks,
+             calendar,
+             counters,
+             resourceConstraints,
+             assignments,
+             retries - 1,
+             incomplete :: incompleteSchedules)
       case Right(schedule) => Right(schedule, incompleteSchedules)
       case Left(incomplete) => Left(incomplete :: incompleteSchedules)
     }

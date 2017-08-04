@@ -5,6 +5,7 @@ import resource._
 import task._
 import schedule._
 import counter._
+import calendar._
 
 case class ChanceCalculator(chances: Map[Resource, Float],
                             influencers: Map[String, Map[Resource, Float]]) {
@@ -23,17 +24,9 @@ case class ChanceCalculator(chances: Map[Resource, Float],
 }
 
 object ChanceCalculator {
-  def apply(influencers: ChanceInfluencer*)(
-      task: Task,
-      counters: Seq[Counter],
-      constraints: Map[Resource, ResourceConstraints],
-      assignments: Map[Resource, Set[Task]]): ChanceCalculator = {
+  def apply(influencers: ChanceInfluencer*)(task: Task): ChanceCalculator = {
     val influencersMap = influencers.toList.map {
-      case infl =>
-        (infl.getClass.getName -> infl(task,
-                                       counters,
-                                       constraints,
-                                       assignments))
+      case infl => (infl.getClass.getName -> infl(task))
     }.toMap
     val total = influencersMap.values.foldLeft(Map[Resource, Float]()) {
       case (result, influence) =>

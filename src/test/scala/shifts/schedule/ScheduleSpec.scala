@@ -11,7 +11,8 @@ class ScheduleSpec extends WordSpec with Matchers {
       val testTasks = tasks.toList.sortBy(!_.tags.contains("feest"))
       Schedule.plan(testTasks, calendar, counters, resourceConstraints) match {
         case Right((schedule, incompleteSchedules)) =>
-          println(s"Found a schedule after ${incompleteSchedules.size} attempts")
+          println(
+            s"Found a schedule after ${incompleteSchedules.size + 1} attempts")
           resourceConstraints.foreach {
             case (resource, constraints) =>
               val resourceTasks = schedule.tasks(resource)
@@ -22,11 +23,11 @@ class ScheduleSpec extends WordSpec with Matchers {
               }
 
               // Test noone is assigned a task during their absence
-              resourceTasks.map(_.dayId) intersect constraints.absence shouldBe Set.empty
+              resourceTasks.map(_.day.id) intersect constraints.absence shouldBe Set.empty
 
               // Test noone is assigned overlapping tasks
               resourceTasks.foreach { task =>
-                resourceTasks.filter(_.overlapsWith(task)) shouldBe Set.empty
+                resourceTasks.count(_.overlapsWith(task)) shouldBe 0
               }
           }
         case Left(incompletes) =>

@@ -3,24 +3,20 @@ package chance
 package influencer
 
 import task._
-import counter._
 import resource._
 import schedule._
 
-object OverlappingTaskInfluencer extends ChanceInfluencer {
+object OverlappingTaskInfluencer {
   def apply(
-      task: Task,
-      counters: Seq[Counter],
-      constraints: Map[Resource, ResourceConstraints],
+      resources: Seq[Resource],
       assignments: Map[Resource, Set[Task]]
-  ): Map[Resource, Float] =
-    constraints.map {
-      case (resource, constraint) =>
-        val chance =
-          if (assignments
-                .getOrElse(resource, Set.empty)
-                .exists(_.overlapsWith(task))) 0F
-          else 1F
-        (resource -> chance)
+  )(task: Task): Map[Resource, Float] =
+    resources.map { resource =>
+      val chance =
+        if (assignments
+              .getOrElse(resource, Set.empty)
+              .exists(_.overlapsWith(task))) 0F
+        else 1F
+      (resource -> chance)
     }.toMap
 }

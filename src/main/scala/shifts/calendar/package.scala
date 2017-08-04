@@ -1,5 +1,7 @@
 package shifts
 
+import task._
+
 package object calendar {
   //import com.github.nscala_time.time.Imports._
 
