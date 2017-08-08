@@ -31,6 +31,8 @@ object Schedule {
            retries: Int = 10,
            incompleteSchedules: List[IncompleteSchedule] = List.empty)
     : Either[Seq[IncompleteSchedule], (Schedule, Seq[IncompleteSchedule])] = {
+    implicit val taskContext = TaskContext(tasks)
+
     @tailrec
     def assignByChance(tasks: List[Task],
                        assignments: Map[Resource, Set[Task]])
@@ -42,15 +44,28 @@ object Schedule {
         }))
       case task :: rest =>
         val chanceCalculator = ChanceCalculator(
-          CurrentAssignmentsInfluencer(counters, resourceConstraints.map {
-            case (resource, constraints) =>
-              (resource -> constraints.desiredNumberOfTasks)
-          }.toMap, assignments),
-          AbsenceInfluencer(resourceConstraints.map {
+          "current assignments" -> CurrentAssignmentsInfluencer(
+            counters,
+            resourceConstraints.map {
+              case (resource, constraints) =>
+                (resource -> constraints.desiredNumberOfTasks)
+            }.toMap,
+            assignments),
+          "absence" -> AbsenceInfluencer(resourceConstraints.map {
             case (resource, constraints) => (resource -> constraints.absence)
           }),
-          OverlappingTaskInfluencer(resourceConstraints.keys.toList,
-                                    assignments)
+          "overlapping tasks" -> OverlappingTaskInfluencer(
+            resourceConstraints.keys.toList,
+            assignments)
+          ,
+          "tasks in one weekend" -> TasksInOneWeekendInfluencer(
+            weekTasks = tasks.filter(_.week == task.week).toSet,
+            desiredTasksInOneWeekend = resourceConstraints.map{
+              case (resource, constraints) =>
+                (resource -> constraints.desiredNumberOfTasksInOneWeekend)
+            }.toMap,
+            assignments = assignments
+          )
         )(task)
 
         ResourcePicker(chanceCalculator).pick() match {

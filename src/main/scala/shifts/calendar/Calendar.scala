@@ -212,8 +212,15 @@ case class Day(label: String,
                dayOfWeek: DayOfWeekNumber,
                parent: () ⇒ PartialWeek)
     extends NeighbourSupport[Day, PartialWeek] {
-  def week = parent()
-  def month = week.month
+  def partialWeek = parent()
+  def week: Week = {
+    val partialWeeks: Seq[PartialWeek] =
+      Seq(partialWeek.previous, Some(partialWeek), partialWeek.next).collect {
+        case Some(week) if week.number == partialWeek.number => week
+      }
+    Week(partialWeeks)
+  }
+  def month = partialWeek.month
   def year = month.year
 
   lazy val id: DayId = Day.id(year.number, month.number, number)

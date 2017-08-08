@@ -19,13 +19,15 @@ object TasksInOneWeekendInfluencer {
         val chance: Float =
           if (task.is(Weekend)) {
             val resourceTasks = assignments.getOrElse(resource, Set.empty)
-            val tasksInSameWeekend = weekTasks.filter(_.is(Weekend))
+            val tasksInSameWeekend = weekTasks.filter(_.is(Weekend)) intersect resourceTasks
             val nrOfNightTasks = tasksInSameWeekend.count(_.is(Night))
 
             if (tasksInSameWeekend.size > 0) {
               if (excludeNights && task.is(Night)) 0F
-              else if (nrOfNightTasks > 0 && (excludeNights || task.is(Night))) 0F
-              else if (tasksInSameWeekend.size < desiredNumberOfWeekendTasks) 10F
+              else if (nrOfNightTasks > 0 && (excludeNights || task.is(Night)))
+                0F
+              else if (tasksInSameWeekend.size < desiredNumberOfWeekendTasks)
+                10F
               else 0.1F
             } else 1F
           } else 1F

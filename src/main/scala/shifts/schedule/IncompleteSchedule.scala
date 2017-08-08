@@ -12,6 +12,7 @@ case class IncompleteSchedule(task: Task,
   override def toString(): String = s"""
     Could not assign $task.
     ${tasksToGo.size} tasks to go after this one.\n
+    ${assignments.size} tasks already assigned.\n
     $chanceCalculator
   """
 }

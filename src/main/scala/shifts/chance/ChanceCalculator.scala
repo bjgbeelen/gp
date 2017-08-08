@@ -24,9 +24,10 @@ case class ChanceCalculator(chances: Map[Resource, Float],
 }
 
 object ChanceCalculator {
-  def apply(influencers: ChanceInfluencer*)(task: Task): ChanceCalculator = {
+  def apply(influencers: (String, ChanceInfluencer)*)(
+      task: Task): ChanceCalculator = {
     val influencersMap = influencers.toList.map {
-      case infl => (infl.getClass.getName -> infl(task))
+      case (name, infl) => (name -> infl(task))
     }.toMap
     val total = influencersMap.values.foldLeft(Map[Resource, Float]()) {
       case (result, influence) =>

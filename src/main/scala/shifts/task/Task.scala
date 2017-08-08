@@ -8,8 +8,9 @@ case class Task private (id: TaskId,
                          label: String,
                          start: Minute,
                          end: Minute,
-                         tags: Set[Tag]) {
+                         tags: Set[Tag]) { self =>
   require(start < end, "The start of the task should be earlier than its end")
+  import Task._
 
   def updateLabel(label: String) = copy(label = label)
   def updateStart(start: Minute) = copy(start = start)
@@ -24,7 +25,7 @@ case class Task private (id: TaskId,
 
 object Task {
   sealed trait Descriptor {
-    def tag: Tag = this.getClass().getSimpleName().toLowerCase
+    def tag: Tag = this.getClass().getSimpleName().toLowerCase.replace("$", "")
   }
   case object Weekend extends Descriptor
   case object Night extends Descriptor {

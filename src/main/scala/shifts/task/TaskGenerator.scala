@@ -17,7 +17,7 @@ object TaskGenerator {
     instructions.foldLeft(Set[Task]()) {
       case (acc, instr) =>
         acc ++ calendar
-          .filter(instr.daySelection : _*)
+          .filter(instr.daySelection: _*)
           .map(
             day =>
               Task(

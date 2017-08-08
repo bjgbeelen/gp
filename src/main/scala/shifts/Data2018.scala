@@ -80,13 +80,13 @@ object Data2018 {
   val weekendDays = WeekDaySelection(saturday to sunday)
   val holidaySelection = DayIdSelection(holidays.collect {
     case Holiday(id, label, _) ⇒ id
-  } : _*)
+  }: _*)
   val holidayWholeDaySelection = DayIdSelection(holidays.collect {
     case Holiday(id, label, true) ⇒ id
-  } : _*)
+  }: _*)
   val holidayPartDaySelection = DayIdSelection(holidays.collect {
     case Holiday(id, label, false) ⇒ id
-  } : _*)
+  }: _*)
   val noHolidaySelection = InverseSelection(holidaySelection)
   val noWholeHolidaySelection = InverseSelection(holidayWholeDaySelection)
 

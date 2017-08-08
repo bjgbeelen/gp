@@ -13,4 +13,12 @@ package object task {
   }
 
   type TaskId = String
+
+  implicit class TaskExtension(task: Task)(implicit context: TaskContext) {
+    def previous: Option[Task] = context.previousTasks.get(task)
+
+    def next: Option[Task] = context.nextTasks.get(task)
+
+    def week: Week = context.taskWeek(task)
+  }
 }
