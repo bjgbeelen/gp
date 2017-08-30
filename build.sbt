@@ -11,6 +11,13 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       nScalaTime % Compile,
       scalaTest % Test,
-      cats % Compile
+      http4sServer % Compile,
+      http4sCirce % Compile,
+      http4sDsl % Compile,
+      circeCore % Compile,
+      circeGeneric % Compile,
+      circeParser % Compile,
+      cats % Compile,
+      logback % Runtime
     )
   )

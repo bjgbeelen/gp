@@ -68,11 +68,24 @@ object Calendar {
     def sortWeeks(weeks: Iterable[WeekNumber],
                   month: MonthNumber): List[WeekNumber] = {
       val sorted = weeks.toList.sorted
-      sorted.reverse match {
-        case w :: _ if month == 1 && (w >= 52) ⇒
-          w :: sorted.take(sorted.length - 1)
-        case _ ⇒ sorted
+
+      val moveToEnd: Option[List[WeekNumber]] = sorted match {
+        case w :: tail if month == 12 && w == 1 =>
+          Some(tail :+ w)
+        case _ => None
       }
+      val moveToFront = sorted.reverse match {
+        case w :: _ if month == 1 && (w >= 52) ⇒
+          Some(w :: sorted.take(sorted.length - 1))
+        case _ => None
+      }
+      moveToEnd.orElse(moveToFront).getOrElse(sorted)
+
+      // sorted.reverse match {
+      //   case w :: _ if month == 1 && (w >= 52) ⇒
+      //     w :: sorted.take(sorted.length - 1)
+      //   case _ ⇒ sorted
+      // }
     }
 
     val calendar = daysMapping(from)
@@ -162,10 +175,20 @@ case class PartialWeek(number: WeekNumber,
     extends CalendarNode[Day]
     with NeighbourSupport[PartialWeek, Month] {
   def month = parent()
-  def year: Year = previous.fold(month.year) {
-    case week if week.number == number && month.number == 1 ⇒
-      month.year.previous.get
-    case _ ⇒ month.year
+  lazy val year: Year = {
+    val optionNext = next.flatMap {
+      case week
+          if week.number == number && month.number == 12 && children.size < 4 =>
+        Some(month.year.next.get)
+      case _ => None
+    }
+    val optionPrevious = previous.flatMap {
+      case week
+          if week.number == number && month.number == 1 && children.size < 4 =>
+        Some(month.year.previous.get)
+      case _ => None
+    }
+    optionNext.orElse(optionPrevious).getOrElse(month.year)
   }
 
   def id = s"${year.number}-$number"
@@ -174,7 +197,10 @@ case class PartialWeek(number: WeekNumber,
 }
 
 case class Week(number: WeekNumber, year: YearNumber, days: Seq[Day]) {
+  import Math.abs
   def id = s"$year-$number"
+  def distance(other: Week): Int =
+    abs(abs(year - other.year) * 52 - abs(number - other.number))
 }
 
 case object Week {
@@ -199,6 +225,17 @@ case object Day {
   val shortDayOfWeekNames = Seq("_", "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo")
   def id(year: YearNumber, month: MonthNumber, day: DayNumber) =
     f"${year}${month}%02d${day}%02d"
+
+  import io.circe._
+  import io.circe.syntax._
+  implicit val dayEncoder: Encoder[Day] = new Encoder[Day] {
+    final def apply(day: Day): Json = Json.obj(
+      ("id", Json.fromString(day.id)),
+      ("label", Json.fromString(day.label)),
+      ("number", Json.fromInt(day.number)),
+      ("dayOfWeek", Json.fromInt(day.dayOfWeek))
+    )
+  }
 }
 
 case object DateTime {

@@ -3,6 +3,9 @@ package task
 
 import calendar._
 
+import io.circe.generic.auto._
+import io.circe.syntax._
+
 case class Task private (id: TaskId,
                          day: Day,
                          label: String,
@@ -20,6 +23,15 @@ case class Task private (id: TaskId,
   def overlapsWith(task: Task): Boolean =
     this != task && this.day == task.day && this.start < task.end && this.end > task.start
 
+  def connectsWith(task: Task, allowSwitch: Boolean = true): Boolean = {
+    val sameDayConnection = this.day == task.day && this.end == task.start
+    val overNightConnection = this.day.next
+      .map(_ == task.day)
+      .getOrElse(false) && this.end == 23 :: 0 && task.start == 0 :: 0
+    sameDayConnection || overNightConnection || (allowSwitch && task
+      .connectsWith(self, allowSwitch = false))
+  }
+
   def is(descriptor: Task.Descriptor) = tags.contains(descriptor.tag)
 }
 
@@ -30,6 +42,12 @@ object Task {
   case object Weekend extends Descriptor
   case object Night extends Descriptor {
     override val tag = "nacht"
+  }
+  case object Morning extends Descriptor {
+    override val tag = "ochtend"
+  }
+  case object Evening extends Descriptor {
+    override val tag = "avond"
   }
 
   def apply(day: Day,

@@ -1,3 +1,4 @@
+
 package shifts
 
 import calendar._
@@ -5,6 +6,7 @@ import task._
 import resource._
 import counter._
 import schedule._
+import constraint._
 
 object Data2018 {
   val holidays = Seq(
@@ -198,41 +200,101 @@ object Data2018 {
   }
 
   val totalPatients = resources.map(_.numberOfPatients).sum
-  val resourceConstraints = {
+
+  val resourceConstraints: Map[Resource, Seq[Constraint]] = {
     val first :: others = resources
-    val otherResourceConstraints = others.map {
-      case Resource(id, _, nrOfPatients) =>
-        ResourceConstraints(
-          resourceId = id,
-          desiredNumberOfTasks =
-            calculateDesiredNumberOfTasks(tasks,
-                                          counters,
-                                          nrOfPatients * 1F / totalPatients),
-          desiredNumberOfTasksInOneWeekend = 2,
-          wantsEveningNightCombination = false,
-          wantsCoupledTasks = false,
-          absence = Set.empty
-        )
+    val overlappingTasksConstraint = OverlappingTasksConstraint()
+    val weekendGapConstraint =
+      WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar, hard = false)
+    val absenceConstraint = AbsenceConstraint(absence = Set.empty)
+    def weekendTasksConstraint(resource: Resource) = {
+      val desired = if (resource.id == "houppermans") 3 else 2
+      WeekendTasksConstraint(desiredTasksPerWeekend = desired)
     }
-    val othersDesiredNumberOfTaskSum =
-      otherResourceConstraints.map(_.desiredNumberOfTasks).sumUp
-    val firstResourceConstraints = ResourceConstraints(
-      resourceId = first.id,
-      desiredNumberOfTasks = calculateDesiredNumberOfTasks(tasks, counters, 1) - othersDesiredNumberOfTaskSum,
-      desiredNumberOfTasksInOneWeekend = 2,
-      wantsEveningNightCombination = false,
-      wantsCoupledTasks = false,
-      absence = Set.empty
-    )
-    (firstResourceConstraints :: otherResourceConstraints).map { rc =>
-      (resources.find(_.id == rc.resourceId).get -> rc)
+    def connectingConstraint(resource: Resource) = {
+      val desired = (resource.id in Seq("baars", "houppermans", "heho"))
+      ConnectionConstraint(connectionDesired = desired,
+                           hard = desired == false)
+    }
+
+    val otherResourceConstraints = others.map {
+      case resource @ Resource(_, _, nrOfPatients) =>
+        val counterConstraints: List[CounterConstraint] =
+          calculateDesiredNumberOfTasks(
+            tasks,
+            counters,
+            nrOfPatients * 1F / totalPatients).map {
+            case (counter, desiredNumber) =>
+              CounterConstraint(counter, desiredNumber)
+          }.toList
+        val constraints: List[Constraint] = counterConstraints ++ List(
+          overlappingTasksConstraint,
+          absenceConstraint,
+          weekendTasksConstraint(resource),
+          connectingConstraint(resource),
+          weekendGapConstraint)
+        (resource, constraints)
     }.toMap
+
+    val firstResourceConstraints = {
+      val counterConstraints = calculateDesiredNumberOfTasks(
+        tasks,
+        counters,
+        1
+      ).map {
+        case (counter, totalDesiredNumber) =>
+          val desiredNumber = totalDesiredNumber - otherResourceConstraints.values.flatten.collect {
+            case CounterConstraint(c, number, _) if c == counter => number
+          }.sum
+          CounterConstraint(counter, desiredNumber)
+      }.toList
+      val constraints: List[Constraint] = List(
+        overlappingTasksConstraint,
+        connectingConstraint(first),
+        absenceConstraint,
+        weekendTasksConstraint(first),
+        weekendGapConstraint) ++ counterConstraints
+      (first -> constraints)
+    }
+
+    otherResourceConstraints + firstResourceConstraints
   }
 
-  val actualFirst = calculateDesiredNumberOfTasks(
-    tasks,
-    counters,
-    resources.head.numberOfPatients * 1F / totalPatients)
+  // val resourceConstraints = {
+  //   val first :: others = resources
+  //   val otherResourceConstraints = others.map {
+  //     case Resource(id, _, nrOfPatients) =>
+  //       ResourceConstraints(
+  //         resourceId = id,
+  //         desiredNumberOfTasks =
+  //           calculateDesiredNumberOfTasks(tasks,
+  //                                         counters,
+  //                                         nrOfPatients * 1F / totalPatients),
+  //         desiredNumberOfTasksInOneWeekend = 2,
+  //         wantsEveningNightCombination = false,
+  //         wantsCoupledTasks = false,
+  //         absence = Set.empty
+  //       )
+  //   }
+  //   val othersDesiredNumberOfTaskSum =
+  //     otherResourceConstraints.map(_.desiredNumberOfTasks).sumUp
+  //   val firstResourceConstraints = ResourceConstraints(
+  //     resourceId = first.id,
+  //     desiredNumberOfTasks = calculateDesiredNumberOfTasks(tasks, counters, 1) - othersDesiredNumberOfTaskSum,
+  //     desiredNumberOfTasksInOneWeekend = 2,
+  //     wantsEveningNightCombination = false,
+  //     wantsCoupledTasks = false,
+  //     absence = Set.empty
+  //   )
+  //   (firstResourceConstraints :: otherResourceConstraints).map { rc =>
+  //     (resources.find(_.id == rc.resourceId).get -> rc)
+  //   }.toMap
+  // }
+
+  // val actualFirst = calculateDesiredNumberOfTasks(
+  //   tasks,
+  //   counters,
+  //   resources.head.numberOfPatients * 1F / totalPatients)
 
   // val schedule =
   //   Schedule.plan(tasks.toList, calendar, counters, resourceConstraints)
