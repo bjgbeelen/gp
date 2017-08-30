@@ -16,12 +16,12 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
   "WeekendDistanceInfluencer" should {
     "say yes (return 1) to a task if the distances in weeks between tasks is equal or larger than the desired distance" in {
       val influence = WeekendDistanceInfluencer(
-        desiredDistances = Map(resource -> 2),
+        desiredDistance = 2,
         hard = true,
         calendar = calendar,
         taskContext = context,
-        assignments = Map((resource -> Set[Task]()))
-      )(context.tasks.head) shouldBe Map(resource -> 1F)
+        assignments = Set[Task]()
+      ).chance(context.tasks.head) shouldBe 1F
     }
     "say yes (return 1) to a task if there is already a task in the same week" in {
       val assigned = context.tasks.find(_.day.id == "20180101").get
@@ -31,12 +31,12 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       assignedWeek distance sameWeek shouldBe 0
 
       val influence = WeekendDistanceInfluencer(
-        desiredDistances = Map(resource -> 2),
+        desiredDistance = 2,
         hard = true,
         calendar = calendar,
         taskContext = context,
-        assignments = Map(resource -> Set(assigned))
-      )(sameWeekTask) shouldBe Map(resource -> 1F)
+        assignments = Set(assigned)
+      ).chance(sameWeekTask) shouldBe 1F
     }
     "say no (return 0) to a task if there is already a task in the previous week" in {
       val assigned = context.tasks.find(_.day.id == "20180101").get
@@ -46,12 +46,12 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       assignedWeek distance nextWeek shouldBe 1
 
       val influence = WeekendDistanceInfluencer(
-        desiredDistances = Map(resource -> 2),
+        desiredDistance = 2,
         hard = true,
         calendar = calendar,
         taskContext = context,
-        assignments = Map(resource -> Set(assigned))
-      )(nextWeekTask) shouldBe Map(resource -> 0F)
+        assignments = Set(assigned)
+      ).chance(nextWeekTask) shouldBe 0F
     }
     "say yes (return 1) to a task if the distance is large enough" in {
       val assigned = context.tasks.find(_.day.id == "20180101").get
@@ -60,12 +60,12 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       val nextWeek = context.taskWeek(nextWeekTask)
       context.taskWeek(assigned) distance context.taskWeek(nextWeekTask) shouldBe 2
       val influence = WeekendDistanceInfluencer(
-        desiredDistances = Map(resource -> 2),
+        desiredDistance = 2,
         hard = true,
         calendar = calendar,
         taskContext = context,
-        assignments = Map(resource -> Set(assigned))
-      )(nextWeekTask) shouldBe Map(resource -> 1F)
+        assignments = Set(assigned)
+      ).chance(nextWeekTask) shouldBe 1F
     }
   }
 }

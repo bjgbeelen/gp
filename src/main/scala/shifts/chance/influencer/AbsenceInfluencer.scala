@@ -7,13 +7,12 @@ import resource._
 import schedule._
 import calendar.DayId
 
-object AbsenceInfluencer {
-  def apply(
-      resourceAbsence: Map[Resource, Set[DayId]]
-  )(task: Task): Map[Resource, Float] =
-    resourceAbsence.map {
-      case (resource, absence) =>
-        val chance = if (absence.contains(task.day.id)) 0F else 1F
-        (resource -> chance)
-    }.toMap
+// object AbsenceInfluencer {
+//   def apply(
+//       absence: Set[DayId]
+//   )(task: Task): Float = if (absence.contains(task.day.id)) 0F else 1F
+// }
+
+case class AbsenceInfluencer(absence: Set[DayId]) extends ChanceInfluencer {
+  def chance(task: Task): Float = if (absence.contains(task.day.id)) 0F else 1F
 }

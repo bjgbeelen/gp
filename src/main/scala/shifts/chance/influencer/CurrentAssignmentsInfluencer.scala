@@ -8,25 +8,22 @@ import resource._
 import schedule._
 import constraint._
 
-object CurrentAssignmentsInfluencer {
-  def apply(
-      counters: Seq[Counter],
-      resourceDesiredNumberOfTasks: Map[Resource, Seq[CounterConstraint]],
-      assignments: Map[Resource, Set[Task]]
-  )(task: Task): Map[Resource, Float] =
-    resourceDesiredNumberOfTasks.map {
-      case (resource, constraints) =>
-        val chance = counters.select(task).foldLeft(1F) {
-          case (acc, counter) =>
-            val currentCount =
-              counter.count(assignments.getOrElse(resource, Set.empty))
-            val desiredCount = constraints.collect {
-              case CounterConstraint(`counter`, desiredCount, _) =>
-                desiredCount
-            }.head
-            if (desiredCount == 0) 0F
-            else acc * (desiredCount - currentCount) / desiredCount
-        }
-        (resource -> chance)
-    }.toMap
+case class CurrentAssignmentsInfluencer(counter: Counter, desiredNumberOfTasks: Int, assignments: Set[Task]) extends ChanceInfluencer {
+  def chance(task: Task): Float = {
+     val currentCount = counter.count(assignments)
+            if (desiredNumberOfTasks == 0) 0F
+            else (desiredNumberOfTasks - currentCount) / desiredNumberOfTasks
+          }
 }
+
+// object CurrentAssignmentsInfluencer {
+//   def apply(
+//       counter: Counter,
+//       desiredNumberOfTasks: Int,
+//       assignments: Set[Task]
+//   )(task: Task): Float = {
+//      val currentCount = counter.count(assignments)
+//             if (desiredNumberOfTasks == 0) 0F
+//             else (desiredNumberOfTasks - currentCount) / desiredNumberOfTasks
+//           }
+// }

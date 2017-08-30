@@ -49,64 +49,79 @@ object Schedule {
           case (result, (k, v)) => result ++ v.map(_ -> k).toMap
         }))
       case task :: rest =>
-        val chanceCalculator = ChanceCalculator(
-          "current assignments" -> CurrentAssignmentsInfluencer(
-            counters,
-            resourceConstraints.map {
-              case (resource, constraints) =>
-                (resource -> constraints.collect {
-                  case counterConstraint: CounterConstraint =>
-                    counterConstraint
-                })
-            }.toMap,
-            assignments
-          ),
-          "absence" -> AbsenceInfluencer(resourceConstraints.map {
-            case (resource, constraints) =>
-              val absence = constraints.collect {
-                case AbsenceConstraint(absence, _) => absence
-              }.head
-              (resource -> absence)
-          }),
-          "overlapping tasks" -> OverlappingTaskInfluencer(
-            resourceConstraints.keys.toList,
-            assignments),
-          "connecting tasks" -> ConnectingTaskInfluencer(
-            resourceConstraints.map {
-              case (resource, constraints) =>
-                val input = constraints.collect {
-                  case ConnectionConstraint(desired, hard) => (desired, hard)
-                }.head
-                (resource, input)
-            }.toMap,
-            assignments
-          ),
-          "tasks in one weekend" -> TasksInOneWeekendInfluencer(
-            weekTasks = context.weekTasks(task.week).toSet,
-            desiredTasksInOneWeekend = resourceConstraints.map {
-              case (resource, constraints) =>
-                val desiredWeekendTasks = constraints.collect {
-                  case WeekendTasksConstraint(desired, excludeNights, _) =>
-                    (desired, excludeNights)
-                }.head
-                (resource -> desiredWeekendTasks)
-            }.toMap,
-            assignments = assignments
-          ),
-          "weekend distances" -> WeekendDistanceInfluencer(
-            desiredDistances = resourceConstraints.map{
-              case (resource, constraints) =>
-                val desiredDistance = constraints.collect {
-                  case WeekendDistanceConstraint(desired, _, hard) => desired
-                }.head
-                (resource -> desiredDistance)
-            }.toMap,
-            hard = false,
-            calendar = calendar,
-            taskContext = context,
-            assignments = assignments
-          )
-        )(task)
+        val influencers: Map[Resource, Seq[ChanceInfluencer]] = resourceConstraints.map{ case (resource, constraints) =>
+          val resourceAssignments = assignments.getOrElse(resource, Set.empty)
+          (resource -> constraints.map{
+            case CounterConstraint(counter, desiredCount, _) =>
+              CurrentAssignmentsInfluencer(counter, desiredCount, resourceAssignments)
+            case AbsenceConstraint(absence, _) => AbsenceInfluencer(absence)
+            case ConnectionConstraint(connectionDesired, hard) => ConnectingTaskInfluencer(connectionDesired, hard, resourceAssignments)
+            case OverlappingTasksConstraint(hard) => OverlappingTaskInfluencer(resourceAssignments)
+            case WeekendDistanceConstraint(desiredDistance, _, hard) => WeekendDistanceInfluencer(desiredDistance, hard, calendar, context, resourceAssignments)
+            case WeekendTasksConstraint(desiredTasksPerWeekend, excludeNights, _) =>
+              val weekTasks = context.weekTasks(task.week).toSet
+              TasksInOneWeekendInfluencer(weekTasks, desiredTasksPerWeekend, excludeNights, resourceAssignments)
+          })
+        }
+        val chanceCalculator = ChanceCalculator(influencers)(task)
+        // val chanceCalculator = ChanceCalculator(
+        //   "current assignments" -> CurrentAssignmentsInfluencer(
+        //     counters,
+        //     resourceConstraints.map {
+        //       case (resource, constraints) =>
+        //         (resource -> constraints.collect {
+        //           case counterConstraint: CounterConstraint =>
+        //             counterConstraint
+        //         })
+        //     }.toMap,
+        //     assignments
+        //   ),
+        //   "absence" -> AbsenceInfluencer(resourceConstraints.map {
+        //     case (resource, constraints) =>
+        //       val absence = constraints.collect {
+        //         case AbsenceConstraint(absence, _) => absence
+        //       }.head
+        //       (resource -> absence)
+        //   }),
+        //   "overlapping tasks" -> OverlappingTaskInfluencer(
+        //     resourceConstraints.keys.toList,
+        //     assignments),
+        //   "connecting tasks" -> ConnectingTaskInfluencer(
+        //     resourceConstraints.map {
+        //       case (resource, constraints) =>
+        //         val input = constraints.collect {
+        //           case ConnectionConstraint(desired, hard) => (desired, hard)
+        //         }.head
+        //         (resource, input)
+        //     }.toMap,
+        //     assignments
+        //   ),
+        //   "tasks in one weekend" -> TasksInOneWeekendInfluencer(
+        //     weekTasks = context.weekTasks(task.week).toSet,
+        //     desiredTasksInOneWeekend = resourceConstraints.map {
+        //       case (resource, constraints) =>
+        //         val desiredWeekendTasks = constraints.collect {
+        //           case WeekendTasksConstraint(desired, excludeNights, _) =>
+        //             (desired, excludeNights)
+        //         }.head
+        //         (resource -> desiredWeekendTasks)
+        //     }.toMap,
+        //     assignments = assignments
+        //   ),
+        //   "weekend distances" -> WeekendDistanceInfluencer(
+        //     desiredDistances = resourceConstraints.map{
+        //       case (resource, constraints) =>
+        //         val desiredDistance = constraints.collect {
+        //           case WeekendDistanceConstraint(desired, _, hard) => desired
+        //         }.head
+        //         (resource -> desiredDistance)
+        //     }.toMap,
+        //     hard = false,
+        //     calendar = calendar,
+        //     taskContext = context,
+        //     assignments = assignments
+        //   )
+        // )(task)
 
         ResourcePicker(chanceCalculator).pick() match {
           case Some(resource) =>

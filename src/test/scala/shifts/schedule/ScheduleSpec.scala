@@ -22,11 +22,13 @@ class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
                              calendar,
                              counters,
                              resourceConstraints,
-                             runs = 300,
+                             runs = 1000,
                              parallel = 4),
                 timeout(Span(1, Hours))) {
-        case ScheduleRunResult(incomplete, completes) =>
+        case ScheduleRunResult(incompletes, completes) =>
           println(s"Complete schedules: ${completes.size}")
+
+          // println(s"Incomplete headOption: ${incompletes.headOption}")
 
           completes.foreach { schedule =>
             resourceConstraints.foreach {

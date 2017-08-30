@@ -7,5 +7,9 @@ import counter._
 import calendar._
 
 package object chance {
-  type ChanceInfluencer = Task => Map[Resource, Float]
+  //type ChanceInfluencer = Task => Float
+}
+
+trait ChanceInfluencer {
+  def chance(task: Task): Float
 }
