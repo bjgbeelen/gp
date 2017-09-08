@@ -13,6 +13,7 @@ package object calendar {
   type DayOfWeekNumber = Int
   type DayNumber       = Int
   type DayId           = String
+  type WeekId          = String
 
   val monday: DayOfWeekNumber    = 1
   val tuesday: DayOfWeekNumber   = 2

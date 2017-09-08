@@ -1,11 +1,6 @@
 package shifts
 package calendar
 
-import io.circe._
-import io.circe.generic.auto._
-import io.circe.syntax._
-import io.circe.joda._
-
 case class DayView(day: Int, id: String, label: String, dayOfWeek: Int)
 case class PartialWeekView(week: Int, days: Seq[DayView])
 case class MonthView(month: Int, name: String, weeks: Seq[PartialWeekView])

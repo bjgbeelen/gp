@@ -160,7 +160,7 @@ case class PartialWeek(number: WeekNumber, parent: () ⇒ Month, children: Seq[D
 
 case class Week(number: WeekNumber, year: YearNumber, days: Seq[Day]) {
   import Math.abs
-  def id = s"$year-$number"
+  def id: WeekId = s"$year-$number"
   def distance(other: Week): Int =
     abs(abs(year - other.year) * 52 - abs(number - other.number))
 }

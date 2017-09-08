@@ -15,7 +15,9 @@ import concurrent._
 
 case class Schedule(name: String,
                     assignments: Map[Task, Resource],
-                    constraints: Map[Resource, Seq[Constraint]] = Map.empty) {
+                    resourceConstraints: Map[Resource, Seq[Constraint]] = Map.empty) {
+  implicit def context = TaskContext(assignments.keys.toList)
+
   def tasks(resource: Resource): Set[Task] =
     assignments
       .filter {
@@ -23,6 +25,14 @@ case class Schedule(name: String,
       }
       .keys
       .toSet
+
+  def totalScore =
+    resourceConstraints.map {
+      case (resource, constraints) =>
+        constraints.foldLeft(0) {
+          case (acc, constraint) => constraint.score(tasks(resource))
+        }
+    }.sum
 }
 
 case class ScheduleRunResult(incomplete: Seq[IncompleteSchedule], complete: Seq[Schedule]) {
@@ -50,7 +60,7 @@ object Schedule {
           val initialValue = Map[Task, Resource]()
           Right(
             Schedule(
-              name = "Random-" + scala.util.Random.alphanumeric.take(4).mkString(""),
+              name = "dummy",
               assignments.foldLeft(initialValue) {
                 case (result, (k, v)) => result ++ v.map(_ -> k).toMap
               },
@@ -131,4 +141,22 @@ object Schedule {
       }
     }
   }
+
+  // def secondApproach(
+  //     tasks: List[Task],
+  //     calendar: Calendar,
+  //     counters: Seq[Counter],
+  //     resourceConstraints: Map[Resource, Seq[Constraint]],
+  //     assignments: Map[Resource, Set[Task]] = Map.empty,
+  //     runs: Int = 200,
+  //     parallel: Int = 8
+  // )(implicit context: TaskContext, executionContext: ExecutionContext) = {
+  //   // weekends with feesten in it first
+  //   def sortFunc(tasksA: Seq[Task], tasksB: Seq[Task]) = {
+  //     tasksA.count(_.is(Task.Feest)) > tasksB.count(_.is(Task.Feest))
+  //   }
+
+
+  //   val weekTasks = context.weekTasks.values.toList.sortWith(sortFunc)
+  // }
 }

@@ -40,13 +40,13 @@ object Data2018 {
   val calendars = List(calendar)
 
   val weekCounters: Seq[Counter] =
-  Counter.withParent(name = "week", include = Set("week"), exclude = Set("ignore"))(
-    Seq(
-      Counter(name = "consult", include = Set("consult")),
-      Counter(name = "visite", include = Set("visite")),
-      Counter(name = "nacht", include = Set("nacht"))
+    Counter.withParent(name = "week", include = Set("week"), exclude = Set("ignore"))(
+      Seq(
+        Counter(name = "consult", include = Set("consult")),
+        Counter(name = "visite", include = Set("visite")),
+        Counter(name = "nacht", include = Set("nacht"))
+      )
     )
-  )
   val weekendCounters = Counter.withParent(name = "weekend", include = Set("weekend"), exclude = Set("ignore"))(
     Seq(
       Counter(name = "consult", include = Set("consult")),
@@ -56,7 +56,7 @@ object Data2018 {
     )
   )
 
-  val counters = weekCounters ++ weekendCounters
+  val counters    = weekCounters ++ weekendCounters
   val countersMap = Map("week" -> weekCounters, "weekend" -> weekendCounters)
 
   val resources: List[Resource] = List(
@@ -207,11 +207,20 @@ object Data2018 {
       WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar, hard = false)
     val absenceConstraint = AbsenceConstraint(absence = Set.empty)
     def weekendTasksConstraint(resource: Resource) = {
-      val desired = if (resource.id == "houppermans") 3 else 2
-      WeekendTasksConstraint(desiredTasksPerWeekend = desired)
+      val desired = resource.id match {
+        case "houppermans" => 3
+        case "heho" => 4
+        case _ => 2
+      }
+      val excludeNight = resource.id match {
+        case "heho" => false
+        case "baars" => false
+        case _ => true
+      }
+      WeekendTasksConstraint(desiredTasksPerWeekend = desired, excludeNight)
     }
     def connectingConstraint(resource: Resource) = {
-      val desired = (resource.id in Seq("baars", "houppermans", "heho"))
+      val desired = (resource.id in Seq("baars", "houppermans", "heho", "dooren_van"))
       ConnectionConstraint(connectionDesired = desired, hard = desired == false)
     }
 
@@ -255,16 +264,21 @@ object Data2018 {
     otherResourceConstraints + firstResourceConstraints
   }
 
-  val schedules: Future[Seq[Schedule]] = {
+  // import scala.annotation.tailrec
+  def foo(): Future[Seq[Schedule]] = {
     import Task._
     val testTasks =
       tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
     implicit val context = TaskContext(testTasks)
-    Schedule.run(testTasks, calendar, counters, resourceConstraints, runs = 300, parallel = 4).map {
+    Schedule.run(testTasks, calendar, counters, resourceConstraints, runs = 500, parallel = 4).flatMap {
+      case ScheduleRunResult(_, Nil) =>
+        println("No complete schedules this run, doing another round")
+        foo()
       case ScheduleRunResult(incomplete, completes) =>
-        completes.zipWithIndex.map {
+        Future.successful(completes.sortBy(_.totalScore).zipWithIndex.map {
           case (item, index) => item.copy(name = index.toString)
-        }
+        })
     }
   }
+  val schedules: Future[Seq[Schedule]] = foo()
 }

@@ -9,4 +9,5 @@ case class AbsenceConstraint(absence: Set[DayId], hard: Boolean = true) extends 
   val obeyed = Set[Task]()
   def violations(input: Set[Task])(implicit context: TaskContext): Set[Task] =
     input.filter(task => absence.contains(task.day.id))
+  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
 }

@@ -20,6 +20,6 @@ case class WeekendDistanceInfluencer(desiredDistance: Int,
       .map(_ distance taskWeek)
       .filter(distance => distance < desiredDistance && distance > 0)
 
-    if (distances.isEmpty) 1F else if (hard) 0F else 0.0001F
+    if (distances.isEmpty) 1F else if (hard) 0F else 0.0000000000000000001F
   }
 }

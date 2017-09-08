@@ -28,4 +28,5 @@ case class ConnectionConstraint(connectionDesired: Boolean, hard: Boolean = true
         }
     }.toSet
   }
+  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
 }

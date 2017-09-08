@@ -11,4 +11,5 @@ case class CounterConstraint(counter: Counter, desiredNumber: Int, hard: Boolean
     val counterTasks = input.filter(task => counter.appliesTo(task))
     if (counterTasks.size == desiredNumber) obeyed else counterTasks
   }
+  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
 }

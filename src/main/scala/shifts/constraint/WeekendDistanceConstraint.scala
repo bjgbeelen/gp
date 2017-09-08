@@ -43,4 +43,5 @@ case class WeekendDistanceConstraint(desiredDistance: Int = 2, calendar: Calenda
     // }.toSet
 
   }
+  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
 }

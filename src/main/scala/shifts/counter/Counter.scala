@@ -27,9 +27,7 @@ object Counter {
         new Counter(newId, _name, include ++ _include, exclude ++ _exclude)
     }
 
-  def apply(name: String,
-            include: Set[Tag] = Set.empty,
-            exclude: Set[Tag] = Set.empty): Counter =
+  def apply(name: String, include: Set[Tag] = Set.empty, exclude: Set[Tag] = Set.empty): Counter =
     new Counter(id = include.toList.sorted.mkString("_").toLowerCase,
                 name = name,
                 include = include,

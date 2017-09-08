@@ -23,4 +23,5 @@ case class OverlappingTasksConstraint(hard: Boolean = true) extends Constraint {
       }
     go(input.toList, Set.empty)
   }
+  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
 }

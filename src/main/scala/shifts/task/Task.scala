@@ -32,6 +32,7 @@ object Task {
     def tag: Tag = this.getClass().getSimpleName().toLowerCase.replace("$", "")
   }
   case object Weekend extends Descriptor
+  case object Feest extends Descriptor
   case object Night extends Descriptor {
     override val tag = "nacht"
   }

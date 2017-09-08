@@ -4,6 +4,7 @@ package calendar
 import akka.http.scaladsl.server.Directives._
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import io.circe.generic.auto._
+import io.circe.Printer
 
 import task.TaskRoutes
 import resource.ResourceRoutes
@@ -18,7 +19,7 @@ trait CalendarRoutes
     with ResourceRoutes
     with CounterRoutes
     with ScheduleRoutes {
-  def calendarRoutes(implicit ec: ExecutionContext) =
+  def calendarRoutes(implicit ec: ExecutionContext, printer: Printer) =
     pathPrefix("calendars") {
       (get & (pathSingleSlash | pathEnd)) {
         complete(

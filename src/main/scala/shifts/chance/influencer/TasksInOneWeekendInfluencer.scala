@@ -23,11 +23,11 @@ case class TasksInOneWeekendInfluencer(weekTasks: Set[Task],
         else if (nrOfNightTasks > 0 && (excludeNights || task.is(Night)))
           0F
         else if (tasksInSameWeekend.size < desiredTasksInOneWeekend) {
-          10000F
+          10000F * desiredTasksInOneWeekend
         } else {
           0.00001F
         }
       } else
         1F
-    } else 1F
+    } else 1F * desiredTasksInOneWeekend
 }
