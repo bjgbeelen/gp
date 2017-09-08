@@ -12,15 +12,13 @@ case class ResourcePicker(chanceCalculator: ChanceCalculator) {
       case (resource, chance) => chance > 0F
     }
     val randomNumber = scala.util.Random.nextFloat
-    ResourcePicker.pickByChance(randomNumber,
-                                applicableResources.normalize.toList)
+    ResourcePicker.pickByChance(randomNumber, applicableResources.normalize.toList)
   }
 }
 
 object ResourcePicker {
   @tailrec
-  def pickByChance(chance: Float,
-                   items: List[(Resource, Float)]): Option[Resource] =
+  def pickByChance(chance: Float, items: List[(Resource, Float)]): Option[Resource] =
     items match {
       case Nil => None
       case (resource, resourceChance) :: tail =>

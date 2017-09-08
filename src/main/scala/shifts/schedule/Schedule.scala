@@ -13,7 +13,9 @@ import chance._
 import constraint._
 import concurrent._
 
-case class Schedule(assignments: Map[Task, Resource]) {
+case class Schedule(name: String,
+                    assignments: Map[Task, Resource],
+                    constraints: Map[Resource, Seq[Constraint]] = Map.empty) {
   def tasks(resource: Resource): Set[Task] =
     assignments
       .filter {
@@ -23,123 +25,78 @@ case class Schedule(assignments: Map[Task, Resource]) {
       .toSet
 }
 
-case class ScheduleRunResult(incomplete: Seq[IncompleteSchedule],
-                             complete: Seq[Schedule]) {
+case class ScheduleRunResult(incomplete: Seq[IncompleteSchedule], complete: Seq[Schedule]) {
   def merge(other: ScheduleRunResult) =
-    ScheduleRunResult(incomplete = incomplete ++ other.incomplete,
-                      complete = complete ++ other.complete)
+    ScheduleRunResult(incomplete = incomplete ++ other.incomplete, complete = complete ++ other.complete)
 }
 
 object Schedule {
 
-  def plan(tasks: List[Task],
-           calendar: Calendar,
-           counters: Seq[Counter],
-           resourceConstraints: Map[Resource, Seq[Constraint]],
-           assignments: Map[Resource, Set[Task]] = Map.empty)(
-      implicit context: TaskContext): Either[IncompleteSchedule, Schedule] = {
+  def plan(
+      tasks: List[Task],
+      calendar: Calendar,
+      counters: Seq[Counter],
+      resourceConstraints: Map[Resource, Seq[Constraint]],
+      assignments: Map[Resource, Set[Task]] = Map.empty
+  )(implicit context: TaskContext): Either[IncompleteSchedule, Schedule] = {
 
     @tailrec
-    def assignByChance(tasks: List[Task],
-                       assignments: Map[Resource, Set[Task]])
-      : Either[IncompleteSchedule, Schedule] = tasks match {
-      case Nil =>
-        val initialValue = Map[Task, Resource]()
-        Right(Schedule(assignments.foldLeft(initialValue) {
-          case (result, (k, v)) => result ++ v.map(_ -> k).toMap
-        }))
-      case task :: rest =>
-        val influencers: Map[Resource, Seq[ChanceInfluencer]] = resourceConstraints.map{ case (resource, constraints) =>
-          val resourceAssignments = assignments.getOrElse(resource, Set.empty)
-          (resource -> constraints.map{
-            case CounterConstraint(counter, desiredCount, _) =>
-              CurrentAssignmentsInfluencer(counter, desiredCount, resourceAssignments)
-            case AbsenceConstraint(absence, _) => AbsenceInfluencer(absence)
-            case ConnectionConstraint(connectionDesired, hard) => ConnectingTaskInfluencer(connectionDesired, hard, resourceAssignments)
-            case OverlappingTasksConstraint(hard) => OverlappingTaskInfluencer(resourceAssignments)
-            case WeekendDistanceConstraint(desiredDistance, _, hard) => WeekendDistanceInfluencer(desiredDistance, hard, calendar, context, resourceAssignments)
-            case WeekendTasksConstraint(desiredTasksPerWeekend, excludeNights, _) =>
-              val weekTasks = context.weekTasks(task.week).toSet
-              TasksInOneWeekendInfluencer(weekTasks, desiredTasksPerWeekend, excludeNights, resourceAssignments)
-          })
-        }
-        val chanceCalculator = ChanceCalculator(influencers)(task)
-        // val chanceCalculator = ChanceCalculator(
-        //   "current assignments" -> CurrentAssignmentsInfluencer(
-        //     counters,
-        //     resourceConstraints.map {
-        //       case (resource, constraints) =>
-        //         (resource -> constraints.collect {
-        //           case counterConstraint: CounterConstraint =>
-        //             counterConstraint
-        //         })
-        //     }.toMap,
-        //     assignments
-        //   ),
-        //   "absence" -> AbsenceInfluencer(resourceConstraints.map {
-        //     case (resource, constraints) =>
-        //       val absence = constraints.collect {
-        //         case AbsenceConstraint(absence, _) => absence
-        //       }.head
-        //       (resource -> absence)
-        //   }),
-        //   "overlapping tasks" -> OverlappingTaskInfluencer(
-        //     resourceConstraints.keys.toList,
-        //     assignments),
-        //   "connecting tasks" -> ConnectingTaskInfluencer(
-        //     resourceConstraints.map {
-        //       case (resource, constraints) =>
-        //         val input = constraints.collect {
-        //           case ConnectionConstraint(desired, hard) => (desired, hard)
-        //         }.head
-        //         (resource, input)
-        //     }.toMap,
-        //     assignments
-        //   ),
-        //   "tasks in one weekend" -> TasksInOneWeekendInfluencer(
-        //     weekTasks = context.weekTasks(task.week).toSet,
-        //     desiredTasksInOneWeekend = resourceConstraints.map {
-        //       case (resource, constraints) =>
-        //         val desiredWeekendTasks = constraints.collect {
-        //           case WeekendTasksConstraint(desired, excludeNights, _) =>
-        //             (desired, excludeNights)
-        //         }.head
-        //         (resource -> desiredWeekendTasks)
-        //     }.toMap,
-        //     assignments = assignments
-        //   ),
-        //   "weekend distances" -> WeekendDistanceInfluencer(
-        //     desiredDistances = resourceConstraints.map{
-        //       case (resource, constraints) =>
-        //         val desiredDistance = constraints.collect {
-        //           case WeekendDistanceConstraint(desired, _, hard) => desired
-        //         }.head
-        //         (resource -> desiredDistance)
-        //     }.toMap,
-        //     hard = false,
-        //     calendar = calendar,
-        //     taskContext = context,
-        //     assignments = assignments
-        //   )
-        // )(task)
+    def assignByChance(
+        tasks: List[Task],
+        assignments: Map[Resource, Set[Task]]
+    ): Either[IncompleteSchedule, Schedule] =
+      tasks match {
+        case Nil =>
+          val initialValue = Map[Task, Resource]()
+          Right(
+            Schedule(
+              name = "Random-" + scala.util.Random.alphanumeric.take(4).mkString(""),
+              assignments.foldLeft(initialValue) {
+                case (result, (k, v)) => result ++ v.map(_ -> k).toMap
+              },
+              resourceConstraints
+            )
+          )
+        case task :: rest =>
+          val influencers: Map[Resource, Seq[ChanceInfluencer]] =
+            resourceConstraints.map {
+              case (resource, constraints) =>
+                val resourceAssignments =
+                  assignments.getOrElse(resource, Set.empty)
+                (resource -> constraints.map {
+                  case CounterConstraint(counter, desiredCount, _) =>
+                    CounterInfluencer(counter, desiredCount, resourceAssignments)
+                  case AbsenceConstraint(absence, _) =>
+                    AbsenceInfluencer(absence)
+                  case ConnectionConstraint(connectionDesired, hard) =>
+                    ConnectingTaskInfluencer(connectionDesired, hard, resourceAssignments)
+                  case OverlappingTasksConstraint(hard) =>
+                    OverlappingTaskInfluencer(resourceAssignments)
+                  case WeekendDistanceConstraint(desiredDistance, _, hard) =>
+                    WeekendDistanceInfluencer(desiredDistance, hard, calendar, context, resourceAssignments)
+                  case WeekendTasksConstraint(desiredTasksPerWeekend, excludeNights, _) =>
+                    val weekTasks = context.weekTasks(task.week).toSet
+                    TasksInOneWeekendInfluencer(weekTasks, desiredTasksPerWeekend, excludeNights, resourceAssignments)
+                })
+            }
+          val chanceCalculator = ChanceCalculator(influencers)(task)
 
-        ResourcePicker(chanceCalculator).pick() match {
-          case Some(resource) =>
-            val updatedResourceTasks =
+          ResourcePicker(chanceCalculator).pick() match {
+            case Some(resource) =>
+              val updatedResourceTasks =
               assignments.getOrElse(resource, Set.empty) + task
-            assignByChance(
-              tasks = rest,
-              assignments = assignments + (resource -> updatedResourceTasks))
-          case None =>
-            Left(
-              IncompleteSchedule(
-                task = task,
-                tasksToGo = rest,
-                assignments = assignments,
-                chanceCalculator = chanceCalculator
-              ))
-        }
-    }
+              assignByChance(tasks = rest, assignments = assignments + (resource -> updatedResourceTasks))
+            case None =>
+              Left(
+                IncompleteSchedule(
+                  task = task,
+                  tasksToGo = rest,
+                  assignments = assignments,
+                  chanceCalculator = chanceCalculator
+                )
+              )
+          }
+      }
 
     val completeAssignments: Map[Resource, Set[Task]] =
       resourceConstraints.map {
@@ -149,15 +106,15 @@ object Schedule {
     assignByChance(tasks, completeAssignments)
   }
 
-  def run(tasks: List[Task],
-          calendar: Calendar,
-          counters: Seq[Counter],
-          resourceConstraints: Map[Resource, Seq[Constraint]],
-          assignments: Map[Resource, Set[Task]] = Map.empty,
-          runs: Int = 200,
-          parallel: Int = 8)(
-      implicit context: TaskContext,
-      executionContext: ExecutionContext): Future[ScheduleRunResult] = {
+  def run(
+      tasks: List[Task],
+      calendar: Calendar,
+      counters: Seq[Counter],
+      resourceConstraints: Map[Resource, Seq[Constraint]],
+      assignments: Map[Resource, Set[Task]] = Map.empty,
+      runs: Int = 200,
+      parallel: Int = 8
+  )(implicit context: TaskContext, executionContext: ExecutionContext): Future[ScheduleRunResult] = {
     val results: Seq[Future[ScheduleRunResult]] = (1 to parallel).map { _ =>
       Future {
         val (lefts, rights) = (1 to runs)
@@ -165,8 +122,7 @@ object Schedule {
             plan(tasks, calendar, counters, resourceConstraints, assignments)
           }
           .partition(_.isLeft)
-        ScheduleRunResult(incomplete = lefts.map(_.left.get),
-                          complete = rights.map(_.right.get))
+        ScheduleRunResult(incomplete = lefts.map(_.left.get), complete = rights.map(_.right.get))
       }
     }
     Future.sequence(results).map { runResults =>

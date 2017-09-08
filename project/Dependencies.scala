@@ -7,6 +7,8 @@ object Dependencies {
   lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1"
   lazy val nScalaTime = "com.github.nscala-time" %% "nscala-time" % "2.16.0"
   val http4sServer =  "org.http4s"     %% "http4s-blaze-server" % Http4sVersion
+  val akkaHttp = "com.typesafe.akka" %% "akka-http" % "10.0.10"
+  val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe" % "1.18.0"
   val http4sCirce = "org.http4s"     %% "http4s-circe"        % Http4sVersion
   val http4sDsl = "org.http4s"     %% "http4s-dsl"          % Http4sVersion
   val circeCore = "io.circe" %% "circe-core" % CirceVersion

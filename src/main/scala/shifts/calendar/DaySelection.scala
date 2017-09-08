@@ -8,8 +8,7 @@ abstract class DaySelection {
 case class InverseSelection(selection: DaySelection) extends DaySelection {
   def exec = !selection.exec(_)
 }
-case class WeekDaySelection(dayOfWeeks: Seq[DayOfWeekNumber])
-    extends DaySelection {
+case class WeekDaySelection(dayOfWeeks: Seq[DayOfWeekNumber]) extends DaySelection {
   def exec = _.dayOfWeek in dayOfWeeks
 }
 case class PeriodSelection(from: DayId, to: DayId) extends DaySelection {

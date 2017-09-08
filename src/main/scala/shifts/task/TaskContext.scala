@@ -27,7 +27,7 @@ case class TaskContext(private val input: Seq[Task]) { self =>
       }.getOrElse(task.day.week)
       else task.day.week
       tmpMap += (task -> week)
-      (task -> week)
+      (task           -> week)
     }
   }.toMap
 

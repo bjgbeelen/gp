@@ -3,21 +3,13 @@ package task
 
 import calendar._
 
-import io.circe.generic.auto._
-import io.circe.syntax._
-
-case class Task private (id: TaskId,
-                         day: Day,
-                         label: String,
-                         start: Minute,
-                         end: Minute,
-                         tags: Set[Tag]) { self =>
+case class Task private (id: TaskId, day: Day, label: String, start: Minute, end: Minute, tags: Set[Tag]) { self =>
   require(start < end, "The start of the task should be earlier than its end")
   import Task._
 
   def updateLabel(label: String) = copy(label = label)
   def updateStart(start: Minute) = copy(start = start)
-  def updateEnd(end: Minute) = copy(end = end)
+  def updateEnd(end: Minute)     = copy(end = end)
   def addTags(newTags: Set[Tag]) = copy(tags = tags ++ newTags)
 
   def overlapsWith(task: Task): Boolean =
@@ -50,11 +42,7 @@ object Task {
     override val tag = "avond"
   }
 
-  def apply(day: Day,
-            label: String,
-            start: Minute,
-            end: Minute,
-            tags: Set[Tag]): Task =
+  def apply(day: Day, label: String, start: Minute, end: Minute, tags: Set[Tag]): Task =
     Task(
       id = day.id + tags.mkString("_", "_", ""),
       day = day,

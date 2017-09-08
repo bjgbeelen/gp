@@ -3,11 +3,7 @@ package calendar
 
 import scala.annotation.tailrec
 
-case class Calendar(name: String,
-                    from: DateTime,
-                    to: DateTime,
-                    children: Seq[Year])
-    extends CalendarNode[Year] {
+case class Calendar(name: String, from: DateTime, to: DateTime, children: Seq[Year]) extends CalendarNode[Year] {
   def years = children
   def months = years.foldLeft(Seq[Month]()) {
     case (months, year) ⇒ months ++ year.months
@@ -27,29 +23,19 @@ case class Calendar(name: String,
 }
 
 object Calendar {
-  def apply(name: String,
-            from: String,
-            to: String,
-            dayLabels: Map[DayId, String]): Calendar =
+  def apply(name: String, from: String, to: String, dayLabels: Map[DayId, String]): Calendar =
     apply(name, DateTime(from), DateTime(to), dayLabels)
 
-  def apply(name: String,
-            from: DateTime,
-            to: DateTime,
-            dayLabels: Map[DayId, String]): Calendar = {
+  def apply(name: String, from: DateTime, to: DateTime, dayLabels: Map[DayId, String]): Calendar = {
     @tailrec
     def daysMapping(
         date: DateTime,
-        mapping: Map[YearNumber,
-                     Map[MonthNumber,
-                         Map[WeekNumber, Seq[(DayNumber, DayOfWeekNumber)]]]] =
-          Map.empty): Map[
-      YearNumber,
-      Map[MonthNumber, Map[WeekNumber, Seq[(DayNumber, DayOfWeekNumber)]]]] = {
-      val year: YearNumber = date.getYear
-      val month: MonthNumber = date.getMonthOfYear
-      val week: WeekNumber = date.getWeekOfWeekyear
-      val day: DayNumber = date.getDayOfMonth
+        mapping: Map[YearNumber, Map[MonthNumber, Map[WeekNumber, Seq[(DayNumber, DayOfWeekNumber)]]]] = Map.empty
+    ): Map[YearNumber, Map[MonthNumber, Map[WeekNumber, Seq[(DayNumber, DayOfWeekNumber)]]]] = {
+      val year: YearNumber           = date.getYear
+      val month: MonthNumber         = date.getMonthOfYear
+      val week: WeekNumber           = date.getWeekOfWeekyear
+      val day: DayNumber             = date.getDayOfMonth
       val dayOfWeek: DayOfWeekNumber = date.getDayOfWeek
       if (date.isBefore(to) || date == to) {
         val updatedDays = mapping
@@ -59,14 +45,12 @@ object Calendar {
         val updatedWeeks = mapping
           .getOrElse(year, Map.empty)
           .getOrElse(month, Map.empty) ++ Map(week -> updatedDays)
-        val updatedMonths = mapping.getOrElse(year, Map.empty) ++ Map(
-          month -> updatedWeeks)
+        val updatedMonths = mapping.getOrElse(year, Map.empty) ++ Map(month -> updatedWeeks)
         daysMapping(date.plusDays(1), mapping ++ Map(year -> updatedMonths))
       } else mapping
     }
 
-    def sortWeeks(weeks: Iterable[WeekNumber],
-                  month: MonthNumber): List[WeekNumber] = {
+    def sortWeeks(weeks: Iterable[WeekNumber], month: MonthNumber): List[WeekNumber] = {
       val sorted = weeks.toList.sorted
 
       val moveToEnd: Option[List[WeekNumber]] = sorted match {
@@ -103,10 +87,7 @@ object Calendar {
                 lazy val days: Seq[Day] =
                   calendar(yearNumber)(monthNumber)(weekNumber).map {
                     case (day, dayOfWeek) ⇒
-                      val label = dayLabels.getOrElse(Day.id(yearNumber,
-                                                             monthNumber,
-                                                             day),
-                                                      "")
+                      val label = dayLabels.getOrElse(Day.id(yearNumber, monthNumber, day), "")
                       Day(label, day, dayOfWeek, () ⇒ week)
                   }
                 week
@@ -120,23 +101,19 @@ object Calendar {
   }
 }
 
-case class Year(number: YearNumber,
-                parent: () ⇒ Calendar,
-                children: Seq[Month])
+case class Year(number: YearNumber, parent: () ⇒ Calendar, children: Seq[Month])
     extends CalendarNode[Month]
     with NeighbourSupport[Year, Calendar] {
-  def months = children
+  def months                 = children
   override lazy val toString = s"${number}"
 }
 
-case class Month(number: MonthNumber,
-                 parent: () ⇒ Year,
-                 children: Seq[PartialWeek])
+case class Month(number: MonthNumber, parent: () ⇒ Year, children: Seq[PartialWeek])
     extends CalendarNode[PartialWeek]
     with NeighbourSupport[Month, Year] {
-  def weeks = children
-  def year = parent()
-  def name = Month.longNames(number)
+  def weeks                  = children
+  def year                   = parent()
+  def name                   = Month.longNames(number)
   override lazy val toString = Month.shortNames(number) + s", ${year.number}"
 }
 
@@ -154,37 +131,22 @@ case object Month {
                       "Oktober",
                       "November",
                       "December")
-  val shortNames = Seq("_",
-                       "Jan",
-                       "Feb",
-                       "Mrt",
-                       "Apr",
-                       "Mei",
-                       "Jun",
-                       "Jul",
-                       "Aug",
-                       "Sep",
-                       "Okt",
-                       "Nov",
-                       "Dec")
+  val shortNames =
+    Seq("_", "Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec")
 }
 
-case class PartialWeek(number: WeekNumber,
-                       parent: () ⇒ Month,
-                       children: Seq[Day])
+case class PartialWeek(number: WeekNumber, parent: () ⇒ Month, children: Seq[Day])
     extends CalendarNode[Day]
     with NeighbourSupport[PartialWeek, Month] {
   def month = parent()
   lazy val year: Year = {
     val optionNext = next.flatMap {
-      case week
-          if week.number == number && month.number == 12 && children.size < 4 =>
+      case week if week.number == number && month.number == 12 && children.size < 4 =>
         Some(month.year.next.get)
       case _ => None
     }
     val optionPrevious = previous.flatMap {
-      case week
-          if week.number == number && month.number == 1 && children.size < 4 =>
+      case week if week.number == number && month.number == 1 && children.size < 4 =>
         Some(month.year.previous.get)
       case _ => None
     }
@@ -214,14 +176,8 @@ case object Week {
 }
 
 case object Day {
-  val longDayOfWeekNames = Seq("_",
-                               "Maandag",
-                               "Dinsdag",
-                               "Woensdag",
-                               "Donderdag",
-                               "Vrijdag",
-                               "Zaterdag",
-                               "Zondag")
+  val longDayOfWeekNames =
+    Seq("_", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag")
   val shortDayOfWeekNames = Seq("_", "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo")
   def id(year: YearNumber, month: MonthNumber, day: DayNumber) =
     f"${year}${month}%02d${day}%02d"
@@ -244,10 +200,7 @@ case object DateTime {
   def apply(date: String) = new DateTime(date)
 }
 
-case class Day(label: String,
-               number: DayNumber,
-               dayOfWeek: DayOfWeekNumber,
-               parent: () ⇒ PartialWeek)
+case class Day(label: String, number: DayNumber, dayOfWeek: DayOfWeekNumber, parent: () ⇒ PartialWeek)
     extends NeighbourSupport[Day, PartialWeek] {
   def partialWeek = parent()
   def week: Week = {
@@ -258,7 +211,7 @@ case class Day(label: String,
     Week(partialWeeks)
   }
   def month = partialWeek.month
-  def year = month.year
+  def year  = month.year
 
   lazy val id: DayId = Day.id(year.number, month.number, number)
 

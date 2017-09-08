@@ -6,14 +6,11 @@ import calendar.Week
 import Task._
 import counter._
 
-case class WeekendTasksConstraint(desiredTasksPerWeekend: Int,
-                                  excludeNights: Boolean = true,
-                                  hard: Boolean = false)
+case class WeekendTasksConstraint(desiredTasksPerWeekend: Int, excludeNights: Boolean = true, hard: Boolean = false)
     extends Constraint {
   type U = Map[Week, Set[Task]]
   val obeyed = Map[Week, Set[Task]]()
-  def violations(input: Set[Task])(
-      implicit context: TaskContext): Map[Week, Set[Task]] = {
+  def violations(input: Set[Task])(implicit context: TaskContext): Map[Week, Set[Task]] = {
     val allWeekendTasks = input.filter(_.is(Weekend))
     context.weekTasks
       .map {

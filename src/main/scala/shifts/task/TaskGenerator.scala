@@ -12,8 +12,7 @@ case class TaskGenerationInstruction(label: String,
                                      daySelection: Seq[DaySelection])
 
 object TaskGenerator {
-  def generate(calendar: Calendar,
-               instructions: Seq[TaskGenerationInstruction]): Set[Task] =
+  def generate(calendar: Calendar, instructions: Seq[TaskGenerationInstruction]): Set[Task] =
     instructions.foldLeft(Set[Task]()) {
       case (acc, instr) =>
         acc ++ calendar
@@ -26,6 +25,7 @@ object TaskGenerator {
                 start = instr.start,
                 end = instr.end,
                 tags = instr.tags
-            ))
+            )
+          )
     }
 }

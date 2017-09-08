@@ -5,10 +5,10 @@ import resource._
 import task._
 import schedule._
 import counter._
+import influencer.ChanceInfluencer
 import calendar._
 
-case class ChanceCalculator(chances: Map[Resource, Float],
-                            influencers: Map[Resource, Seq[(ChanceInfluencer, Float)]]) {
+case class ChanceCalculator(chances: Map[Resource, Float], influencers: Map[Resource, Seq[(ChanceInfluencer, Float)]]) {
   override def toString(): String =
     chances
       .map {
@@ -24,19 +24,21 @@ case class ChanceCalculator(chances: Map[Resource, Float],
 }
 
 object ChanceCalculator {
-  def apply(influencers: Map[Resource, Seq[ChanceInfluencer]])(
-      task: Task): ChanceCalculator = {
-    val individualChances = influencers.map{ case (resource, chanceInfluencers) =>
-      val result = chanceInfluencers.map{ case influencer =>
-        (influencer, influencer.chance(task))
-      }
-      (resource -> result)
+  def apply(influencers: Map[Resource, Seq[ChanceInfluencer]])(task: Task): ChanceCalculator = {
+    val individualChances = influencers.map {
+      case (resource, chanceInfluencers) =>
+        val result = chanceInfluencers.map {
+          case influencer =>
+            (influencer, influencer.chance(task))
+        }
+        (resource -> result)
     }
-    val total = individualChances.map{ case (resource, chances) =>
-      val product = chances.foldLeft(1F) {
-        case (acc, (_, chance)) => acc * chance
-      }
-      (resource -> product)
+    val total = individualChances.map {
+      case (resource, chances) =>
+        val product = chances.foldLeft(1F) {
+          case (acc, (_, chance)) => acc * chance
+        }
+        (resource -> product)
     }
     // val influencersMap = influencers.toList.map {
     //   case (name, infl) => (name -> infl(task))

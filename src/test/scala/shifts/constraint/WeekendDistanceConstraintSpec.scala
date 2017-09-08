@@ -12,7 +12,8 @@ class WeekendDistanceConstraintSpec extends WordSpec with Matchers {
   implicit val taskContext = TaskContext(tasks.toSeq)
   val weeks: Seq[Week] =
     calendar.weeks.sortBy { case w => (w.year, w.number) }.take(6)
-  val constraint = WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar)
+  val constraint =
+    WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar)
 
   "WeekendGapConstraint" should {
     "detect when the weekend gap constraint is violated" in {

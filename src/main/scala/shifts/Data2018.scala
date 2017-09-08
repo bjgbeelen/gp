@@ -1,4 +1,3 @@
-
 package shifts
 
 import calendar._
@@ -8,9 +7,12 @@ import counter._
 import schedule._
 import constraint._
 
+import scala.concurrent._
+import scala.concurrent.ExecutionContext.Implicits.global
+
 object Data2018 {
   val holidays = Seq(
-    Holiday(dayId = "20171231", label = "Oudjaarsavond", wholeDay = false),
+    Holiday(dayId = "20171231", label = "", wholeDay = false),
     Holiday("20180101", "Nieuwjaarsdag", true),
     Holiday("20180330", "Goede vrijdag", true),
     Holiday("20180331", "", true),
@@ -33,26 +35,29 @@ object Data2018 {
 
   val holidayLabels = holidays.map { case Holiday(id, label, _) ⇒ (id, label) }.toMap
 
-  val calendar = Calendar("2018", "2017-12-27", "2019-01-04", holidayLabels)
+  val calendar = Calendar("2018", "2017-12-25", "2019-01-07", holidayLabels)
 
-  val counters =
-    Counter.withParent(name = "week",
-                       include = Set("week"),
-                       exclude = Set("ignore"))(
-      Seq(
-        Counter(name = "consult", include = Set("consult")),
-        Counter(name = "visite", include = Set("visite")),
-        Counter(name = "nacht", include = Set("nacht"))
-      )) ++
-      Counter.withParent(name = "weekend",
-                         include = Set("weekend"),
-                         exclude = Set("ignore"))(
-        Seq(
-          Counter(name = "consult", include = Set("consult")),
-          Counter(name = "visite", include = Set("visite")),
-          Counter(name = "nacht", include = Set("nacht")),
-          Counter(name = "feest", include = Set("feest"))
-        ))
+  val calendars = List(calendar)
+
+  val weekCounters: Seq[Counter] =
+  Counter.withParent(name = "week", include = Set("week"), exclude = Set("ignore"))(
+    Seq(
+      Counter(name = "consult", include = Set("consult")),
+      Counter(name = "visite", include = Set("visite")),
+      Counter(name = "nacht", include = Set("nacht"))
+    )
+  )
+  val weekendCounters = Counter.withParent(name = "weekend", include = Set("weekend"), exclude = Set("ignore"))(
+    Seq(
+      Counter(name = "consult", include = Set("consult")),
+      Counter(name = "visite", include = Set("visite")),
+      Counter(name = "nacht", include = Set("nacht")),
+      Counter(name = "feest", include = Set("feest"))
+    )
+  )
+
+  val counters = weekCounters ++ weekendCounters
+  val countersMap = Map("week" -> weekCounters, "weekend" -> weekendCounters)
 
   val resources: List[Resource] = List(
     Resource(name = "Acker, vd", numberOfPatients = 1518),
@@ -76,10 +81,10 @@ object Data2018 {
     Resource(name = "Sluijs, vd", numberOfPatients = 2774)
   )
 
-  val weekDaysWithoutFriday = WeekDaySelection(monday to thursday)
-  val weekDays = WeekDaySelection(monday to friday)
+  val weekDaysWithoutFriday      = WeekDaySelection(monday to thursday)
+  val weekDays                   = WeekDaySelection(monday to friday)
   val weekendDaysIncludingFriday = WeekDaySelection(friday to sunday)
-  val weekendDays = WeekDaySelection(saturday to sunday)
+  val weekendDays                = WeekDaySelection(saturday to sunday)
   val holidaySelection = DayIdSelection(holidays.collect {
     case Holiday(id, label, _) ⇒ id
   }: _*)
@@ -89,7 +94,7 @@ object Data2018 {
   val holidayPartDaySelection = DayIdSelection(holidays.collect {
     case Holiday(id, label, false) ⇒ id
   }: _*)
-  val noHolidaySelection = InverseSelection(holidaySelection)
+  val noHolidaySelection      = InverseSelection(holidaySelection)
   val noWholeHolidaySelection = InverseSelection(holidayWholeDaySelection)
 
   val instructions = Seq(
@@ -110,18 +115,16 @@ object Data2018 {
                               Set("week", "consult", "avond"),
                               Seq(weekDaysWithoutFriday, noHolidaySelection)),
     // weekend tasks
-    TaskGenerationInstruction(
-      "consult",
-      start = 17 :: 0,
-      end = 23 :: 0,
-      Set("weekend", "consult", "avond"),
-      Seq(WeekDaySelection(Seq(friday)), noHolidaySelection)),
-    TaskGenerationInstruction(
-      "visite",
-      start = 17 :: 0,
-      end = 23 :: 0,
-      Set("weekend", "visite", "avond"),
-      Seq(WeekDaySelection(Seq(friday)), noHolidaySelection)),
+    TaskGenerationInstruction("consult",
+                              start = 17 :: 0,
+                              end = 23 :: 0,
+                              Set("weekend", "consult", "avond"),
+                              Seq(WeekDaySelection(Seq(friday)), noHolidaySelection)),
+    TaskGenerationInstruction("visite",
+                              start = 17 :: 0,
+                              end = 23 :: 0,
+                              Set("weekend", "visite", "avond"),
+                              Seq(WeekDaySelection(Seq(friday)), noHolidaySelection)),
     TaskGenerationInstruction("nacht",
                               start = 0 :: 0,
                               end = 8 :: 0,
@@ -137,30 +140,26 @@ object Data2018 {
                               end = 23 :: 0,
                               Set("weekend", "consult", "avond"),
                               Seq(weekendDays, noHolidaySelection)),
-    TaskGenerationInstruction(
-      "visite",
-      start = 9 :: 0,
-      end = 16 :: 0,
-      Set("weekend", "visite", "ochtend"),
-      Seq(WeekDaySelection(Seq(saturday)), noWholeHolidaySelection)),
-    TaskGenerationInstruction(
-      "visite",
-      start = 9 :: 0,
-      end = 16 :: 0,
-      Set("weekend", "visite", "ochtend"),
-      Seq(WeekDaySelection(Seq(sunday)), noWholeHolidaySelection)),
-    TaskGenerationInstruction(
-      "visite",
-      start = 16 :: 0,
-      end = 23 :: 0,
-      Set("weekend", "visite", "avond"),
-      Seq(WeekDaySelection(Seq(saturday)), noHolidaySelection)),
-    TaskGenerationInstruction(
-      "visite",
-      start = 16 :: 0,
-      end = 23 :: 0,
-      Set("weekend", "visite", "avond"),
-      Seq(WeekDaySelection(Seq(sunday)), noHolidaySelection)),
+    TaskGenerationInstruction("visite",
+                              start = 9 :: 0,
+                              end = 16 :: 0,
+                              Set("weekend", "visite", "ochtend"),
+                              Seq(WeekDaySelection(Seq(saturday)), noWholeHolidaySelection)),
+    TaskGenerationInstruction("visite",
+                              start = 9 :: 0,
+                              end = 16 :: 0,
+                              Set("weekend", "visite", "ochtend"),
+                              Seq(WeekDaySelection(Seq(sunday)), noWholeHolidaySelection)),
+    TaskGenerationInstruction("visite",
+                              start = 16 :: 0,
+                              end = 23 :: 0,
+                              Set("weekend", "visite", "avond"),
+                              Seq(WeekDaySelection(Seq(saturday)), noHolidaySelection)),
+    TaskGenerationInstruction("visite",
+                              start = 16 :: 0,
+                              end = 23 :: 0,
+                              Set("weekend", "visite", "avond"),
+                              Seq(WeekDaySelection(Seq(sunday)), noHolidaySelection)),
     // holiday tasks
     TaskGenerationInstruction("nacht",
                               start = 0 :: 0,
@@ -202,7 +201,7 @@ object Data2018 {
   val totalPatients = resources.map(_.numberOfPatients).sum
 
   val resourceConstraints: Map[Resource, Seq[Constraint]] = {
-    val first :: others = resources
+    val first :: others            = resources
     val overlappingTasksConstraint = OverlappingTasksConstraint()
     val weekendGapConstraint =
       WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar, hard = false)
@@ -213,17 +212,13 @@ object Data2018 {
     }
     def connectingConstraint(resource: Resource) = {
       val desired = (resource.id in Seq("baars", "houppermans", "heho"))
-      ConnectionConstraint(connectionDesired = desired,
-                           hard = desired == false)
+      ConnectionConstraint(connectionDesired = desired, hard = desired == false)
     }
 
     val otherResourceConstraints = others.map {
       case resource @ Resource(_, _, nrOfPatients) =>
         val counterConstraints: List[CounterConstraint] =
-          calculateDesiredNumberOfTasks(
-            tasks,
-            counters,
-            nrOfPatients * 1F / totalPatients).map {
+          calculateDesiredNumberOfTasks(tasks, counters, nrOfPatients * 1F / totalPatients).map {
             case (counter, desiredNumber) =>
               CounterConstraint(counter, desiredNumber)
           }.toList
@@ -232,7 +227,8 @@ object Data2018 {
           absenceConstraint,
           weekendTasksConstraint(resource),
           connectingConstraint(resource),
-          weekendGapConstraint)
+          weekendGapConstraint
+        )
         (resource, constraints)
     }.toMap
 
@@ -248,54 +244,27 @@ object Data2018 {
           }.sum
           CounterConstraint(counter, desiredNumber)
       }.toList
-      val constraints: List[Constraint] = List(
-        overlappingTasksConstraint,
-        connectingConstraint(first),
-        absenceConstraint,
-        weekendTasksConstraint(first),
-        weekendGapConstraint) ++ counterConstraints
+      val constraints: List[Constraint] = List(overlappingTasksConstraint,
+                                               connectingConstraint(first),
+                                               absenceConstraint,
+                                               weekendTasksConstraint(first),
+                                               weekendGapConstraint) ++ counterConstraints
       (first -> constraints)
     }
 
     otherResourceConstraints + firstResourceConstraints
   }
 
-  // val resourceConstraints = {
-  //   val first :: others = resources
-  //   val otherResourceConstraints = others.map {
-  //     case Resource(id, _, nrOfPatients) =>
-  //       ResourceConstraints(
-  //         resourceId = id,
-  //         desiredNumberOfTasks =
-  //           calculateDesiredNumberOfTasks(tasks,
-  //                                         counters,
-  //                                         nrOfPatients * 1F / totalPatients),
-  //         desiredNumberOfTasksInOneWeekend = 2,
-  //         wantsEveningNightCombination = false,
-  //         wantsCoupledTasks = false,
-  //         absence = Set.empty
-  //       )
-  //   }
-  //   val othersDesiredNumberOfTaskSum =
-  //     otherResourceConstraints.map(_.desiredNumberOfTasks).sumUp
-  //   val firstResourceConstraints = ResourceConstraints(
-  //     resourceId = first.id,
-  //     desiredNumberOfTasks = calculateDesiredNumberOfTasks(tasks, counters, 1) - othersDesiredNumberOfTaskSum,
-  //     desiredNumberOfTasksInOneWeekend = 2,
-  //     wantsEveningNightCombination = false,
-  //     wantsCoupledTasks = false,
-  //     absence = Set.empty
-  //   )
-  //   (firstResourceConstraints :: otherResourceConstraints).map { rc =>
-  //     (resources.find(_.id == rc.resourceId).get -> rc)
-  //   }.toMap
-  // }
-
-  // val actualFirst = calculateDesiredNumberOfTasks(
-  //   tasks,
-  //   counters,
-  //   resources.head.numberOfPatients * 1F / totalPatients)
-
-  // val schedule =
-  //   Schedule.plan(tasks.toList, calendar, counters, resourceConstraints)
+  val schedules: Future[Seq[Schedule]] = {
+    import Task._
+    val testTasks =
+      tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
+    implicit val context = TaskContext(testTasks)
+    Schedule.run(testTasks, calendar, counters, resourceConstraints, runs = 300, parallel = 4).map {
+      case ScheduleRunResult(incomplete, completes) =>
+        completes.zipWithIndex.map {
+          case (item, index) => item.copy(name = index.toString)
+        }
+    }
+  }
 }

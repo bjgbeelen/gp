@@ -4,9 +4,7 @@ package constraint
 import calendar._
 import task._
 
-case class WeekendDistanceConstraint(desiredDistance: Int = 2,
-                                calendar: Calendar,
-                                hard: Boolean = true)
+case class WeekendDistanceConstraint(desiredDistance: Int = 2, calendar: Calendar, hard: Boolean = true)
     extends Constraint {
   type U = Set[Week]
   val obeyed = Set[Week]()
@@ -18,7 +16,7 @@ case class WeekendDistanceConstraint(desiredDistance: Int = 2,
 
   def violations(input: Set[Task])(implicit context: TaskContext): Set[Week] = {
     val weeks = input.toList.sortBy(_.day.id).map(context.taskWeek).sliding(2)
-    weeks.collect{
+    weeks.collect {
       case List(w1, w2) if withinDistance(w1, w2) => w1
     }.toSet
     // val allWeeks = calendar.weeks.toList

@@ -14,7 +14,8 @@ import constraint._
 class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
   "Schedule.plan()" should {
     "automatically assign resources to tasks" in {
-      val testTasks = tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
+      val testTasks =
+        tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
       implicit val context = task.TaskContext(testTasks)
       // implicit val defaultPatience = PatienceConfig(timeout = Span(20, Seconds))
 
@@ -22,7 +23,7 @@ class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
                              calendar,
                              counters,
                              resourceConstraints,
-                             runs = 1000,
+                             runs = 300,
                              parallel = 4),
                 timeout(Span(1, Hours))) {
         case ScheduleRunResult(incompletes, completes) =>
