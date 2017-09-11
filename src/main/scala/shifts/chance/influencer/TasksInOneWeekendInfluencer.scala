@@ -25,7 +25,7 @@ case class TasksInOneWeekendInfluencer(weekTasks: Set[Task],
         else if (tasksInSameWeekend.size < desiredTasksInOneWeekend) {
           10000F * desiredTasksInOneWeekend
         } else {
-          0.00001F
+          0.0000000000000000000001F
         }
       } else
         1F

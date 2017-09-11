@@ -23,6 +23,8 @@ lazy val root = (project in file(".")).
       akkaHttp % Compile,
       akkaHttpCirce % Compile,
       http4sCirce % Compile,
+      doobieCore % Compile,
+      doobiePostgres % Compile,
       http4sDsl % Compile,
       circeCore % Compile,
       circeGeneric % Compile,

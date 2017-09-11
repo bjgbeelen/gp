@@ -26,8 +26,8 @@ object Data2018 {
     Holiday("20180512", "", true),
     Holiday("20180518", "", false),
     Holiday("20180519", "", true),
-    Holiday("20180520", "1e pinksterdag", true),
-    Holiday("20180521", "2e pinksterdag", true),
+    Holiday("20180520", "1e pinkster", true),
+    Holiday("20180521", "2e pinkster", true),
     Holiday("20181224", "Kerstavond", false),
     Holiday("20181225", "1e Kerstdag", true),
     Holiday("20181226", "2e Kerstdag", true)
@@ -209,13 +209,13 @@ object Data2018 {
     def weekendTasksConstraint(resource: Resource) = {
       val desired = resource.id match {
         case "houppermans" => 3
-        case "heho" => 4
-        case _ => 2
+        case "heho"        => 4
+        case _             => 2
       }
       val excludeNight = resource.id match {
-        case "heho" => false
+        case "heho"  => false
         case "baars" => false
-        case _ => true
+        case _       => true
       }
       WeekendTasksConstraint(desiredTasksPerWeekend = desired, excludeNight)
     }
@@ -270,7 +270,7 @@ object Data2018 {
     val testTasks =
       tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
     implicit val context = TaskContext(testTasks)
-    Schedule.run(testTasks, calendar, counters, resourceConstraints, runs = 500, parallel = 4).flatMap {
+    Schedule.run(testTasks, calendar, counters, resourceConstraints, runs = 100, parallel = 4).flatMap {
       case ScheduleRunResult(_, Nil) =>
         println("No complete schedules this run, doing another round")
         foo()

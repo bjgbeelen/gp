@@ -1,0 +1,2592 @@
+{
+  "assignments": {
+    "20180127_weekend_visite_avond": "marcelis",
+    "20180202_weekend_visite_avond": "daamen",
+    "20181224_weekend_visite_avond_feest": "sluijs_vd",
+    "20181117_weekend_consult_avond": "homa",
+    "20181124_weekend_visite_avond": "pruijssen",
+    "20181102_weekend_consult_avond": "rekkers",
+    "20180421_weekend_consult_ochtend": "rens_van",
+    "20180527_weekend_visite_ochtend": "gielen",
+    "20181125_weekend_consult_ochtend": "sluijs_vd",
+    "20180602_weekend_visite_avond": "baars",
+    "20180330_weekend_consult_avond_feest": "rekkers",
+    "20180101_weekend_visite_avond_feest": "rens_van",
+    "20180909_weekend_consult_avond": "onderwater",
+    "20180929_weekend_visite_avond": "nierop_van",
+    "20180601_weekend_consult_avond": "marcelis",
+    "20180510_weekend_nacht_feest": "houppermans",
+    "20181104_weekend_consult_ochtend": "daamen",
+    "20180603_weekend_consult_ochtend": "marcelis",
+    "20180525_weekend_consult_avond": "daamen",
+    "20180706_weekend_consult_avond": "pruijssen",
+    "20180721_weekend_visite_avond": "ambachtsheer",
+    "20180107_weekend_consult_avond": "marcelis",
+    "20180907_weekend_visite_avond": "hoeks",
+    "20180608_weekend_visite_avond": "acker_vd",
+    "20181225_weekend_consult_avond_feest": "heeden_vd",
+    "20180325_weekend_nacht": "pruijssen",
+    "20181201_weekend_consult_avond": "houppermans",
+    "20181201_weekend_visite_avond": "rekkers",
+    "20180311_weekend_visite_ochtend": "beelen",
+    "20180603_weekend_consult_avond": "baars",
+    "20180120_weekend_visite_avond": "rekkers",
+    "20181020_weekend_consult_avond": "sluijs_vd",
+    "20180113_weekend_visite_ochtend": "nierop_van",
+    "20180708_weekend_nacht": "hoeks",
+    "20180114_weekend_visite_avond": "pruijssen",
+    "20180729_weekend_consult_avond": "baars",
+    "20181014_weekend_visite_avond": "heho",
+    "20181202_weekend_visite_avond": "gielen",
+    "20180209_weekend_consult_avond": "dooren_van",
+    "20180105_weekend_consult_avond": "marcelis",
+    "20180930_weekend_visite_avond": "heho",
+    "20181222_weekend_consult_avond": "dooren_van",
+    "20180331_weekend_consult_ochtend_feest": "onderwater",
+    "20180210_weekend_visite_avond": "marcelis",
+    "20180617_weekend_nacht": "heho",
+    "20180707_weekend_nacht": "onderwater",
+    "20180921_weekend_visite_avond": "ambachtsheer",
+    "20180923_weekend_nacht": "dooren_van",
+    "20180826_weekend_visite_avond": "rekkers",
+    "20180617_weekend_consult_ochtend": "rens_van",
+    "20180224_weekend_consult_ochtend": "onderwater",
+    "20180929_weekend_nacht": "baars",
+    "20180909_weekend_consult_ochtend": "ambachtsheer",
+    "20181117_weekend_nacht": "daamen",
+    "20180603_weekend_visite_avond": "rekkers",
+    "20180817_weekend_visite_avond": "beelen",
+    "20181006_weekend_consult_ochtend": "ambachtsheer",
+    "20181110_weekend_consult_avond": "gielen",
+    "20180510_weekend_visite_avond_feest": "sluijs_vd",
+    "20180518_weekend_consult_avond_feest": "onderwater",
+    "20180713_weekend_visite_avond": "rens_van",
+    "20180831_weekend_consult_avond": "heho",
+    "20180922_weekend_consult_ochtend": "marcelis",
+    "20180203_weekend_consult_avond": "baars",
+    "20180527_weekend_nacht": "baars",
+    "20180923_weekend_visite_ochtend": "hoeks",
+    "20180908_weekend_consult_ochtend": "ambachtsheer",
+    "20180616_weekend_consult_avond": "acker_vd",
+    "20180825_weekend_visite_avond": "nierop_van",
+    "20180929_weekend_visite_ochtend": "rekkers",
+    "20180128_weekend_nacht": "rens_van",
+    "20180708_weekend_visite_ochtend": "baars",
+    "20180630_weekend_visite_avond": "heho",
+    "20180901_weekend_visite_ochtend": "rens_van",
+    "20180414_weekend_consult_ochtend": "gielen",
+    "20180819_weekend_nacht": "homa",
+    "20180615_weekend_consult_avond": "rekkers",
+    "20181027_weekend_consult_avond": "dooren_van",
+    "20180304_weekend_consult_avond": "ambachtsheer",
+    "20180429_weekend_nacht": "gielen",
+    "20180610_weekend_nacht": "gielen",
+    "20180225_weekend_visite_ochtend": "houppermans",
+    "20180902_weekend_nacht": "heeden_vd",
+    "20180217_weekend_visite_avond": "ambachtsheer",
+    "20181117_weekend_visite_avond": "heeden_vd",
+    "20180120_weekend_consult_ochtend": "homa",
+    "20180521_weekend_consult_ochtend_feest": "acker_vd",
+    "20180428_weekend_visite_avond": "rekkers",
+    "20180930_weekend_visite_ochtend": "beelen",
+    "20181209_weekend_consult_ochtend": "homa",
+    "20180330_weekend_consult_ochtend_feest": "heho",
+    "20181027_weekend_visite_ochtend": "beelen",
+    "20180303_weekend_consult_avond": "baars",
+    "20180112_weekend_consult_avond": "rens_van",
+    "20181117_weekend_visite_ochtend": "baars",
+    "20180407_weekend_visite_avond": "sluijs_vd",
+    "20180728_weekend_nacht": "baars",
+    "20180804_weekend_visite_ochtend": "dooren_van",
+    "20180622_weekend_visite_avond": "hoeks",
+    "20180401_weekend_visite_ochtend_feest": "houppermans",
+    "20180331_weekend_consult_avond_feest": "daamen",
+    "20180721_weekend_visite_ochtend": "homa",
+    "20180701_weekend_visite_ochtend": "heho",
+    "20180803_weekend_consult_avond": "dooren_van",
+    "20180223_weekend_consult_avond": "rens_van",
+    "20180812_weekend_consult_ochtend": "hoeks",
+    "20180824_weekend_consult_avond": "gielen",
+    "20180617_weekend_consult_avond": "homa",
+    "20171229_weekend_consult_avond": "acker_vd",
+    "20180623_weekend_visite_avond": "baars",
+    "20180224_weekend_nacht": "dooren_van",
+    "20181014_weekend_consult_ochtend": "beelen",
+    "20180715_weekend_nacht": "rekkers",
+    "20180408_weekend_visite_avond": "sluijs_vd",
+    "20181123_weekend_consult_avond": "hoeks",
+    "20180506_weekend_visite_ochtend": "dooren_van",
+    "20180426_weekend_visite_avond_feest": "hoeks",
+    "20181202_weekend_consult_avond": "houppermans",
+    "20180224_weekend_visite_ochtend": "rens_van",
+    "20180203_weekend_visite_ochtend": "daamen",
+    "20180602_weekend_consult_avond": "rens_van",
+    "20181125_weekend_visite_avond": "marcelis",
+    "20181021_weekend_nacht": "daamen",
+    "20171231_weekend_nacht": "dooren_van",
+    "20181110_weekend_nacht": "acker_vd",
+    "20180107_weekend_visite_ochtend": "dooren_van",
+    "20180819_weekend_visite_avond": "dooren_van",
+    "20181226_weekend_visite_ochtend_feest": "ambachtsheer",
+    "20180427_weekend_consult_ochtend_feest": "baars",
+    "20180211_weekend_visite_ochtend": "marcelis",
+    "20180518_weekend_visite_avond_feest": "dooren_van",
+    "20180629_weekend_visite_avond": "marcelis",
+    "20180826_weekend_consult_avond": "houppermans",
+    "20180128_weekend_consult_ochtend": "hoeks",
+    "20181226_weekend_consult_avond_feest": "marcelis",
+    "20181028_weekend_visite_ochtend": "hoeks",
+    "20180916_weekend_consult_ochtend": "daamen",
+    "20180907_weekend_consult_avond": "gielen",
+    "20181118_weekend_consult_avond": "heeden_vd",
+    "20180318_weekend_consult_avond": "gielen",
+    "20180817_weekend_consult_avond": "acker_vd",
+    "20180513_weekend_consult_avond": "heho",
+    "20180722_weekend_consult_ochtend": "heho",
+    "20181021_weekend_visite_avond": "sluijs_vd",
+    "20180609_weekend_consult_ochtend": "houppermans",
+    "20181102_weekend_visite_avond": "baars",
+    "20180509_weekend_visite_avond_feest": "gielen",
+    "20180505_weekend_consult_ochtend": "dooren_van",
+    "20181216_weekend_visite_avond": "baars",
+    "20180304_weekend_visite_ochtend": "sluijs_vd",
+    "20181027_weekend_visite_avond": "heeden_vd",
+    "20171230_weekend_consult_avond": "hoeks",
+    "20180119_weekend_consult_avond": "homa",
+    "20180225_weekend_visite_avond": "hoeks",
+    "20181201_weekend_visite_ochtend": "houppermans",
+    "20180929_weekend_consult_avond": "beelen",
+    "20180120_weekend_consult_avond": "ambachtsheer",
+    "20181013_weekend_visite_ochtend": "hoeks",
+    "20180121_weekend_consult_avond": "gielen",
+    "20180825_weekend_consult_ochtend": "rekkers",
+    "20180603_weekend_visite_ochtend": "homa",
+    "20190105_weekend_nacht": "homa",
+    "20180428_weekend_visite_ochtend": "houppermans",
+    "20180317_weekend_nacht": "onderwater",
+    "20180720_weekend_visite_avond": "onderwater",
+    "20180609_weekend_nacht": "onderwater",
+    "20180609_weekend_visite_ochtend": "beelen",
+    "20180623_weekend_consult_avond": "hoeks",
+    "20181216_weekend_nacht": "rekkers",
+    "20180713_weekend_consult_avond": "houppermans",
+    "20180407_weekend_visite_ochtend": "homa",
+    "20180113_weekend_consult_ochtend": "pruijssen",
+    "20180909_weekend_visite_ochtend": "gielen",
+    "20180923_weekend_visite_avond": "ambachtsheer",
+    "20180707_weekend_consult_ochtend": "heeden_vd",
+    "20180610_weekend_visite_avond": "houppermans",
+    "20180512_weekend_nacht_feest": "ambachtsheer",
+    "20180715_weekend_visite_avond": "baars",
+    "20180330_weekend_visite_ochtend_feest": "daamen",
+    "20180520_weekend_consult_avond_feest": "beelen",
+    "20181216_weekend_consult_ochtend": "onderwater",
+    "20180422_weekend_consult_ochtend": "onderwater",
+    "20180818_weekend_nacht": "hoeks",
+    "20180420_weekend_visite_avond": "homa",
+    "20180114_weekend_consult_ochtend": "sluijs_vd",
+    "20181005_weekend_visite_avond": "heeden_vd",
+    "20180721_weekend_consult_avond": "heeden_vd",
+    "20180915_weekend_visite_avond": "nierop_van",
+    "20171231_weekend_consult_avond_feest": "rens_van",
+    "20180921_weekend_consult_avond": "hoeks",
+    "20180317_weekend_consult_ochtend": "acker_vd",
+    "20181124_weekend_consult_avond": "sluijs_vd",
+    "20180520_weekend_visite_ochtend_feest": "nierop_van",
+    "20181019_weekend_visite_avond": "baars",
+    "20181014_weekend_visite_ochtend": "hoeks",
+    "20180901_weekend_consult_ochtend": "dooren_van",
+    "20180512_weekend_consult_ochtend_feest": "heeden_vd",
+    "20180707_weekend_visite_ochtend": "daamen",
+    "20180511_weekend_consult_avond_feest": "heho",
+    "20180914_weekend_visite_avond": "homa",
+    "20180203_weekend_consult_ochtend": "ambachtsheer",
+    "20180302_weekend_consult_avond": "baars",
+    "20180422_weekend_visite_avond": "daamen",
+    "20181230_weekend_visite_avond": "heho",
+    "20181117_weekend_consult_ochtend": "ambachtsheer",
+    "20180203_weekend_nacht": "homa",
+    "20181225_weekend_visite_ochtend_feest": "sluijs_vd",
+    "20180811_weekend_visite_ochtend": "marcelis",
+    "20181221_weekend_visite_avond": "dooren_van",
+    "20181006_weekend_visite_avond": "acker_vd",
+    "20180714_weekend_consult_avond": "rens_van",
+    "20180520_weekend_consult_ochtend_feest": "homa",
+    "20181222_weekend_consult_ochtend": "dooren_van",
+    "20180203_weekend_visite_avond": "beelen",
+    "20180729_weekend_nacht": "beelen",
+    "20180908_weekend_nacht": "baars",
+    "20180622_weekend_consult_avond": "beelen",
+    "20181228_weekend_visite_avond": "pruijssen",
+    "20180127_weekend_consult_avond": "pruijssen",
+    "20180727_weekend_visite_avond": "nierop_van",
+    "20181014_weekend_nacht": "dooren_van",
+    "20181214_weekend_consult_avond": "nierop_van",
+    "20190106_weekend_consult_ochtend": "hoeks",
+    "20181021_weekend_consult_ochtend": "rekkers",
+    "20180728_weekend_visite_ochtend": "rens_van",
+    "20180602_weekend_visite_ochtend": "baars",
+    "20180311_weekend_nacht": "heeden_vd",
+    "20180402_weekend_visite_avond_feest": "dooren_van",
+    "20180304_weekend_nacht": "rekkers",
+    "20180506_weekend_consult_ochtend": "onderwater",
+    "20180106_weekend_consult_ochtend": "rekkers",
+    "20180901_weekend_visite_avond": "marcelis",
+    "20181202_weekend_visite_ochtend": "daamen",
+    "20180505_weekend_consult_avond": "onderwater",
+    "20180408_weekend_nacht": "hoeks",
+    "20180112_weekend_visite_avond": "sluijs_vd",
+    "20180101_weekend_consult_avond_feest": "pruijssen",
+    "20180429_weekend_visite_ochtend": "heeden_vd",
+    "20180310_weekend_consult_avond": "hoeks",
+    "20180325_weekend_visite_avond": "ambachtsheer",
+    "20180204_weekend_consult_ochtend": "beelen",
+    "20180204_weekend_visite_ochtend": "onderwater",
+    "20171231_weekend_visite_avond_feest": "pruijssen",
+    "20181111_weekend_nacht": "onderwater",
+    "20180826_weekend_consult_ochtend": "houppermans",
+    "20180422_weekend_visite_ochtend": "dooren_van",
+    "20181006_weekend_consult_avond": "gielen",
+    "20180728_weekend_consult_ochtend": "rekkers",
+    "20180408_weekend_visite_ochtend": "baars",
+    "20181214_weekend_visite_avond": "heho",
+    "20180218_weekend_consult_avond": "homa",
+    "20180428_weekend_consult_ochtend": "baars",
+    "20171230_weekend_nacht": "houppermans",
+    "20180602_weekend_nacht": "dooren_van",
+    "20180121_weekend_consult_ochtend": "baars",
+    "20181109_weekend_visite_avond": "gielen",
+    "20180511_weekend_visite_avond_feest": "pruijssen",
+    "20180818_weekend_consult_ochtend": "heeden_vd",
+    "20180113_weekend_nacht": "hoeks",
+    "20181130_weekend_visite_avond": "rekkers",
+    "20181208_weekend_consult_ochtend": "heeden_vd",
+    "20181103_weekend_visite_ochtend": "nierop_van",
+    "20180512_weekend_visite_ochtend_feest": "gielen",
+    "20181013_weekend_visite_avond": "heho",
+    "20180609_weekend_consult_avond": "acker_vd",
+    "20181006_weekend_visite_ochtend": "onderwater",
+    "20180413_weekend_visite_avond": "heho",
+    "20180902_weekend_visite_avond": "heho",
+    "20180521_weekend_visite_avond_feest": "baars",
+    "20180325_weekend_consult_avond": "hoeks",
+    "20180819_weekend_consult_avond": "baars",
+    "20181007_weekend_visite_ochtend": "heeden_vd",
+    "20180310_weekend_nacht": "pruijssen",
+    "20180311_weekend_consult_ochtend": "dooren_van",
+    "20181221_weekend_consult_avond": "acker_vd",
+    "20180915_weekend_visite_ochtend": "rekkers",
+    "20181209_weekend_visite_ochtend": "beelen",
+    "20180324_weekend_nacht": "sluijs_vd",
+    "20180601_weekend_visite_avond": "rens_van",
+    "20181229_weekend_consult_ochtend": "onderwater",
+    "20180216_weekend_consult_avond": "homa",
+    "20190104_weekend_visite_avond": "daamen",
+    "20190106_weekend_visite_avond": "nierop_van",
+    "20180616_weekend_nacht": "dooren_van",
+    "20181111_weekend_visite_ochtend": "sluijs_vd",
+    "20181222_weekend_visite_ochtend": "acker_vd",
+    "20181027_weekend_consult_ochtend": "hoeks",
+    "20181209_weekend_consult_avond": "sluijs_vd",
+    "20180701_weekend_nacht": "nierop_van",
+    "20180427_weekend_visite_ochtend_feest": "hoeks",
+    "20181223_weekend_visite_avond": "homa",
+    "20180608_weekend_consult_avond": "sluijs_vd",
+    "20181230_weekend_nacht": "rekkers",
+    "20180209_weekend_visite_avond": "houppermans",
+    "20180324_weekend_visite_ochtend": "ambachtsheer",
+    "20180204_weekend_visite_avond": "acker_vd",
+    "20181104_weekend_consult_avond": "nierop_van",
+    "20180324_weekend_consult_ochtend": "heeden_vd",
+    "20180519_weekend_consult_ochtend_feest": "homa",
+    "20180812_weekend_consult_avond": "sluijs_vd",
+    "20180414_weekend_visite_avond": "heeden_vd",
+    "20181225_weekend_visite_avond_feest": "acker_vd",
+    "20180721_weekend_nacht": "sluijs_vd",
+    "20190105_weekend_consult_avond": "nierop_van",
+    "20180818_weekend_consult_avond": "pruijssen",
+    "20180427_weekend_visite_avond_feest": "ambachtsheer",
+    "20171230_weekend_visite_ochtend": "sluijs_vd",
+    "20180707_weekend_visite_avond": "gielen",
+    "20180217_weekend_nacht": "acker_vd",
+    "20181013_weekend_nacht": "heho",
+    "20181028_weekend_nacht": "ambachtsheer",
+    "20180930_weekend_consult_ochtend": "baars",
+    "20180825_weekend_nacht": "sluijs_vd",
+    "20180428_weekend_nacht": "baars",
+    "20180422_weekend_consult_avond": "rens_van",
+    "20180310_weekend_visite_ochtend": "rens_van",
+    "20181215_weekend_consult_avond": "baars",
+    "20180211_weekend_consult_ochtend": "rens_van",
+    "20180323_weekend_visite_avond": "ambachtsheer",
+    "20180331_weekend_nacht_feest": "rens_van",
+    "20180825_weekend_visite_ochtend": "daamen",
+    "20180126_weekend_visite_avond": "pruijssen",
+    "20180729_weekend_consult_ochtend": "nierop_van",
+    "20180916_weekend_visite_ochtend": "rekkers",
+    "20171229_weekend_visite_avond": "hoeks",
+    "20180420_weekend_consult_avond": "dooren_van",
+    "20181229_weekend_visite_ochtend": "rens_van",
+    "20180504_weekend_visite_avond": "dooren_van",
+    "20181012_weekend_visite_avond": "beelen",
+    "20181202_weekend_nacht": "heho",
+    "20180318_weekend_nacht": "rekkers",
+    "20180818_weekend_visite_ochtend": "acker_vd",
+    "20180422_weekend_nacht": "sluijs_vd",
+    "20180426_weekend_consult_avond_feest": "acker_vd",
+    "20180402_weekend_nacht_feest": "gielen",
+    "20180729_weekend_visite_avond": "rekkers",
+    "20180721_weekend_consult_ochtend": "heho",
+    "20180630_weekend_consult_ochtend": "baars",
+    "20181103_weekend_consult_ochtend": "baars",
+    "20180121_weekend_nacht": "heeden_vd",
+    "20181208_weekend_visite_avond": "sluijs_vd",
+    "20180521_weekend_nacht_feest": "marcelis",
+    "20180407_weekend_nacht": "beelen",
+    "20180401_weekend_nacht_feest": "nierop_van",
+    "20180504_weekend_consult_avond": "acker_vd",
+    "20181005_weekend_consult_avond": "acker_vd",
+    "20180218_weekend_visite_avond": "baars",
+    "20180908_weekend_consult_avond": "beelen",
+    "20180421_weekend_nacht": "acker_vd",
+    "20180923_weekend_consult_ochtend": "houppermans",
+    "20181021_weekend_consult_avond": "baars",
+    "20180715_weekend_visite_ochtend": "beelen",
+    "20180406_weekend_consult_avond": "ambachtsheer",
+    "20180510_weekend_visite_ochtend_feest": "acker_vd",
+    "20181111_weekend_visite_avond": "baars",
+    "20181110_weekend_visite_ochtend": "baars",
+    "20180218_weekend_consult_ochtend": "sluijs_vd",
+    "20181109_weekend_consult_avond": "hoeks",
+    "20180922_weekend_visite_ochtend": "houppermans",
+    "20180204_weekend_nacht": "rekkers",
+    "20180624_weekend_nacht": "sluijs_vd",
+    "20180311_weekend_consult_avond": "dooren_van",
+    "20181026_weekend_consult_avond": "dooren_van",
+    "20180224_weekend_visite_avond": "hoeks",
+    "20181230_weekend_consult_ochtend": "heho",
+    "20181118_weekend_nacht": "rens_van",
+    "20180819_weekend_consult_ochtend": "heeden_vd",
+    "20181007_weekend_consult_avond": "acker_vd",
+    "20181111_weekend_consult_avond": "beelen",
+    "20180513_weekend_consult_ochtend": "daamen",
+    "20180427_weekend_nacht_feest": "beelen",
+    "20180127_weekend_nacht": "sluijs_vd",
+    "20180107_weekend_visite_avond": "rekkers",
+    "20180818_weekend_visite_avond": "beelen",
+    "20180414_weekend_nacht": "heho",
+    "20180211_weekend_nacht": "acker_vd",
+    "20181125_weekend_consult_avond": "baars",
+    "20180210_weekend_consult_avond": "nierop_van",
+    "20180113_weekend_consult_avond": "rens_van",
+    "20180623_weekend_visite_ochtend": "onderwater",
+    "20180513_weekend_visite_ochtend": "rens_van",
+    "20180510_weekend_consult_ochtend_feest": "gielen",
+    "20181202_weekend_consult_ochtend": "houppermans",
+    "20180309_weekend_visite_avond": "houppermans",
+    "20180706_weekend_visite_avond": "homa",
+    "20180210_weekend_nacht": "gielen",
+    "20181103_weekend_consult_avond": "rekkers",
+    "20180126_weekend_consult_avond": "hoeks",
+    "20180101_weekend_nacht_feest": "daamen",
+    "20181208_weekend_consult_avond": "pruijssen",
+    "20180804_weekend_consult_avond": "homa",
+    "20181028_weekend_consult_avond": "gielen",
+    "20180210_weekend_consult_ochtend": "hoeks",
+    "20180303_weekend_visite_avond": "acker_vd",
+    "20180928_weekend_visite_avond": "baars",
+    "20180509_weekend_consult_avond_feest": "heho",
+    "20180624_weekend_consult_avond": "beelen",
+    "20180506_weekend_nacht": "homa",
+    "20181103_weekend_nacht": "acker_vd",
+    "20180811_weekend_nacht": "ambachtsheer",
+    "20180128_weekend_visite_avond": "marcelis",
+    "20190106_weekend_consult_avond": "heeden_vd",
+    "20180128_weekend_consult_avond": "dooren_van",
+    "20181020_weekend_visite_ochtend": "rens_van",
+    "20180616_weekend_visite_ochtend": "ambachtsheer",
+    "20180511_weekend_nacht_feest": "heho",
+    "20181013_weekend_consult_avond": "nierop_van",
+    "20181118_weekend_consult_ochtend": "dooren_van",
+    "20180120_weekend_nacht": "onderwater",
+    "20180510_weekend_consult_avond_feest": "daamen",
+    "20180714_weekend_nacht": "marcelis",
+    "20180304_weekend_visite_avond": "acker_vd",
+    "20180826_weekend_visite_ochtend": "nierop_van",
+    "20180318_weekend_consult_ochtend": "daamen",
+    "20180121_weekend_visite_avond": "beelen",
+    "20180831_weekend_visite_avond": "dooren_van",
+    "20180323_weekend_consult_avond": "beelen",
+    "20180330_weekend_visite_avond_feest": "dooren_van",
+    "20180211_weekend_visite_avond": "hoeks",
+    "20180505_weekend_nacht": "nierop_van",
+    "20180915_weekend_consult_avond": "sluijs_vd",
+    "20181226_weekend_nacht_feest": "beelen",
+    "20180303_weekend_consult_ochtend": "gielen",
+    "20180304_weekend_consult_ochtend": "baars",
+    "20180722_weekend_consult_avond": "pruijssen",
+    "20181230_weekend_visite_ochtend": "onderwater",
+    "20180922_weekend_visite_avond": "gielen",
+    "20180401_weekend_visite_avond_feest": "houppermans",
+    "20180526_weekend_nacht": "acker_vd",
+    "20180216_weekend_visite_avond": "baars",
+    "20190105_weekend_visite_ochtend": "gielen",
+    "20180413_weekend_consult_avond": "rekkers",
+    "20180916_weekend_nacht": "heeden_vd",
+    "20181111_weekend_consult_ochtend": "hoeks",
+    "20180630_weekend_consult_avond": "acker_vd",
+    "20181021_weekend_visite_ochtend": "rens_van",
+    "20180803_weekend_visite_avond": "acker_vd",
+    "20181124_weekend_visite_ochtend": "marcelis",
+    "20181118_weekend_visite_ochtend": "rekkers",
+    "20180812_weekend_visite_avond": "gielen",
+    "20181208_weekend_nacht": "hoeks",
+    "20180722_weekend_nacht": "gielen",
+    "20180812_weekend_visite_ochtend": "houppermans",
+    "20180316_weekend_consult_avond": "homa",
+    "20181229_weekend_consult_avond": "heho",
+    "20181013_weekend_consult_ochtend": "beelen",
+    "20180804_weekend_consult_ochtend": "daamen",
+    "20180908_weekend_visite_avond": "onderwater",
+    "20180114_weekend_visite_ochtend": "acker_vd",
+    "20180119_weekend_visite_avond": "ambachtsheer",
+    "20180121_weekend_visite_ochtend": "rekkers",
+    "20180106_weekend_consult_avond": "baars",
+    "20180728_weekend_visite_avond": "hoeks",
+    "20181215_weekend_visite_avond": "nierop_van",
+    "20181130_weekend_consult_avond": "gielen",
+    "20180324_weekend_consult_avond": "beelen",
+    "20180519_weekend_consult_avond_feest": "nierop_van",
+    "20181207_weekend_consult_avond": "beelen",
+    "20180623_weekend_nacht": "dooren_van",
+    "20180521_weekend_visite_ochtend_feest": "beelen",
+    "20180505_weekend_visite_avond": "dooren_van",
+    "20180407_weekend_consult_avond": "acker_vd",
+    "20180106_weekend_visite_ochtend": "ambachtsheer",
+    "20180407_weekend_consult_ochtend": "ambachtsheer",
+    "20181019_weekend_consult_avond": "onderwater",
+    "20180610_weekend_consult_avond": "sluijs_vd",
+    "20180930_weekend_nacht": "sluijs_vd",
+    "20181012_weekend_consult_avond": "heho",
+    "20180224_weekend_consult_avond": "heeden_vd",
+    "20171230_weekend_consult_ochtend": "homa",
+    "20180520_weekend_visite_avond_feest": "rekkers",
+    "20180901_weekend_nacht": "acker_vd",
+    "20181222_weekend_nacht": "houppermans",
+    "20180421_weekend_visite_avond": "homa",
+    "20180819_weekend_visite_ochtend": "baars",
+    "20180401_weekend_consult_ochtend_feest": "marcelis",
+    "20180928_weekend_consult_avond": "rekkers",
+    "20180303_weekend_visite_ochtend": "sluijs_vd",
+    "20181223_weekend_consult_avond": "dooren_van",
+    "20180211_weekend_consult_avond": "nierop_van",
+    "20180225_weekend_nacht": "acker_vd",
+    "20171231_weekend_visite_ochtend": "heeden_vd",
+    "20180107_weekend_consult_ochtend": "baars",
+    "20180930_weekend_consult_avond": "daamen",
+    "20180317_weekend_visite_ochtend": "daamen",
+    "20180811_weekend_visite_avond": "gielen",
+    "20181223_weekend_visite_ochtend": "acker_vd",
+    "20180402_weekend_consult_avond_feest": "baars",
+    "20180408_weekend_consult_avond": "acker_vd",
+    "20180325_weekend_visite_ochtend": "acker_vd",
+    "20180127_weekend_consult_ochtend": "dooren_van",
+    "20181007_weekend_consult_ochtend": "gielen",
+    "20180707_weekend_consult_avond": "pruijssen",
+    "20180810_weekend_visite_avond": "rekkers",
+    "20180720_weekend_consult_avond": "ambachtsheer",
+    "20180128_weekend_visite_ochtend": "dooren_van",
+    "20181028_weekend_consult_ochtend": "beelen",
+    "20181226_weekend_consult_ochtend_feest": "heeden_vd",
+    "20180902_weekend_consult_ochtend": "dooren_van",
+    "20180610_weekend_visite_ochtend": "heeden_vd",
+    "20180915_weekend_nacht": "acker_vd",
+    "20181201_weekend_nacht": "ambachtsheer",
+    "20180825_weekend_consult_avond": "gielen",
+    "20181020_weekend_visite_avond": "onderwater",
+    "20180616_weekend_visite_avond": "heho",
+    "20180225_weekend_consult_ochtend": "daamen",
+    "20180106_weekend_visite_avond": "dooren_van",
+    "20180624_weekend_consult_ochtend": "baars",
+    "20180120_weekend_visite_ochtend": "gielen",
+    "20180415_weekend_consult_avond": "gielen",
+    "20180722_weekend_visite_avond": "homa",
+    "20180901_weekend_consult_avond": "homa",
+    "20181020_weekend_nacht": "homa",
+    "20180812_weekend_nacht": "rens_van",
+    "20181125_weekend_visite_ochtend": "beelen",
+    "20180318_weekend_visite_avond": "nierop_van",
+    "20180701_weekend_consult_ochtend": "marcelis",
+    "20180701_weekend_visite_avond": "acker_vd",
+    "20180708_weekend_visite_avond": "gielen",
+    "20180210_weekend_visite_ochtend": "houppermans",
+    "20180302_weekend_visite_avond": "gielen",
+    "20171231_weekend_consult_ochtend": "sluijs_vd",
+    "20180202_weekend_consult_avond": "acker_vd",
+    "20181223_weekend_nacht": "daamen",
+    "20181207_weekend_visite_avond": "heeden_vd",
+    "20181007_weekend_nacht": "homa",
+    "20180527_weekend_consult_ochtend": "heeden_vd",
+    "20180402_weekend_consult_ochtend_feest": "onderwater",
+    "20180603_weekend_nacht": "hoeks",
+    "20180310_weekend_visite_avond": "houppermans",
+    "20180204_weekend_consult_avond": "ambachtsheer",
+    "20180708_weekend_consult_ochtend": "sluijs_vd",
+    "20180107_weekend_nacht": "gielen",
+    "20180805_weekend_visite_ochtend": "onderwater",
+    "20181110_weekend_visite_avond": "beelen",
+    "20180805_weekend_visite_avond": "homa",
+    "20181026_weekend_visite_avond": "gielen",
+    "20180421_weekend_consult_avond": "daamen",
+    "20180916_weekend_visite_avond": "sluijs_vd",
+    "20180715_weekend_consult_ochtend": "acker_vd",
+    "20181222_weekend_visite_avond": "baars",
+    "20180217_weekend_consult_avond": "heho",
+    "20181215_weekend_visite_ochtend": "rens_van",
+    "20181230_weekend_consult_avond": "rens_van",
+    "20181229_weekend_nacht": "heho",
+    "20181123_weekend_visite_avond": "beelen",
+    "20180217_weekend_consult_ochtend": "baars",
+    "20180804_weekend_visite_avond": "onderwater",
+    "20181103_weekend_visite_avond": "daamen",
+    "20181225_weekend_nacht_feest": "gielen",
+    "20180909_weekend_visite_avond": "hoeks",
+    "20181125_weekend_nacht": "nierop_van",
+    "20181215_weekend_nacht": "acker_vd",
+    "20181229_weekend_visite_avond": "pruijssen",
+    "20180311_weekend_visite_avond": "hoeks",
+    "20180714_weekend_visite_avond": "acker_vd",
+    "20180623_weekend_consult_ochtend": "gielen",
+    "20180401_weekend_consult_avond_feest": "acker_vd",
+    "20180105_weekend_visite_avond": "ambachtsheer",
+    "20180317_weekend_consult_avond": "nierop_van",
+    "20180708_weekend_consult_avond": "homa",
+    "20181020_weekend_consult_ochtend": "rekkers",
+    "20180402_weekend_visite_ochtend_feest": "acker_vd",
+    "20181116_weekend_consult_avond": "ambachtsheer",
+    "20181027_weekend_nacht": "acker_vd",
+    "20180805_weekend_consult_avond": "acker_vd",
+    "20180225_weekend_consult_avond": "onderwater",
+    "20180728_weekend_consult_avond": "houppermans",
+    "20181223_weekend_consult_ochtend": "ambachtsheer",
+    "20180101_weekend_visite_ochtend_feest": "acker_vd",
+    "20180617_weekend_visite_avond": "ambachtsheer",
+    "20180805_weekend_consult_ochtend": "daamen",
+    "20180325_weekend_consult_ochtend": "beelen",
+    "20181201_weekend_consult_ochtend": "gielen",
+    "20180506_weekend_visite_avond": "dooren_van",
+    "20180316_weekend_visite_avond": "gielen",
+    "20181028_weekend_visite_avond": "heeden_vd",
+    "20180513_weekend_nacht": "hoeks",
+    "20180824_weekend_visite_avond": "daamen",
+    "20180527_weekend_consult_avond": "heho",
+    "20181104_weekend_nacht": "pruijssen",
+    "20181228_weekend_consult_avond": "gielen",
+    "20180521_weekend_consult_avond_feest": "rekkers",
+    "20181124_weekend_nacht": "acker_vd",
+    "20180714_weekend_consult_ochtend": "nierop_van",
+    "20180526_weekend_consult_ochtend": "sluijs_vd",
+    "20180914_weekend_consult_avond": "daamen",
+    "20180527_weekend_visite_avond": "baars",
+    "20180106_weekend_nacht": "beelen",
+    "20190106_weekend_nacht": "marcelis",
+    "20190105_weekend_consult_ochtend": "sluijs_vd",
+    "20181110_weekend_consult_ochtend": "sluijs_vd",
+    "20180929_weekend_consult_ochtend": "daamen",
+    "20180811_weekend_consult_avond": "sluijs_vd",
+    "20180615_weekend_visite_avond": "heho",
+    "20180415_weekend_visite_ochtend": "heeden_vd",
+    "20180414_weekend_visite_ochtend": "pruijssen",
+    "20180331_weekend_visite_avond_feest": "rekkers",
+    "20181226_weekend_visite_avond_feest": "homa",
+    "20180922_weekend_nacht": "rens_van",
+    "20180810_weekend_consult_avond": "marcelis",
+    "20180317_weekend_visite_avond": "homa",
+    "20180511_weekend_visite_ochtend_feest": "heeden_vd",
+    "20180512_weekend_visite_avond_feest": "sluijs_vd",
+    "20181007_weekend_visite_avond": "onderwater",
+    "20181209_weekend_nacht": "acker_vd",
+    "20190105_weekend_visite_avond": "baars",
+    "20180609_weekend_visite_avond": "heeden_vd",
+    "20171230_weekend_visite_avond": "onderwater",
+    "20180421_weekend_visite_ochtend": "onderwater",
+    "20180526_weekend_visite_avond": "gielen",
+    "20181104_weekend_visite_ochtend": "heho",
+    "20180629_weekend_consult_avond": "heho",
+    "20180223_weekend_visite_avond": "daamen",
+    "20180616_weekend_consult_ochtend": "rekkers",
+    "20180630_weekend_visite_ochtend": "rens_van",
+    "20181006_weekend_nacht": "houppermans",
+    "20180519_weekend_nacht_feest": "baars",
+    "20180324_weekend_visite_avond": "hoeks",
+    "20180505_weekend_visite_ochtend": "marcelis",
+    "20190106_weekend_visite_ochtend": "daamen",
+    "20180909_weekend_nacht": "acker_vd",
+    "20180617_weekend_visite_ochtend": "heho",
+    "20180602_weekend_consult_ochtend": "rekkers",
+    "20180218_weekend_visite_ochtend": "heho",
+    "20180915_weekend_consult_ochtend": "pruijssen",
+    "20180114_weekend_nacht": "daamen",
+    "20180811_weekend_consult_ochtend": "rekkers",
+    "20180512_weekend_consult_avond_feest": "acker_vd",
+    "20181208_weekend_visite_ochtend": "homa",
+    "20180427_weekend_consult_avond_feest": "acker_vd",
+    "20180805_weekend_nacht": "pruijssen",
+    "20180415_weekend_nacht": "houppermans",
+    "20180318_weekend_visite_ochtend": "acker_vd",
+    "20180715_weekend_consult_avond": "houppermans",
+    "20180624_weekend_visite_avond": "gielen",
+    "20180511_weekend_consult_ochtend_feest": "rens_van",
+    "20180415_weekend_consult_ochtend": "rekkers",
+    "20180331_weekend_visite_ochtend_feest": "acker_vd",
+    "20180113_weekend_visite_avond": "acker_vd",
+    "20181118_weekend_visite_avond": "homa",
+    "20180415_weekend_visite_avond": "pruijssen",
+    "20180610_weekend_consult_ochtend": "beelen",
+    "20180127_weekend_visite_ochtend": "heho",
+    "20180506_weekend_consult_avond": "marcelis",
+    "20180429_weekend_consult_avond": "rekkers",
+    "20180630_weekend_nacht": "baars",
+    "20180309_weekend_consult_avond": "rens_van",
+    "20180526_weekend_consult_avond": "heeden_vd",
+    "20181124_weekend_consult_ochtend": "baars",
+    "20180916_weekend_consult_avond": "pruijssen",
+    "20180922_weekend_consult_avond": "houppermans",
+    "20181209_weekend_visite_avond": "dooren_van",
+    "20180217_weekend_visite_ochtend": "sluijs_vd",
+    "20181216_weekend_visite_ochtend": "rens_van",
+    "20180804_weekend_nacht": "heeden_vd",
+    "20180902_weekend_visite_ochtend": "homa",
+    "20180513_weekend_visite_avond": "pruijssen",
+    "20180218_weekend_nacht": "beelen",
+    "20180526_weekend_visite_ochtend": "daamen",
+    "20181116_weekend_visite_avond": "rekkers",
+    "20180101_weekend_consult_ochtend_feest": "homa",
+    "20181104_weekend_visite_avond": "homa",
+    "20181224_weekend_consult_avond_feest": "hoeks",
+    "20180519_weekend_visite_avond_feest": "baars",
+    "20180429_weekend_visite_avond": "houppermans",
+    "20180727_weekend_consult_avond": "houppermans",
+    "20180114_weekend_consult_avond": "nierop_van",
+    "20181225_weekend_consult_ochtend_feest": "hoeks",
+    "20180525_weekend_visite_avond": "sluijs_vd",
+    "20180428_weekend_consult_avond": "houppermans",
+    "20180303_weekend_nacht": "marcelis",
+    "20181014_weekend_consult_avond": "sluijs_vd",
+    "20180406_weekend_visite_avond": "sluijs_vd",
+    "20180408_weekend_consult_ochtend": "homa",
+    "20180714_weekend_visite_ochtend": "beelen",
+    "20180520_weekend_nacht_feest": "ambachtsheer",
+    "20180923_weekend_consult_avond": "gielen",
+    "20180722_weekend_visite_ochtend": "heeden_vd",
+    "20180701_weekend_consult_avond": "rens_van",
+    "20180519_weekend_visite_ochtend_feest": "dooren_van",
+    "20180429_weekend_consult_ochtend": "ambachtsheer",
+    "20180414_weekend_consult_avond": "heho",
+    "20180908_weekend_visite_ochtend": "baars",
+    "20180729_weekend_visite_ochtend": "hoeks",
+    "20181216_weekend_consult_avond": "heho",
+    "20180826_weekend_nacht": "ambachtsheer",
+    "20180624_weekend_visite_ochtend": "onderwater",
+    "20180330_weekend_nacht_feest": "baars",
+    "20180902_weekend_consult_avond": "dooren_van",
+    "20190104_weekend_consult_avond": "hoeks",
+    "20180310_weekend_consult_ochtend": "beelen",
+    "20181215_weekend_consult_ochtend": "onderwater"
+  },
+  "resourceConstraints": {
+    "rens_van": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-24": [
+            "20180617_weekend_consult_ochtend"
+          ],
+          "2018-30": [
+            "20180728_weekend_visite_ochtend"
+          ],
+          "2018-35": [
+            "20180901_weekend_visite_ochtend"
+          ],
+          "2018-6": [
+            "20180211_weekend_consult_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "sluijs_vd": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-14": [
+            "20180406_weekend_visite_avond","20180407_weekend_visite_avond","20180408_weekend_visite_avond"
+          ],
+          "2019-1": [
+            "20190105_weekend_consult_ochtend"
+          ],
+          "2018-27": [
+            "20180708_weekend_consult_ochtend"
+          ],
+          "2018-41": [
+            "20181014_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-41"
+        ],
+        "hard": false
+      }
+    ],
+    "ambachtsheer": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-40": [
+            "20181006_weekend_consult_ochtend"
+          ],
+          "2018-9": [
+            "20180304_weekend_consult_avond"
+          ],
+          "2018-12": [
+            "20180323_weekend_visite_avond","20180324_weekend_visite_ochtend","20180325_weekend_visite_avond"
+          ],
+          "2018-7": [
+            "20180217_weekend_visite_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-19"
+        ],
+        "hard": false
+      }
+    ],
+    "onderwater": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 9,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 9,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 3,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2017-52": [
+            "20171230_weekend_visite_avond"
+          ],
+          "2018-29": [
+            "20180720_weekend_visite_avond"
+          ],
+          "2018-5": [
+            "20180204_weekend_visite_ochtend"
+          ],
+          "2018-20": [
+            "20180518_weekend_consult_avond_feest"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "gielen": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 18,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 18,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-19": [
+            "20180509_weekend_visite_avond_feest","20180510_weekend_consult_ochtend_feest","20180512_weekend_visite_ochtend_feest"
+          ],
+          "2019-1": [
+            "20190105_weekend_visite_ochtend"
+          ],
+          "2018-52": [
+            "20181228_weekend_consult_avond"
+          ],
+          "2018-48": [
+            "20181130_weekend_consult_avond","20181201_weekend_consult_ochtend","20181202_weekend_visite_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-51","2018-52"
+        ],
+        "hard": false
+      }
+    ],
+    "hoeks": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-47": [
+            "20181123_weekend_consult_avond"
+          ],
+          "2018-32": [
+            "20180812_weekend_consult_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-32"
+        ],
+        "hard": false
+      }
+    ],
+    "marcelis": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 3,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-13": [
+            "20180401_weekend_consult_ochtend_feest"
+          ],
+          "2018-38": [
+            "20180922_weekend_consult_ochtend"
+          ],
+          "2018-35": [
+            "20180901_weekend_visite_avond"
+          ],
+          "2018-51": [
+            "20181226_weekend_consult_avond_feest"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "heho": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 4,
+        "excludeNights": false,
+        "violations": {
+          "2018-50": [
+            "20181214_weekend_visite_avond","20181216_weekend_consult_avond"
+          ],
+          "2018-48": [
+            "20181202_weekend_nacht"
+          ],
+          "2018-44": [
+            "20181104_weekend_visite_ochtend"
+          ],
+          "2018-26": [
+            "20180629_weekend_consult_avond","20180630_weekend_visite_avond","20180701_weekend_visite_ochtend"
+          ],
+          "2018-15": [
+            "20180413_weekend_visite_avond","20180414_weekend_consult_avond","20180414_weekend_nacht"
+          ],
+          "2018-29": [
+            "20180721_weekend_consult_ochtend","20180722_weekend_consult_ochtend"
+          ],
+          "2018-7": [
+            "20180217_weekend_consult_avond","20180218_weekend_visite_ochtend"
+          ],
+          "2018-4": [
+            "20180127_weekend_visite_ochtend"
+          ],
+          "2018-39": [
+            "20180930_weekend_visite_avond"
+          ],
+          "2018-35": [
+            "20180831_weekend_consult_avond","20180902_weekend_visite_avond"
+          ],
+          "2018-13": [
+            "20180330_weekend_consult_ochtend_feest"
+          ],
+          "2018-21": [
+            "20180527_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": true,
+        "violations": [
+          "20180217_weekend_consult_avond","20180218_weekend_visite_ochtend","20180414_weekend_consult_avond","20180509_weekend_consult_avond_feest","20180511_weekend_consult_avond_feest","20180511_weekend_nacht_feest","20180513_weekend_consult_avond","20180615_weekend_visite_avond","20180617_weekend_visite_ochtend","20180629_weekend_consult_avond","20180630_weekend_visite_avond","20180701_weekend_visite_ochtend","20180721_weekend_consult_ochtend","20180722_weekend_consult_ochtend","20180831_weekend_consult_avond","20180902_weekend_visite_avond","20181013_weekend_visite_avond","20181014_weekend_visite_avond","20181214_weekend_visite_avond","20181216_weekend_consult_avond","20181229_weekend_consult_avond","20181229_weekend_nacht"
+        ],
+        "hard": false
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "rekkers": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "beelen": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-3": [
+            "20180121_weekend_visite_avond"
+          ],
+          "2018-41": [
+            "20181012_weekend_visite_avond","20181013_weekend_consult_ochtend","20181014_weekend_consult_ochtend"
+          ],
+          "2018-12": [
+            "20180323_weekend_consult_avond","20180324_weekend_consult_avond","20180325_weekend_consult_ochtend"
+          ],
+          "2018-36": [
+            "20180908_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "baars": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 22,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 20,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 8,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 22,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": false,
+        "violations": {
+          "2018-9": [
+            "20180302_weekend_consult_avond","20180303_weekend_consult_avond","20180304_weekend_consult_ochtend"
+          ],
+          "2018-22": [
+            "20180602_weekend_visite_avond","20180602_weekend_visite_ochtend","20180603_weekend_consult_avond"
+          ],
+          "2018-3": [
+            "20180121_weekend_consult_ochtend"
+          ],
+          "2018-7": [
+            "20180216_weekend_visite_avond","20180217_weekend_consult_ochtend","20180218_weekend_visite_avond"
+          ],
+          "2018-14": [
+            "20180408_weekend_visite_ochtend"
+          ],
+          "2018-17": [
+            "20180427_weekend_consult_ochtend_feest","20180428_weekend_consult_ochtend","20180428_weekend_nacht"
+          ],
+          "2018-39": [
+            "20180928_weekend_visite_avond","20180929_weekend_nacht","20180930_weekend_consult_ochtend"
+          ],
+          "2018-28": [
+            "20180715_weekend_visite_avond"
+          ],
+          "2018-20": [
+            "20180519_weekend_nacht_feest","20180519_weekend_visite_avond_feest","20180521_weekend_visite_avond_feest"
+          ],
+          "2019-1": [
+            "20190105_weekend_visite_avond"
+          ],
+          "2018-51": [
+            "20181222_weekend_visite_avond"
+          ],
+          "2018-27": [
+            "20180708_weekend_visite_ochtend"
+          ],
+          "2018-46": [
+            "20181117_weekend_visite_ochtend"
+          ],
+          "2018-5": [
+            "20180203_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": true,
+        "violations": [
+          "20180106_weekend_consult_avond","20180107_weekend_consult_ochtend","20180216_weekend_visite_avond","20180217_weekend_consult_ochtend","20180218_weekend_visite_avond","20180302_weekend_consult_avond","20180303_weekend_consult_avond","20180304_weekend_consult_ochtend","20180330_weekend_nacht_feest","20180402_weekend_consult_avond_feest","20180427_weekend_consult_ochtend_feest","20180519_weekend_nacht_feest","20180519_weekend_visite_avond_feest","20180521_weekend_visite_avond_feest","20180527_weekend_nacht","20180527_weekend_visite_avond","20180603_weekend_consult_avond","20180623_weekend_visite_avond","20180624_weekend_consult_ochtend","20180728_weekend_nacht","20180729_weekend_consult_avond","20180908_weekend_nacht","20180908_weekend_visite_ochtend","20180930_weekend_consult_ochtend","20181019_weekend_visite_avond","20181021_weekend_consult_avond","20181102_weekend_visite_avond","20181103_weekend_consult_ochtend","20181110_weekend_visite_ochtend","20181111_weekend_visite_avond","20181124_weekend_consult_ochtend","20181125_weekend_consult_avond","20181215_weekend_consult_avond","20181216_weekend_visite_avond"
+        ],
+        "hard": false
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-13","2018-20","2018-21","2018-25","2018-26","2018-27","2018-44","2018-45","2018-46","2018-50"
+        ],
+        "hard": false
+      }
+    ],
+    "acker_vd": [
+      {
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-12": [
+            "20180325_weekend_visite_ochtend"
+          ],
+          "2018-40": [
+            "20181005_weekend_consult_avond","20181006_weekend_visite_avond","20181007_weekend_consult_avond"
+          ],
+          "2018-18": [
+            "20180504_weekend_consult_avond"
+          ],
+          "2018-20": [
+            "20180521_weekend_consult_ochtend_feest"
+          ],
+          "2018-51": [
+            "20181221_weekend_consult_avond","20181222_weekend_visite_ochtend","20181223_weekend_visite_ochtend","20181225_weekend_visite_avond_feest"
+          ],
+          "2018-13": [
+            "20180331_weekend_visite_ochtend_feest","20180401_weekend_consult_avond_feest","20180402_weekend_visite_ochtend_feest"
+          ],
+          "2018-24": [
+            "20180616_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2018-11","2018-12","2018-13","2018-16","2018-17","2018-18","2018-19","2018-20","2018-23","2018-35","2018-36","2018-43","2018-44","2018-49","2018-5","2018-50","2018-6","2018-7","2018-8"
+        ],
+        "hard": false
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 19,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 20,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 19,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 20,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      }
+    ],
+    "houppermans": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 9,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 9,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 3,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 3,
+        "excludeNights": true,
+        "violations": {
+          "2018-34": [
+            "20180826_weekend_consult_avond","20180826_weekend_consult_ochtend"
+          ],
+          "2018-23": [
+            "20180609_weekend_consult_ochtend","20180610_weekend_visite_avond"
+          ],
+          "2018-6": [
+            "20180209_weekend_visite_avond","20180210_weekend_visite_ochtend"
+          ],
+          "2018-48": [
+            "20181201_weekend_consult_avond","20181201_weekend_visite_ochtend","20181202_weekend_consult_avond","20181202_weekend_consult_ochtend"
+          ],
+          "2018-30": [
+            "20180727_weekend_consult_avond","20180728_weekend_consult_avond"
+          ],
+          "2018-28": [
+            "20180713_weekend_consult_avond","20180715_weekend_consult_avond"
+          ],
+          "2018-8": [
+            "20180225_weekend_visite_ochtend"
+          ],
+          "2018-13": [
+            "20180401_weekend_visite_avond_feest","20180401_weekend_visite_ochtend_feest"
+          ],
+          "2018-10": [
+            "20180309_weekend_visite_avond","20180310_weekend_visite_avond"
+          ],
+          "2018-32": [
+            "20180812_weekend_visite_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": true,
+        "violations": [
+          "20180209_weekend_visite_avond","20180210_weekend_visite_ochtend","20180309_weekend_visite_avond","20180310_weekend_visite_avond","20180429_weekend_visite_avond","20180609_weekend_consult_ochtend","20180610_weekend_visite_avond","20180713_weekend_consult_avond","20180715_weekend_consult_avond","20180727_weekend_consult_avond","20180728_weekend_consult_avond","20180923_weekend_consult_ochtend"
+        ],
+        "hard": false
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "homa": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 15,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 6,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-22": [
+            "20180603_weekend_visite_ochtend"
+          ],
+          "2018-24": [
+            "20180617_weekend_consult_avond"
+          ],
+          "2018-44": [
+            "20181104_weekend_visite_avond"
+          ],
+          "2018-37": [
+            "20180914_weekend_visite_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "pruijssen": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 3,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-29": [
+            "20180722_weekend_consult_avond"
+          ],
+          "2018-33": [
+            "20180818_weekend_consult_avond"
+          ],
+          "2018-47": [
+            "20181124_weekend_visite_avond"
+          ],
+          "2018-49": [
+            "20181208_weekend_consult_avond"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "daamen": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-48": [
+            "20181202_weekend_visite_ochtend"
+          ],
+          "2018-27": [
+            "20180707_weekend_visite_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "dooren_van": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 16,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 12,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 17,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-6": [
+            "20180209_weekend_consult_avond"
+          ],
+          "2018-33": [
+            "20180819_weekend_visite_avond"
+          ],
+          "2018-18": [
+            "20180504_weekend_visite_avond","20180505_weekend_consult_ochtend","20180505_weekend_visite_avond","20180506_weekend_visite_avond","20180506_weekend_visite_ochtend"
+          ],
+          "2018-49": [
+            "20181209_weekend_visite_avond"
+          ],
+          "2018-4": [
+            "20180127_weekend_consult_ochtend","20180128_weekend_consult_avond","20180128_weekend_visite_ochtend"
+          ],
+          "2018-35": [
+            "20180831_weekend_visite_avond","20180901_weekend_consult_ochtend","20180902_weekend_consult_avond","20180902_weekend_consult_ochtend"
+          ],
+          "2018-51": [
+            "20181221_weekend_visite_avond","20181222_weekend_consult_avond","20181222_weekend_consult_ochtend","20181223_weekend_consult_avond"
+          ],
+          "2018-46": [
+            "20181118_weekend_consult_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": true,
+        "violations": [
+          "20180106_weekend_visite_avond","20180107_weekend_visite_ochtend","20180127_weekend_consult_ochtend","20180330_weekend_visite_avond_feest","20180402_weekend_visite_avond_feest","20180420_weekend_consult_avond","20180422_weekend_visite_ochtend","20180504_weekend_visite_avond","20180518_weekend_visite_avond_feest","20180519_weekend_visite_ochtend_feest","20180803_weekend_consult_avond","20180804_weekend_visite_ochtend","20180831_weekend_visite_avond","20180901_weekend_consult_ochtend","20181026_weekend_consult_avond","20181027_weekend_consult_avond","20181221_weekend_visite_avond","20181223_weekend_consult_avond"
+        ],
+        "hard": false
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+          "2017-52","2018-24"
+        ],
+        "hard": false
+      }
+    ],
+    "heeden_vd": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 13,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 5,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 14,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-12": [
+            "20180324_weekend_consult_ochtend"
+          ],
+          "2017-52": [
+            "20171231_weekend_visite_ochtend"
+          ],
+          "2018-17": [
+            "20180429_weekend_visite_ochtend"
+          ],
+          "2018-8": [
+            "20180224_weekend_consult_avond"
+          ],
+          "2019-1": [
+            "20190106_weekend_consult_avond"
+          ],
+          "2018-27": [
+            "20180707_weekend_consult_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ],
+    "nierop_van": [
+      {
+        "type": "CounterConstraint",
+        "counterId": "week_visite",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_visite",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_nacht",
+        "desired": 10,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "week_consult",
+        "desired": 7,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_nacht",
+        "desired": 4,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_consult",
+        "desired": 11,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "CounterConstraint",
+        "counterId": "weekend_feest",
+        "desired": 3,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "OverlappingTasksConstraint",
+        "hard": true,
+        "violations": [
+        ]
+      },{
+        "type": "AbsenceConstraint",
+        "absence": [
+        ],
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendTasksConstraint",
+        "desiredTasksPerWeekend": 2,
+        "excludeNights": true,
+        "violations": {
+          "2018-41": [
+            "20181013_weekend_consult_avond"
+          ],
+          "2018-39": [
+            "20180929_weekend_visite_avond"
+          ],
+          "2018-37": [
+            "20180915_weekend_visite_avond"
+          ],
+          "2018-28": [
+            "20180714_weekend_consult_ochtend"
+          ]
+        },
+        "hard": false
+      },{
+        "type": "ConnectionConstraint",
+        "connectionDesired": false,
+        "violations": [
+        ],
+        "hard": true
+      },{
+        "type": "WeekendDistanceConstraint",
+        "desiredDistance": 2,
+        "violations": [
+        ],
+        "hard": false
+      }
+    ]
+  },
+  "totalScore": 17
+}

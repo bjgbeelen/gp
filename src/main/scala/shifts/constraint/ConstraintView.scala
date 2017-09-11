@@ -27,10 +27,7 @@ case class CounterConstraintView(`type`: String,
     extends ConstraintView
 case class OverlappingTasksConstraintView(`type`: String, hard: Boolean, violations: Seq[(TaskId, TaskId)])
     extends ConstraintView
-case class WeekendDistanceConstraintView(`type`: String,
-                                         desiredDistance: Int,
-                                         violations: Seq[String],
-                                         hard: Boolean)
+case class WeekendDistanceConstraintView(`type`: String, desiredDistance: Int, violations: Seq[String], hard: Boolean)
     extends ConstraintView
 case class WeekendTasksConstraintView(`type`: String,
                                       desiredTasksPerWeekend: Int,
@@ -40,14 +37,14 @@ case class WeekendTasksConstraintView(`type`: String,
     extends ConstraintView
 
 object ConstraintView {
-   implicit val constraintViewEncoder: Encoder[ConstraintView] = new Encoder[ConstraintView] {
+  implicit val constraintViewEncoder: Encoder[ConstraintView] = new Encoder[ConstraintView] {
     final def apply(constraintView: ConstraintView): Json = constraintView match {
-      case x: AbsenceConstraintView => x.asJson
-      case x: ConnectionConstraintView => x.asJson
-      case x: CounterConstraintView => x.asJson
-      case x: WeekendDistanceConstraintView => x.asJson
+      case x: AbsenceConstraintView          => x.asJson
+      case x: ConnectionConstraintView       => x.asJson
+      case x: CounterConstraintView          => x.asJson
+      case x: WeekendDistanceConstraintView  => x.asJson
       case x: OverlappingTasksConstraintView => x.asJson
-      case x: WeekendTasksConstraintView => x.asJson
+      case x: WeekendTasksConstraintView     => x.asJson
     }
   }
 
@@ -68,15 +65,22 @@ object ConstraintView {
                                  violations = x.violations(tasks).map(_.id).toList.sorted,
                                  hard = x.hard)
       case x: OverlappingTasksConstraint =>
-        OverlappingTasksConstraintView(typeName, x.hard, x.violations(tasks).map { case (t1, t2) => (t1.id, t2.id) }.toList.sorted)
+        OverlappingTasksConstraintView(typeName,
+                                       x.hard,
+                                       x.violations(tasks).map { case (t1, t2) => (t1.id, t2.id) }.toList.sorted)
       case x: WeekendDistanceConstraint =>
         WeekendDistanceConstraintView(typeName,
                                       desiredDistance = x.desiredDistance,
                                       violations = x.violations(tasks).map(_.id).toList.sorted,
                                       x.hard)
       case x: WeekendTasksConstraint =>
-        WeekendTasksConstraintView(typeName, desiredTasksPerWeekend = x.desiredTasksPerWeekend, excludeNights = x.excludeNights,
-          violations = x.violations(tasks).map{case (week, tasks) => (week.id -> tasks.map(_.id).toList.sorted)}, hard = x.hard)
+        WeekendTasksConstraintView(
+          typeName,
+          desiredTasksPerWeekend = x.desiredTasksPerWeekend,
+          excludeNights = x.excludeNights,
+          violations = x.violations(tasks).map { case (week, tasks) => (week.id -> tasks.map(_.id).toList.sorted) },
+          hard = x.hard
+        )
     }
   }
 }

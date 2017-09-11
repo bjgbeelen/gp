@@ -3,6 +3,7 @@ import sbt._
 object Dependencies {
   val Http4sVersion = "0.17.0-M3"
   val CirceVersion = "0.8.0"
+  val DoobieVersion = "0.5.0-M7"
 
   lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1"
   lazy val nScalaTime = "com.github.nscala-time" %% "nscala-time" % "2.16.0"
@@ -16,4 +17,7 @@ object Dependencies {
   val circeParser = "io.circe" %% "circe-parser" % CirceVersion
   val cats = "org.typelevel" %% "cats" % "0.9.0"
   val logback =  "ch.qos.logback" %  "logback-classic"     % "1.2.1"
+  val doobieCore = "org.tpolecat" %% "doobie-core"      % DoobieVersion
+  val doobiePostgres = "org.tpolecat" %% "doobie-postgres"  % DoobieVersion // Postgres driver 42.1.4 + type mappings.
+  val doobieScalaTest = "org.tpolecat" %% "doobie-scalatest" % DoobieVersion  // ScalaTest support for typechecking statements
 }

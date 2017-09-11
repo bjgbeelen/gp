@@ -13,10 +13,12 @@ import chance._
 import constraint._
 import concurrent._
 
-case class Schedule(name: String,
-                    assignments: Map[Task, Resource],
-                    resourceConstraints: Map[Resource, Seq[Constraint]] = Map.empty) {
-  implicit def context = TaskContext(assignments.keys.toList)
+case class Schedule(
+    name: String,
+    assignments: Map[Task, Resource],
+    resourceConstraints: Map[Resource, Seq[Constraint]] = Map.empty
+)(implicit taskContext: TaskContext) {
+  def context = taskContext
 
   def tasks(resource: Resource): Set[Task] =
     assignments
@@ -155,8 +157,6 @@ object Schedule {
   //   def sortFunc(tasksA: Seq[Task], tasksB: Seq[Task]) = {
   //     tasksA.count(_.is(Task.Feest)) > tasksB.count(_.is(Task.Feest))
   //   }
-
-
   //   val weekTasks = context.weekTasks.values.toList.sortWith(sortFunc)
   // }
 }

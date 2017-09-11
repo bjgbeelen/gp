@@ -26,5 +26,8 @@ case class WeekendTasksConstraint(desiredTasksPerWeekend: Int, excludeNights: Bo
       }
       .toMap
   }
-  def score(input: Set[Task])(implicit context: TaskContext): Int = violations(input).size
+  def score(input: Set[Task])(implicit context: TaskContext): Int =
+    violations(input).values.toList
+      .map(real => Math.abs(desiredTasksPerWeekend - real.size))
+      .sum
 }
