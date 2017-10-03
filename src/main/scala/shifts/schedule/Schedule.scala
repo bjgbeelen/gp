@@ -15,6 +15,7 @@ import concurrent._
 
 case class Schedule(
     name: String,
+    calendar: Calendar,
     assignments: Map[Task, Resource],
     resourceConstraints: Map[Resource, Seq[Constraint]] = Map.empty
 )(implicit taskContext: TaskContext) {
@@ -63,6 +64,7 @@ object Schedule {
           Right(
             Schedule(
               name = "dummy",
+              calendar = calendar,
               assignments.foldLeft(initialValue) {
                 case (result, (k, v)) => result ++ v.map(_ -> k).toMap
               },

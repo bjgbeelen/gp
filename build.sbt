@@ -4,7 +4,7 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization := "com.besquare",
-      scalaVersion := "2.12.2",
+      scalaVersion := "2.12.3",
       version      := "0.1.0-SNAPSHOT",
       scalacOptions ++= Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature", "-language:higherKinds", "-language:implicitConversions", "-Ydelambdafy:method", "-target:jvm-1.8"),
   resolvers     ++= Seq(
@@ -19,13 +19,14 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       nScalaTime % Compile,
       scalaTest % Test,
-      http4sServer % Compile,
       akkaHttp % Compile,
       akkaHttpCirce % Compile,
-      http4sCirce % Compile,
+      monixCore % Compile,
+      // http4sServer % Compile,
+      // http4sDsl % Compile,
+      // http4sCirce % Compile,
       doobieCore % Compile,
       doobiePostgres % Compile,
-      http4sDsl % Compile,
       circeCore % Compile,
       circeGeneric % Compile,
       circeParser % Compile,

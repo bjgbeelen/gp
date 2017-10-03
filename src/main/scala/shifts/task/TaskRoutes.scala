@@ -6,15 +6,21 @@ import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import io.circe.generic.auto._
 import io.circe.Printer
 
-import calendar.Calendar
-import Data2018._
+import monix.execution.Scheduler.Implicits.global
+import monix.eval.{ Task => MonixTask }
+
+import calendar.CalendarDescription
+import repository.Tasks
+import doobie._, doobie.implicits._
+import cats.effect.IO
 
 trait TaskRoutes extends FailFastCirceSupport {
-  def taskRoutes(calendar: Calendar)(implicit printer: Printer) =
+  def taskRoutes(calendar: CalendarDescription)(implicit printer: Printer, transactor: Transactor[IO]) =
     pathPrefix("tasks") {
       (get & (pathSingleSlash | pathEnd)) {
-        val taskMap: Map[String, Set[Task]] = tasks.groupBy(_.day.id)
-        complete(taskMap)
+        val tasks   = MonixTask.fromIO(Tasks.find(calendar.name).transact(transactor))
+        val taskMap = tasks.map(_.groupBy(_.day))
+        complete(taskMap.runAsync)
       }
     }
 }

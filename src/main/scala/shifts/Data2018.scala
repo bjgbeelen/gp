@@ -9,6 +9,12 @@ import constraint._
 
 import scala.concurrent._
 import scala.concurrent.ExecutionContext.Implicits.global
+import repository._
+
+import doobie.Transactor
+import cats.effect.IO
+
+import java.util.Date
 
 object Data2018 {
   val holidays = Seq(
@@ -35,7 +41,10 @@ object Data2018 {
 
   val holidayLabels = holidays.map { case Holiday(id, label, _) ⇒ (id, label) }.toMap
 
-  val calendar = Calendar("2018", "2017-12-25", "2019-01-07", holidayLabels)
+  val calendarDescription =
+    CalendarDescription("2018", DateTime("2017-12-25").toDate, new DateTime("2019-01-07").toDate, holidayLabels)
+
+  val calendar = Calendar(calendarDescription)
 
   val calendars = List(calendar)
 
@@ -56,7 +65,7 @@ object Data2018 {
     )
   )
 
-  val counters    = weekCounters ++ weekendCounters
+  val counters    = (weekCounters ++ weekendCounters).toList
   val countersMap = Map("week" -> weekCounters, "weekend" -> weekendCounters)
 
   val resources: List[Resource] = List(
@@ -205,7 +214,13 @@ object Data2018 {
     val overlappingTasksConstraint = OverlappingTasksConstraint()
     val weekendGapConstraint =
       WeekendDistanceConstraint(desiredDistance = 2, calendar = calendar, hard = false)
-    val absenceConstraint = AbsenceConstraint(absence = Set.empty)
+    def absenceConstraint(resource: Resource) = {
+      val absence: Set[DayId] = resource.id match {
+        case "beelen" => Set("20180101", "20180102", "20180103", "20180104", "20180105", "20180106", "20180107")
+        case _        => Set.empty
+      }
+      AbsenceConstraint(absence = absence)
+    }
     def weekendTasksConstraint(resource: Resource) = {
       val desired = resource.id match {
         case "houppermans" => 3
@@ -233,7 +248,7 @@ object Data2018 {
           }.toList
         val constraints: List[Constraint] = counterConstraints ++ List(
           overlappingTasksConstraint,
-          absenceConstraint,
+          absenceConstraint(resource),
           weekendTasksConstraint(resource),
           connectingConstraint(resource),
           weekendGapConstraint
@@ -255,7 +270,7 @@ object Data2018 {
       }.toList
       val constraints: List[Constraint] = List(overlappingTasksConstraint,
                                                connectingConstraint(first),
-                                               absenceConstraint,
+                                               absenceConstraint(first),
                                                weekendTasksConstraint(first),
                                                weekendGapConstraint) ++ counterConstraints
       (first -> constraints)
@@ -281,4 +296,27 @@ object Data2018 {
     }
   }
   val schedules: Future[Seq[Schedule]] = foo()
+
+  val testSchedule = Schedule(
+    name = "Test",
+    calendar = calendar,
+    assignments = Map.empty,
+    resourceConstraints = resourceConstraints
+  )(TaskContext(tasks.toList))
+
+  val xa = Transactor.fromDriverManager[IO](
+    "org.postgresql.Driver",
+    "jdbc:postgresql:gp-shifts",
+    "app",
+    ""
+  )
+  // Calendars.find("2018")
+
+  // Calendars.find("2018").flatMap {
+  //   case None =>
+  //     for {
+  //       calendarId <- Calendars.insert(calendarDescription)
+  //     } yield calendarId
+  //   case _ => ???
+  // }
 }

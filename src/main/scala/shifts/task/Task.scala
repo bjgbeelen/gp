@@ -3,6 +3,26 @@ package task
 
 import calendar._
 
+case class TaskView(id: TaskId,
+                    day: DayId,
+                    calendarName: String,
+                    label: String,
+                    start: Minute,
+                    end: Minute,
+                    tags: List[Tag])
+
+object TaskView {
+  def from(task: Task) = TaskView(
+    id = task.id,
+    day = task.day.id,
+    calendarName = task.day.calendar.name,
+    label = task.label,
+    start = task.start,
+    end = task.end,
+    tags = task.tags.toList
+  )
+}
+
 case class Task private (id: TaskId, day: Day, label: String, start: Minute, end: Minute, tags: Set[Tag]) { self =>
   require(start < end, "The start of the task should be earlier than its end")
   import Task._

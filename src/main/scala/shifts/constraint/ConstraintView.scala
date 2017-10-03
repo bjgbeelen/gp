@@ -48,6 +48,21 @@ object ConstraintView {
     }
   }
 
+  implicit val constraintViewDecoder: Decoder[ConstraintView] = new Decoder[ConstraintView] {
+    final def apply(c: HCursor): Decoder.Result[ConstraintView] =
+      c.downField("type").as[String].flatMap { _type =>
+        val decoder = _type match {
+          case "AbsenceConstraint"          => implicitly[Decoder[AbsenceConstraintView]]
+          case "ConnectionConstraint"       => implicitly[Decoder[ConnectionConstraintView]]
+          case "CounterConstraint"          => implicitly[Decoder[CounterConstraintView]]
+          case "WeekendDistanceConstraint"  => implicitly[Decoder[WeekendDistanceConstraintView]]
+          case "OverlappingTasksConstraint" => implicitly[Decoder[OverlappingTasksConstraintView]]
+          case "WeekendTasksConstraint"     => implicitly[Decoder[WeekendTasksConstraintView]]
+        }
+        decoder(c)
+      }
+  }
+
   def from(constraint: Constraint, tasks: Set[Task])(implicit context: TaskContext) = {
     val typeName = constraint.getClass.getSimpleName
     constraint match {

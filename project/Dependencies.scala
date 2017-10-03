@@ -4,6 +4,7 @@ object Dependencies {
   val Http4sVersion = "0.17.0-M3"
   val CirceVersion = "0.8.0"
   val DoobieVersion = "0.5.0-M7"
+  val MonixVersion = "3.0.0-M1"
 
   lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1"
   lazy val nScalaTime = "com.github.nscala-time" %% "nscala-time" % "2.16.0"
@@ -11,6 +12,7 @@ object Dependencies {
   val akkaHttp = "com.typesafe.akka" %% "akka-http" % "10.0.10"
   val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe" % "1.18.0"
   val http4sCirce = "org.http4s"     %% "http4s-circe"        % Http4sVersion
+  val monixCore = "io.monix"  %% "monix" % MonixVersion
   val http4sDsl = "org.http4s"     %% "http4s-dsl"          % Http4sVersion
   val circeCore = "io.circe" %% "circe-core" % CirceVersion
   val circeGeneric = "io.circe" %% "circe-generic" % CirceVersion

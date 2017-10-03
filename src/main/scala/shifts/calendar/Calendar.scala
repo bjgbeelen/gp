@@ -3,7 +3,12 @@ package calendar
 
 import scala.annotation.tailrec
 
-case class Calendar(name: String, from: DateTime, to: DateTime, children: Seq[Year]) extends CalendarNode[Year] {
+import java.util.Date
+
+case class CalendarDescription(name: String, from: Date, to: Date, labels: Map[String, String])
+
+case class Calendar private (name: String, from: DateTime, to: DateTime, children: Seq[Year])
+    extends CalendarNode[Year] {
   def years = children
   def months = years.foldLeft(Seq[Month]()) {
     case (months, year) ⇒ months ++ year.months
@@ -23,8 +28,8 @@ case class Calendar(name: String, from: DateTime, to: DateTime, children: Seq[Ye
 }
 
 object Calendar {
-  def apply(name: String, from: String, to: String, dayLabels: Map[DayId, String]): Calendar =
-    apply(name, DateTime(from), DateTime(to), dayLabels)
+  def apply(description: CalendarDescription): Calendar =
+    apply(description.name, new DateTime(description.from), new DateTime(description.to), description.labels)
 
   def apply(name: String, from: DateTime, to: DateTime, dayLabels: Map[DayId, String]): Calendar = {
     @tailrec
@@ -105,6 +110,7 @@ case class Year(number: YearNumber, parent: () ⇒ Calendar, children: Seq[Month
     extends CalendarNode[Month]
     with NeighbourSupport[Year, Calendar] {
   def months                 = children
+  def calendar               = parent()
   override lazy val toString = s"${number}"
 }
 
@@ -210,8 +216,9 @@ case class Day(label: String, number: DayNumber, dayOfWeek: DayOfWeekNumber, par
       }
     Week(partialWeeks)
   }
-  def month = partialWeek.month
-  def year  = month.year
+  def month    = partialWeek.month
+  def year     = month.year
+  def calendar = year.calendar
 
   lazy val id: DayId = Day.id(year.number, month.number, number)
 
