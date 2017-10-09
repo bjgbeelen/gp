@@ -12,12 +12,12 @@ case class ScheduleView(
     resourceConstraints: Map[ResourceId, Seq[ConstraintView]],
     totalScore: Int
 ) {
-    def updateConstraints(map: Map[ResourceId, Seq[ConstraintView]]): ScheduleView = {
-        val updatedConstraints = map.foldLeft(resourceConstraints){
-            case (acc, item) => acc + item
-        }
-        copy(resourceConstraints = updatedConstraints)
+  def updateConstraints(map: Map[ResourceId, Seq[ConstraintView]]): ScheduleView = {
+    val updatedConstraints = map.foldLeft(resourceConstraints) {
+      case (acc, item) => acc + item
     }
+    copy(resourceConstraints = updatedConstraints)
+  }
 }
 
 object ScheduleView {

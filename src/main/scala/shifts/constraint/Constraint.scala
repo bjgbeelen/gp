@@ -2,6 +2,8 @@ package shifts
 package constraint
 
 import task._
+import counter._
+import calendar._
 import io.circe._
 import io.circe.generic.auto._
 import io.circe.syntax._
@@ -27,5 +29,32 @@ object Constraint {
       }
       json.add("type", constraint.getClass.getSimpleName.asJson).asJson
     }
+  }
+
+  def from(view: ConstraintView, calendar: Calendar, counters: Seq[Counter]): Constraint = view match {
+    case view: AbsenceConstraintView =>
+      AbsenceConstraint(
+        absence = view.absence,
+        hard = view.hard
+      )
+    case view: ConnectionConstraintView =>
+      ConnectionConstraint(
+        connectionDesired = view.connectionDesired,
+        hard = view.hard
+      )
+    case view: CounterConstraintView =>
+      CounterConstraint(
+        counter = counters.filter(_.id == view.counterId).head,
+        desiredNumber = view.desired,
+        hard = view.hard
+      )
+    case view: OverlappingTasksConstraintView =>
+      OverlappingTasksConstraint(hard = view.hard)
+    case view: WeekendDistanceConstraintView =>
+      WeekendDistanceConstraint(desiredDistance = view.desiredDistance, calendar = calendar, hard = view.hard)
+    case view: WeekendTasksConstraintView =>
+      WeekendTasksConstraint(desiredTasksPerWeekend = view.desiredTasksPerWeekend,
+                             excludeNights = view.excludeNights,
+                             hard = view.hard)
   }
 }

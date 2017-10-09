@@ -27,7 +27,7 @@ object Tasks extends Repository[TaskView, TaskIdentifier] {
       .query[TaskView]
       .option
 
-  def find(calendarName: String)(implicit meta: Meta[String]): ConnectionIO[List[TaskView]] =
+  def list(calendarName: String)(implicit meta: Meta[String]): ConnectionIO[List[TaskView]] =
     sql"select id, day, calendarName, label, start, finish, tags FROM Tasks where calendarName = $calendarName"
       .query[TaskView]
       .list

@@ -18,7 +18,7 @@ trait TaskRoutes extends FailFastCirceSupport {
   def taskRoutes(calendar: CalendarDescription)(implicit printer: Printer, transactor: Transactor[IO]) =
     pathPrefix("tasks") {
       (get & (pathSingleSlash | pathEnd)) {
-        val tasks   = MonixTask.fromIO(Tasks.find(calendar.name).transact(transactor))
+        val tasks   = MonixTask.fromIO(Tasks.list(calendar.name).transact(transactor))
         val taskMap = tasks.map(_.groupBy(_.day))
         complete(taskMap.runAsync)
       }

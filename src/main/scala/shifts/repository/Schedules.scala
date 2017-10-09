@@ -26,13 +26,10 @@ object Schedules extends Repository[ScheduleView, ScheduleIdentifier] {
     })
   }
 
-  def update(
-    constraints: Map[ResourceId, Seq[ConstraintView]],
-    scheduleName: String,
-    calendarName: String): ConnectionIO[Int] = {
-    sql"UPDATE Schedules SET constraints = $constraints WHERE name = $scheduleName AND calendarName = $calendarName"
-      .update.run
-  }
+  def update(constraints: Map[ResourceId, Seq[ConstraintView]],
+             scheduleName: String,
+             calendarName: String): ConnectionIO[Int] =
+    sql"UPDATE Schedules SET constraints = $constraints WHERE name = $scheduleName AND calendarName = $calendarName".update.run
 
   def list(calendarName: CalendarName): ConnectionIO[List[String]] =
     sql"SELECT name FROM Schedules where calendarName = $calendarName".query[String].list
@@ -44,13 +41,15 @@ object Schedules extends Repository[ScheduleView, ScheduleIdentifier] {
       .flatMap {
         case Some((name, calendarName, constraints)) =>
           Assignments.find(identifier).map { assignments =>
-            Some(ScheduleView(
-              name = name,
-              calendarName = calendarName,
-              assignments = assignments,
-              resourceConstraints = constraints,
-              totalScore = 0
-            ))
+            Some(
+              ScheduleView(
+                name = name,
+                calendarName = calendarName,
+                assignments = assignments,
+                resourceConstraints = constraints,
+                totalScore = 0
+              )
+            )
           }
         case _ => Option.empty[ScheduleView].pure[ConnectionIO]
       }

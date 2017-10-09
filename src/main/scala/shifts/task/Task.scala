@@ -51,6 +51,16 @@ object Task {
   sealed trait Descriptor {
     def tag: Tag = this.getClass().getSimpleName().toLowerCase.replace("$", "")
   }
+
+  def from(view: TaskView, calendar: Calendar) = Task(
+    id = view.id,
+    day = calendar.filter(DayIdSelection(view.day)).head,
+    label = view.label,
+    start = view.start,
+    end = view.end,
+    tags = view.tags.toSet
+  )
+
   case object Weekend extends Descriptor
   case object Feest   extends Descriptor
   case object Night extends Descriptor {

@@ -12,20 +12,25 @@ case class TaskGenerationInstruction(label: String,
                                      daySelection: Seq[DaySelection])
 
 object TaskGenerator {
-  def generate(calendar: Calendar, instructions: Seq[TaskGenerationInstruction]): Set[Task] =
+  def generate(calendar: Calendar,
+               instructions: Seq[TaskGenerationInstruction],
+               ignoreTasks: Seq[(DayId, Set[Tag])]): Set[Task] =
     instructions.foldLeft(Set[Task]()) {
       case (acc, instr) =>
         acc ++ calendar
           .filter(instr.daySelection: _*)
-          .map(
-            day =>
-              Task(
-                label = instr.label,
-                day = day,
-                start = instr.start,
-                end = instr.end,
-                tags = instr.tags
+          .map { day =>
+            val ignoreTag: Set[Tag] = if (ignoreTasks.exists {
+                                            case (dayId, tags) => day.id == dayId && tags.intersect(instr.tags) == tags
+                                          }) Set("ignore")
+            else Set.empty
+            Task(
+              label = instr.label,
+              day = day,
+              start = instr.start,
+              end = instr.end,
+              tags = instr.tags ++ ignoreTag
             )
-          )
+          }
     }
 }

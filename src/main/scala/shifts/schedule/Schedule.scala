@@ -57,17 +57,17 @@ object Schedule {
     def assignByChance(
         tasks: List[Task],
         assignments: Map[Resource, Set[Task]]
-    ): Either[IncompleteSchedule, Schedule] =
+    ): Either[IncompleteSchedule, Schedule] = {
+      val taskResourceMap = assignments.foldLeft(Map[Task, Resource]()) {
+        case (result, (k, v)) => result ++ v.map(_ -> k).toMap
+      }
       tasks match {
         case Nil =>
-          val initialValue = Map[Task, Resource]()
           Right(
             Schedule(
               name = "dummy",
               calendar = calendar,
-              assignments.foldLeft(initialValue) {
-                case (result, (k, v)) => result ++ v.map(_ -> k).toMap
-              },
+              taskResourceMap,
               resourceConstraints
             )
           )
@@ -82,6 +82,8 @@ object Schedule {
                     CounterInfluencer(counter, desiredCount, resourceAssignments)
                   case AbsenceConstraint(absence, _) =>
                     AbsenceInfluencer(absence)
+                  case RequiredAssignmentsConstraint(shouldHave, shouldNotHave, _) =>
+                    RequiredAssignmentsInfluencer(shouldHave, shouldNotHave)
                   case ConnectionConstraint(connectionDesired, hard) =>
                     ConnectingTaskInfluencer(connectionDesired, hard, resourceAssignments)
                   case OverlappingTasksConstraint(hard) =>
@@ -111,6 +113,7 @@ object Schedule {
               )
           }
       }
+    }
 
     val completeAssignments: Map[Resource, Set[Task]] =
       resourceConstraints.map {
@@ -145,20 +148,4 @@ object Schedule {
       }
     }
   }
-
-  // def secondApproach(
-  //     tasks: List[Task],
-  //     calendar: Calendar,
-  //     counters: Seq[Counter],
-  //     resourceConstraints: Map[Resource, Seq[Constraint]],
-  //     assignments: Map[Resource, Set[Task]] = Map.empty,
-  //     runs: Int = 200,
-  //     parallel: Int = 8
-  // )(implicit context: TaskContext, executionContext: ExecutionContext) = {
-  //   // weekends with feesten in it first
-  //   def sortFunc(tasksA: Seq[Task], tasksB: Seq[Task]) = {
-  //     tasksA.count(_.is(Task.Feest)) > tasksB.count(_.is(Task.Feest))
-  //   }
-  //   val weekTasks = context.weekTasks.values.toList.sortWith(sortFunc)
-  // }
 }

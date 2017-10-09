@@ -11,10 +11,15 @@ import doobie._, doobie.implicits._
 import cats.effect.IO
 import cats.implicits._
 
-import monix.execution.Scheduler.Implicits.global
-import monix.eval.Task
+import scala.util.{ Success => TrySuccess, Failure }
 
-import calendar.CalendarDescription
+import monix.execution.Scheduler.Implicits.{ global => taskScheduler }
+import monix.eval.{ Task => MonixTask }
+
+import calendar._
+import task._
+import resource._
+import counter._
 import resource.ResourceId
 import constraint._
 import Data2018._
@@ -22,64 +27,102 @@ import scala.concurrent._
 import repository._
 
 trait ScheduleRoutes extends FailFastCirceSupport {
-  def scheduleRoutes(
-      calendar: CalendarDescription
-  )(implicit ec: ExecutionContext, printer: Printer, transactor: Transactor[IO]) = {
 
+  def scheduleRoutes(
+      calendarDescription: CalendarDescription
+  )(implicit ec: ExecutionContext, printer: Printer, transactor: Transactor[IO]) = {
     def scheduleViewDependentRoutes(view: ScheduleView) =
       (get & (pathSingleSlash | pathEnd))(complete(view)) ~
       (path("constraints") & put & entity(as[Map[ResourceId, Seq[ConstraintView]]])) { newConstraints =>
-          val update = Schedules.update(newConstraints, view.name, calendar.name).transact(transactor)
-          val task = Task.fromIO(update).map {
-            case 1 => complete(NoContent)
-            case other => complete(InternalServerError, s"Unexpected $other updates")
-          }
-          ctx => task.runAsync.flatMap(_(ctx))
-      } ~ {
-          pathPrefix(Segment) { taskId =>
-            (delete & (pathSingleSlash | pathEnd)) {
-              val deleteAssignment = Assignments
-                .delete(ScheduleTask(taskId, view.name, calendar.name))
-                .transact(transactor)
-              val task = Task.fromIO(deleteAssignment).map(_ => NoContent)
-              complete(task.runAsync)
-            } ~
-            pathPrefix(Segment) { resourceId =>
-              post {
-                val queries = for {
-                  _ <- Assignments.delete(ScheduleTask(taskId, view.name, calendar.name))
-                  _ <- Assignments.insert(Assignment(taskId, resourceId, view.name, calendar.name))
-                } yield ()
-                val task = Task.fromIO(queries.transact(transactor)).map(_ => Created)
-                complete(task.runAsync)
-              }
-            }
-
-          }
+        val update = Schedules.update(newConstraints, view.name, calendarDescription.name).transact(transactor)
+        val task = MonixTask.fromIO(update).map {
+          case 1     => complete(NoContent)
+          case other => complete(InternalServerError, s"Unexpected $other updates")
         }
+        ctx =>
+          task.runAsync.flatMap(_(ctx))
+      } ~ path("completeWeekends") {
+        val calendar = Calendar(calendarDescription)
+        val dbResults = for {
+          tasks     <- Tasks.list(calendarDescription.name).map(_.map(view => Task.from(view, calendar)))
+          counters  <- Counters.list(calendarDescription.name)
+          resources <- Resources.list(calendarDescription.name)
+          constraints <- view.resourceConstraints
+            .map {
+              case (resourceId, constraintsView) =>
+                val resource = resources.filter(_.id == resourceId).head
+                val constraints =
+                  constraintsView.map(constraintView => Constraint.from(constraintView, calendar, counters))
+                (resource, constraints)
+            }
+            .pure[ConnectionIO]
+          assignments <- view.assignments.map {
+             case (taskId, resourceId) =>
+                val task = tasks.filter(_.id == taskId).head
+                val resource = resources.filter(_.id == resourceId).head
+                (task, resource)
+          }.pure[ConnectionIO]
+        } yield (tasks, counters, constraints, assignments)
+
+        val task = MonixTask.fromIO(dbResults.transact(transactor)).foreach {
+          case (tasks, counters, constraints, assignments) =>
+            SolutionSearchManager.start(
+              scheduleName = view.name,
+              tasks = tasks.toList.filter(!_.tags.contains("ignore")),
+              calendar = calendar,
+              counters = counters,
+              resourceConstraints = resourceConstraints,
+              assignments = assignments
+            )
+        }
+
+        complete("Calculating possible solutions...")
+      } ~ {
+        pathPrefix(Segment) { taskId =>
+          (delete & (pathSingleSlash | pathEnd)) {
+            val deleteAssignment = Assignments
+              .delete(ScheduleTask(taskId, view.name, calendar.name))
+              .transact(transactor)
+            val task = MonixTask.fromIO(deleteAssignment).map(_ => NoContent)
+            complete(task.runAsync)
+          } ~
+          pathPrefix(Segment) { resourceId =>
+            post {
+              val queries = for {
+                _ <- Assignments.delete(ScheduleTask(taskId, view.name, calendarDescription.name))
+                _ <- Assignments.insert(Assignment(taskId, resourceId, view.name, calendar.name))
+              } yield ()
+              val task = MonixTask.fromIO(queries.transact(transactor)).map(_ => Created)
+              complete(task.runAsync)
+            }
+          }
+
+        }
+      }
 
     pathPrefix("schedules") {
       (get & (pathSingleSlash | pathEnd)) {
         val schedules = Schedules.list(calendarName = calendar.name)
-        val task      = Task.fromIO(schedules.transact(transactor))
+        val task =
+          MonixTask.fromIO(schedules.transact(transactor)).map(_ ++ SolutionSearchManager.calculatedSolutions.keys)
         complete(task.runAsync)
       } ~ pathPrefix(Segment) { scheduleName =>
-          val scheduleView = Schedules
-              .find(ScheduleIdentifier(name = scheduleName, calendarName = calendar.name))
-              .transact(transactor)
-            val task = Task.fromIO(scheduleView).map{
-              case Some(view) => scheduleViewDependentRoutes(view)
-              case None => complete(NotFound)
-            }
-            ctx => task.runAsync.flatMap(_(ctx))
+        val scheduleView: IO[Option[ScheduleView]] =
+          SolutionSearchManager.calculatedSolutions.get(scheduleName).pure[IO].flatMap {
+            case Some(view) => Some(view).pure[IO]
+            case None =>
+              Schedules
+                .find(ScheduleIdentifier(name = scheduleName, calendarName = calendar.name))
+                .transact(transactor)
+          }
+
+        val task = MonixTask.fromIO(scheduleView).map {
+          case Some(view) => scheduleViewDependentRoutes(view)
+          case None       => complete(NotFound)
         }
+        ctx =>
+          task.runAsync.flatMap(_(ctx))
+      }
     }
   }
 }
-
-//   def scheduleViewDependentRoutes()
-//           )
-//         }
-//       }
-//     }
-// }
