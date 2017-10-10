@@ -5,7 +5,7 @@ import calendar.Week
 import Task._
 
 case class TaskContext(private val input: Seq[Task]) { self =>
-  val tasks = input.sortBy { task =>
+  val tasks = input.filter(!_.tags.contains("ignore")).sortBy { task =>
     (task.day.id, task.start, task.label)
   }
 

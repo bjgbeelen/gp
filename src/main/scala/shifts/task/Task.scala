@@ -61,6 +61,9 @@ object Task {
     tags = view.tags.toSet
   )
 
+  case object Ignored extends Descriptor {
+    override val tag = "ignore"
+  }
   case object Weekend extends Descriptor
   case object Feest   extends Descriptor
   case object Night extends Descriptor {

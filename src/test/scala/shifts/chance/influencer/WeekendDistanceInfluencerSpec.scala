@@ -10,7 +10,7 @@ import org.scalatest._
 class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
   import Data2018._
 
-  val context = TaskContext(tasks.toSeq)
+  val context = TaskContext(applicableTasks.toSeq)
   val resource = resources.head
 
   "WeekendDistanceInfluencer" should {
@@ -24,7 +24,7 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       ).chance(context.tasks.head) shouldBe 1F
     }
     "say yes (return 1) to a task if there is already a task in the same week" in {
-      val assigned = context.tasks.find(_.day.id == "20180101").get
+      val assigned = context.tasks.find(_.day.id == "20180108").get
       val sameWeekTask = context.nextTasks(assigned)
       val assignedWeek = context.taskWeek(assigned)
       val sameWeek = context.taskWeek(sameWeekTask)
@@ -39,8 +39,8 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       ).chance(sameWeekTask) shouldBe 1F
     }
     "say no (return 0) to a task if there is already a task in the previous week" in {
-      val assigned = context.tasks.find(_.day.id == "20180101").get
-      val nextWeekTask = context.tasks.find(_.day.id == "20180107").get
+      val assigned = context.tasks.find(_.day.id == "20180108").get
+      val nextWeekTask = context.tasks.find(_.day.id == "20180115").get
       val assignedWeek = context.taskWeek(assigned)
       val nextWeek = context.taskWeek(nextWeekTask)
       assignedWeek distance nextWeek shouldBe 1
@@ -54,8 +54,8 @@ class WeekendDistanceInfluencerSpec extends WordSpec with Matchers {
       ).chance(nextWeekTask) shouldBe 0F
     }
     "say yes (return 1) to a task if the distance is large enough" in {
-      val assigned = context.tasks.find(_.day.id == "20180101").get
-      val nextWeekTask = context.tasks.find(_.day.id == "20180114").get
+      val assigned = context.tasks.find(_.day.id == "20180108").get
+      val nextWeekTask = context.tasks.find(_.day.id == "20180122").get
       val assignedWeek = context.taskWeek(assigned)
       val nextWeek = context.taskWeek(nextWeekTask)
       context.taskWeek(assigned) distance context.taskWeek(nextWeekTask) shouldBe 2

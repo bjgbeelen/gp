@@ -35,10 +35,10 @@ object SolutionSearchManager {
       calendar: Calendar,
       counters: Seq[Counter],
       resourceConstraints: Map[Resource, Seq[Constraint]],
-      assignments: Map[Task, Resource]
+      assignments: Map[Task, Resource] = Map.empty
   ): Unit = {
     implicit val taskContext = TaskContext(tasks.toSeq)
-    cancelable = Some(taskScheduler.scheduleWithFixedDelay(1 seconds, 5 minute) {
+    cancelable = Some(taskScheduler.scheduleWithFixedDelay(1 seconds, 30 seconds) {
       MonixTask
         .fromFuture {
           println(s"[${taskScheduler.currentTimeMillis}] Searching for solutions,,,")
@@ -55,6 +55,8 @@ object SolutionSearchManager {
           )
         }
         .foreach {
+          case ScheduleRunResult(incomplete, Nil) =>
+            println(incomplete.head)
           case ScheduleRunResult(_, completes) =>
             val newSolutions: Map[String, ScheduleView] = completes
               .map(schedule => s"${schedule.totalScore}-auto-$scheduleName" -> ScheduleView.from(schedule))

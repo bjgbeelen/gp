@@ -32,15 +32,15 @@ class TaskSpec extends WordSpec with Matchers {
       val easter1Evening = easter1.find(_.is(Task.Evening)).get
       val easter2Night = easter2.find(_.is(Task.Night)).get
 
-      val xmas1 = tasks
+      val xmas1 = applicableTasks
         .filter(task =>
           task.day.label == "1e Kerstdag" && task.is(Task.Morning))
         .head
-      val xmas2 = tasks
+      val xmas2 = applicableTasks
         .filter(task =>
           task.day.label == "1e Kerstdag" && task.is(Task.Evening))
         .head
-      val xmas3 = tasks
+      val xmas3 = applicableTasks
         .filter(task =>
           task.day.label == "2e Kerstdag" && task.is(Task.Evening))
         .head
@@ -98,16 +98,16 @@ class TaskSpec extends WordSpec with Matchers {
 
     "determine the correct week that the task belongs to" in {
       import Data2018._
-      implicit val context = TaskContext(tasks.toList)
-      val easter1 = tasks.find(_.day.label == "1e paasdag").get
-      val easter2 = tasks.find(_.day.label == "2e paasdag").get
+      implicit val context = TaskContext(applicableTasks.toList)
+      val easter1 = applicableTasks.find(_.day.label == "1e paasdag").get
+      val easter2 = applicableTasks.find(_.day.label == "2e paasdag").get
 
       easter1.week shouldBe easter2.week
     }
 
     "calculate related week tasks for a week" in {
       import Data2018._
-      implicit val context = TaskContext(tasks.toList)
+      implicit val context = TaskContext(applicableTasks.toList)
     }
   }
 }

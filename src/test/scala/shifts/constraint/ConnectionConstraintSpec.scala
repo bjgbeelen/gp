@@ -8,19 +8,19 @@ import org.scalatest._
 
 class ConnectionConstraintSpec extends WordSpec with Matchers {
   import Data2018._
-  val task1 = tasks
+  val task1 = applicableTasks
     .filter(task => task.day.label == "1e Kerstdag" && task.is(Morning))
     .head
-  val task2 = tasks
+  val task2 = applicableTasks
     .filter(task => task.day.label == "1e Kerstdag" && task.is(Evening))
     .head
-  val task3 = tasks
+  val task3 = applicableTasks
     .filter(task => task.day.label == "2e Kerstdag" && task.is(Evening))
     .head
-  val task4 = tasks
+  val task4 = applicableTasks
     .filter(task => task.day.label == "1e paasdag" && task.is(Evening))
     .head
-  implicit val context = TaskContext(tasks.toSeq)
+  implicit val context = TaskContext(applicableTasks.toSeq)
 
   "ConnectionConstraint" should {
     "detect tasks that don't connect when connection is desired" in {

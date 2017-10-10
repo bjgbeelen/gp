@@ -67,6 +67,7 @@ object Data2018 {
     )
   )
 
+  // val ignoreTasks = Seq.empty
   val ignoreTasks = Seq(
     ("20171225", Set("nacht")),
     ("20171225", Set("consult")),
@@ -756,13 +757,14 @@ object Data2018 {
   )
 
   val tasks = TaskGenerator.generate(calendar, instructions, ignoreTasks)
+  val applicableTasks = tasks.filter(!_.tags.contains("ignore"))
 
   def calculateDesiredNumberOfTasks(
       tasks: Set[Task],
       counters: Seq[Counter],
       ratio: Float
   ): Map[Counter, Int] = counters.count(tasks).map {
-    case (counter, size) => (counter, Math.floor(size * ratio).toInt)
+    case (counter, size) => (counter, Math.round(size * ratio).toInt)
   }
 
   val totalPatients = resources.map(_.numberOfPatients).sum
@@ -800,7 +802,7 @@ object Data2018 {
     val otherResourceConstraints = others.map {
       case resource @ Resource(_, _, nrOfPatients) =>
         val counterConstraints: List[CounterConstraint] =
-          calculateDesiredNumberOfTasks(tasks, counters, nrOfPatients * 1F / totalPatients).map {
+          calculateDesiredNumberOfTasks(applicableTasks, counters, nrOfPatients * 1F / totalPatients).map {
             case (counter, desiredNumber) =>
               CounterConstraint(counter, desiredNumber)
           }.toList
@@ -816,7 +818,7 @@ object Data2018 {
 
     val firstResourceConstraints = {
       val counterConstraints = calculateDesiredNumberOfTasks(
-        tasks,
+        applicableTasks,
         counters,
         1
       ).map {
@@ -830,7 +832,8 @@ object Data2018 {
                                                connectingConstraint(first),
                                                absenceConstraint(first),
                                                weekendTasksConstraint(first),
-                                               weekendGapConstraint) ++ counterConstraints
+                                               weekendGapConstraint
+                                           ) ++ counterConstraints
       (first -> constraints)
     }
 
@@ -860,7 +863,7 @@ object Data2018 {
     calendar = calendar,
     assignments = Map.empty,
     resourceConstraints = resourceConstraints
-  )(TaskContext(tasks.toList))
+  )(TaskContext(applicableTasks.toList))
 
   val xa = Transactor.fromDriverManager[IO](
     "org.postgresql.Driver",

@@ -14,10 +14,8 @@ import constraint._
 class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
   "Schedule.plan()" should {
     "automatically assign resources to tasks" in {
-      val testTasks =
-        tasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
+      val testTasks = applicableTasks.toList.sortBy(!_.tags.contains("feest")).filter(_.is(Weekend))
       implicit val context = task.TaskContext(testTasks)
-      // implicit val defaultPatience = PatienceConfig(timeout = Span(20, Seconds))
 
       whenReady(Schedule.run(testTasks,
                              calendar,
@@ -29,7 +27,10 @@ class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
         case ScheduleRunResult(incompletes, completes) =>
           println(s"Complete schedules: ${completes.size}")
 
-          // println(s"Incomplete headOption: ${incompletes.headOption}")
+          if (completes.isEmpty) {
+            println("\n*******************************\n")
+            println(incompletes.head.toString)
+          }
 
           completes.foreach { schedule =>
             resourceConstraints.foreach {
@@ -42,54 +43,6 @@ class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
             }
           }
       }
-      // Schedule.run(testTasks, calendar, counters, resourceConstraints) match {
-      //   case Right((schedule, incompleteSchedules)) =>
-      //     println(
-      //       s"Found a schedule after ${incompleteSchedules.size + 1} attempts")
-      //     resourceConstraints.foreach {
-      //       case (resource, constraints) =>
-      //         val resourceTasks = schedule.tasks(resource)
-      //         constraints.filter(_.hard).foreach { constraint =>
-      //           constraint.violations(resourceTasks) shouldBe constraint.obeyed
-      //         }
-
-      //         val weekendTasksConstraint = constraints.collect {
-      //           case x: WeekendTasksConstraint => x
-      //         }.head
-      //         val foo = weekendTasksConstraint.violations(resourceTasks).map{
-      //                   case (week, task) => (week.id -> task.map(_.id))
-      //                   }.toMap
-      //         println(s"$resource: $foo")
-      //         println("")
-      //       // Test everyone has got their expected nr of assignments
-      //       // constraints.collect{case a: CounterConstraint => a}.foreach {
-      //       //   case CounterConstraint(counter, desiredNumber, _) =>
-      //       //     counter.count(resourceTasks) shouldBe desiredNumber
-      //       // }
-
-      //       // // Test noone is assigned a task during their absence
-      //       // resourceTasks.map(_.day.id) intersect constraints.absence shouldBe Set.empty
-
-      //       // // Test noone is assigned overlapping tasks
-      //       // resourceTasks.foreach { task =>
-      //       //   resourceTasks.count(_.overlapsWith(task)) shouldBe 0
-      //       // }
-
-      //       // val map = calendar.weeks.map{ week =>
-      //       //   val count = resourceTasks.filter(task => task.is(Weekend) && !task.is(Night)).count(_.week == week)
-      //       //   (week -> count)
-      //       // }.toMap
-
-      //       // if (resource.id == "beelen")
-      //       // println(map.filter{
-      //       //   case (week, size) => size > 0
-      //       // })
-      //     }
-      //   case Left(incompletes) =>
-      //     println(incompletes.head)
-      //     assert(false)
-      // }
-
     }
   }
 }

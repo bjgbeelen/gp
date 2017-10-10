@@ -62,17 +62,27 @@ trait ScheduleRoutes extends FailFastCirceSupport {
                 val resource = resources.filter(_.id == resourceId).head
                 (task, resource)
           }.pure[ConnectionIO]
-        } yield (tasks, counters, constraints, assignments)
+        } yield (tasks, counters, constraints,
+            resources.map{ resource =>
+              val (shouldHave, shouldNotHave) = assignments.partition{ case (_, _resource) => _resource == resource}
+              resource -> RequiredAssignmentsConstraint(
+                shouldHaveTasks = shouldHave.keys.toSet,
+                shouldNotHaveTasks = shouldNotHave.keys.toSet,
+                hard = true
+              )
+            }.toMap
+          )
 
         val task = MonixTask.fromIO(dbResults.transact(transactor)).foreach {
-          case (tasks, counters, constraints, assignments) =>
+          case (tasks, counters, constraints, currentAssignmentsConstraints) =>
             SolutionSearchManager.start(
               scheduleName = view.name,
               tasks = tasks.toList.filter(!_.tags.contains("ignore")),
               calendar = calendar,
               counters = counters,
-              resourceConstraints = resourceConstraints,
-              assignments = assignments
+              resourceConstraints = resourceConstraints.map{ case (resource, constraints) =>
+                (resource, constraints) //:+ currentAssignmentsConstraints(resource))
+              }
             )
         }
 
