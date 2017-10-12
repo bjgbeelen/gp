@@ -41,6 +41,20 @@ trait ScheduleRoutes extends FailFastCirceSupport {
         }
         ctx =>
           task.runAsync.flatMap(_(ctx))
+      } ~ path("scores") {
+        val optionalSchedule = SolutionSearchManager.completeSolutions.get(view.name)
+        optionalSchedule match {
+          case Some(schedule) =>
+            val str = schedule.resourceConstraints.map{ case (resource, constraints) =>
+              val result = s"${resource.name} has the following scores:\n" + constraints.map{ constraint =>
+                val score = constraint.score(schedule.assignments.collect{ case (t, r) if (r == resource) => t}.toSet)(schedule.context)
+                s"${constraint.getClass.getSimpleName}: $score"
+              }.mkString("\n")
+              result
+          }
+            complete(str.mkString("\n\n"))
+          case None => complete(NotFound -> "What?")
+        }
       } ~ path("completeWeekends") {
         val calendar = Calendar(calendarDescription)
         val dbResults = for {
@@ -81,7 +95,7 @@ trait ScheduleRoutes extends FailFastCirceSupport {
               calendar = calendar,
               counters = counters,
               resourceConstraints = resourceConstraints.map{ case (resource, constraints) =>
-                (resource, constraints) //:+ currentAssignmentsConstraints(resource))
+                (resource, constraints :+ currentAssignmentsConstraints(resource))
               }
             )
         }

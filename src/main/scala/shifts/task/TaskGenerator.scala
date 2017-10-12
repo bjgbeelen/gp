@@ -29,7 +29,7 @@ object TaskGenerator {
               day = day,
               start = instr.start,
               end = instr.end,
-              tags = instr.tags ++ ignoreTag
+              tags = instr.tags ++ ignoreTag ++ Set(Day.longDayOfWeekNames(day.dayOfWeek).toLowerCase)
             )
           }
     }

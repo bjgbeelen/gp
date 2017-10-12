@@ -21,8 +21,8 @@ class ScheduleSpec extends WordSpec with Matchers with ScalaFutures {
                              calendar,
                              counters,
                              resourceConstraints,
-                             runs = 300,
-                             parallel = 4),
+                             runs = 400,
+                             parallel = 3),
                 timeout(Span(1, Hours))) {
         case ScheduleRunResult(incompletes, completes) =>
           println(s"Complete schedules: ${completes.size}")

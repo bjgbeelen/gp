@@ -58,10 +58,26 @@ object Data2018 {
         Counter(name = "nacht", include = Set("nacht"))
       )
     )
-  val weekendCounters = Counter.withParent(name = "weekend", include = Set("weekend"), exclude = Set("ignore"))(
+  val weekendConsultCounters = Counter.withParent(name = "weekend consult", include = Set("weekend", "consult"), exclude = Set("ignore"))(
     Seq(
-      Counter(name = "consult", include = Set("consult")),
-      Counter(name = "visite", include = Set("visite")),
+      Counter(name = "vrvnd", include = Set("vrijdag", "avond")),
+      Counter(name = "ztrchtnd", include = Set("zaterdag", "ochtend")),
+      Counter(name = "ztrvnd", include = Set("zaterdag", "avond")),
+      Counter(name = "znchtnd", include = Set("zondag", "ochtend")),
+      Counter(name = "znvnd", include = Set("zondag", "avond"))
+    )
+  )
+  val weekendVisiteCounters = Counter.withParent(name = "weekend visite", include = Set("weekend", "visite"), exclude = Set("ignore"))(
+    Seq(
+      Counter(name = "vrvnd", include = Set("vrijdag", "avond")),
+      Counter(name = "ztrchtnd", include = Set("zaterdag", "ochtend")),
+      Counter(name = "ztrvnd", include = Set("zaterdag", "avond")),
+      Counter(name = "znchtnd", include = Set("zondag", "ochtend")),
+      Counter(name = "znvnd", include = Set("zondag", "avond"))
+    )
+  )
+  val weekendOverigCounters = Counter.withParent(name = "weekend overig", include = Set("weekend"), exclude = Set("ignore"))(
+    Seq(
       Counter(name = "nacht", include = Set("nacht")),
       Counter(name = "feest", include = Set("feest"))
     )
@@ -626,8 +642,8 @@ object Data2018 {
     ("20190107", Set("consult"))
   )
 
-  val counters    = (weekCounters ++ weekendCounters).toList
-  val countersMap = Map("week" -> weekCounters, "weekend" -> weekendCounters)
+  val counters    = (weekCounters ++ weekendConsultCounters ++ weekendVisiteCounters ++ weekendOverigCounters).toList
+  val countersMap = Map("week" -> weekCounters, "weekend consult" -> weekendConsultCounters, "weekend visite" -> weekendVisiteCounters, "weekend overig" -> weekendOverigCounters)
 
   val resources: List[Resource] = List(
     Resource(name = "Acker, vd", numberOfPatients = 1518),
