@@ -29,6 +29,11 @@ case class OverlappingTasksConstraintView(`type`: String, hard: Boolean, violati
     extends ConstraintView
 case class WeekendDistanceConstraintView(`type`: String, desiredDistance: Int, violations: Seq[String], hard: Boolean)
     extends ConstraintView
+case class RequiredAssignmentsConstraintView(`type`: String,
+                                             shouldHaveTasks: Set[TaskId],
+                                             shouldNotHaveTasks: Set[TaskId],
+                                             hard: Boolean)
+    extends ConstraintView
 case class WeekendTasksConstraintView(`type`: String,
                                       desiredTasksPerWeekend: Int,
                                       excludeNights: Boolean,
@@ -39,12 +44,13 @@ case class WeekendTasksConstraintView(`type`: String,
 object ConstraintView {
   implicit val constraintViewEncoder: Encoder[ConstraintView] = new Encoder[ConstraintView] {
     final def apply(constraintView: ConstraintView): Json = constraintView match {
-      case x: AbsenceConstraintView          => x.asJson
-      case x: ConnectionConstraintView       => x.asJson
-      case x: CounterConstraintView          => x.asJson
-      case x: WeekendDistanceConstraintView  => x.asJson
-      case x: OverlappingTasksConstraintView => x.asJson
-      case x: WeekendTasksConstraintView     => x.asJson
+      case x: AbsenceConstraintView             => x.asJson
+      case x: ConnectionConstraintView          => x.asJson
+      case x: CounterConstraintView             => x.asJson
+      case x: WeekendDistanceConstraintView     => x.asJson
+      case x: OverlappingTasksConstraintView    => x.asJson
+      case x: WeekendTasksConstraintView        => x.asJson
+      case x: RequiredAssignmentsConstraintView => x.asJson
     }
   }
 
@@ -52,12 +58,13 @@ object ConstraintView {
     final def apply(c: HCursor): Decoder.Result[ConstraintView] =
       c.downField("type").as[String].flatMap { _type =>
         val decoder = _type match {
-          case "AbsenceConstraint"          => implicitly[Decoder[AbsenceConstraintView]]
-          case "ConnectionConstraint"       => implicitly[Decoder[ConnectionConstraintView]]
-          case "CounterConstraint"          => implicitly[Decoder[CounterConstraintView]]
-          case "WeekendDistanceConstraint"  => implicitly[Decoder[WeekendDistanceConstraintView]]
-          case "OverlappingTasksConstraint" => implicitly[Decoder[OverlappingTasksConstraintView]]
-          case "WeekendTasksConstraint"     => implicitly[Decoder[WeekendTasksConstraintView]]
+          case "AbsenceConstraint"             => implicitly[Decoder[AbsenceConstraintView]]
+          case "ConnectionConstraint"          => implicitly[Decoder[ConnectionConstraintView]]
+          case "CounterConstraint"             => implicitly[Decoder[CounterConstraintView]]
+          case "WeekendDistanceConstraint"     => implicitly[Decoder[WeekendDistanceConstraintView]]
+          case "OverlappingTasksConstraint"    => implicitly[Decoder[OverlappingTasksConstraintView]]
+          case "WeekendTasksConstraint"        => implicitly[Decoder[WeekendTasksConstraintView]]
+          case "RequiredAssignmentsConstraint" => implicitly[Decoder[RequiredAssignmentsConstraintView]]
         }
         decoder(c)
       }
@@ -88,6 +95,11 @@ object ConstraintView {
                                       desiredDistance = x.desiredDistance,
                                       violations = x.violations(tasks).map(_.id).toList.sorted,
                                       x.hard)
+      case x: RequiredAssignmentsConstraint =>
+        RequiredAssignmentsConstraintView(typeName,
+                                          shouldHaveTasks = x.shouldHaveTasks.map(_.id),
+                                          shouldNotHaveTasks = x.shouldNotHaveTasks.map(_.id),
+                                          hard = x.hard)
       case x: WeekendTasksConstraint =>
         WeekendTasksConstraintView(
           typeName,

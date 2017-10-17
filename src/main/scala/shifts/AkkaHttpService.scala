@@ -58,6 +58,7 @@ object Service extends App with CalendarRoutes {
           _ <- Resources.batchInsert(Data2018.resources.map(ResourceView.from(Data2018.calendarDescription.name)))
           _ <- Counters.batchInsert(Data2018.counters.map(CounterView.from(Data2018.calendarDescription.name)))
           _ <- Schedules.insert(ScheduleView.from(Data2018.testSchedule))
+          _ <- Schedules.insert(ScheduleView.from(Data2018.feestSchedule))
         } yield 1
       case _ =>
         sql"select 42".query[Int].unique

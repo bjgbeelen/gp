@@ -5,9 +5,9 @@ import calendar.DayId
 import task._
 
 case class RequiredAssignmentsConstraint(
-  shouldHaveTasks: Set[Task],
-  shouldNotHaveTasks: Set[Task],
-  hard: Boolean
+    shouldHaveTasks: Set[Task],
+    shouldNotHaveTasks: Set[Task],
+    hard: Boolean
 ) extends Constraint {
   type U = (Set[Task], Set[Task])
   val obeyed = (Set[Task](), Set[Task]())

@@ -22,7 +22,7 @@ case class Schedule(
   def context = taskContext
 
   def tasks(resource: Resource): Set[Task] =
-    assignments.collect{ case (t, r) if r == resource => t}.toSet
+    assignments.collect { case (t, r) if r == resource => t }.toSet
 
   def totalScore: Int =
     resourceConstraints.map {
@@ -131,20 +131,16 @@ object Schedule {
       Future {
         val (lefts, rights) = (1 to runs)
           .map { iteration =>
-            val result = plan(tasks, calendar, counters, resourceConstraints, assignments)
-            println(s"finished $iteration: ${result.getClass.getSimpleName}")
-            result
+            plan(tasks, calendar, counters, resourceConstraints, assignments)
           }
           .partition(_.isLeft)
         ScheduleRunResult(incomplete = lefts.map(_.left.get), complete = rights.map(_.right.get))
       }
     }
     Future.sequence(results).map { runResults =>
-      println("komt hier wel")
       val result = runResults.foldLeft(ScheduleRunResult(Seq.empty, Seq.empty)) {
         case (acc, runResult) => acc.merge(runResult)
       }
-      println("done making result")
       result
     }
   }

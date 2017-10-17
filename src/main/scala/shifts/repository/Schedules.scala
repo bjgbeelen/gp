@@ -23,7 +23,13 @@ object Schedules extends Repository[ScheduleView, ScheduleIdentifier] {
     val sql = "INSERT INTO Schedules (name, calendarName, constraints) VALUES (?, ?, ?)"
     Update[(String, String, Map[ResourceId, Seq[ConstraintView]])](sql).updateMany(o.map { view =>
       (view.name, view.calendarName, view.resourceConstraints)
-    })
+    }).flatMap{ _ => o.map{ case view =>
+        val assignments = view.assignments.map{ case (taskId, resourceId) =>
+          Assignment(taskId, resourceId, view.name, view.calendarName)
+        }
+        Assignments.batchInsert(assignments.toList)
+      }.head // fixme, workaround
+    }
   }
 
   def update(constraints: Map[ResourceId, Seq[ConstraintView]],
