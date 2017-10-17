@@ -69,7 +69,7 @@ object Data2018 {
       )
     )
   val weekendVisiteCounters =
-    Counter.withParent(name = "weekend visite", include = Set("weekend", "visite"), exclude = Set("ignore", "feest"))(
+    Counter.withParent(name = "weekend visite", include = Set("weekend", "visite"), exclude = Set("ignore", ""))(
       Seq(
         Counter(name = "vrvnd", include = Set("vrijdag", "avond")),
         Counter(name = "ztrchtnd", include = Set("zaterdag", "ochtend")),
@@ -620,7 +620,7 @@ object Data2018 {
     ("20181115", Set("nacht")),
     ("20181116", Set("nacht")),
     ("20181117", Set("nacht")),
-    ("20181118", Set("nacht")),
+    ("20181111", Set("nacht")),
     ("20181125", Set("nacht")),
     ("20181126", Set("nacht")),
     ("20181127", Set("nacht")),
