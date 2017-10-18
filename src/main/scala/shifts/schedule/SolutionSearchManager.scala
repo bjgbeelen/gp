@@ -39,7 +39,7 @@ object SolutionSearchManager {
       assignments: Map[Task, Resource] = Map.empty
   ): Unit = {
     implicit val taskContext = TaskContext(tasks.toSeq)
-    cancelable = Some(taskScheduler.scheduleWithFixedDelay(1 seconds, 1 hour) {
+    cancelable = Some(taskScheduler.scheduleWithFixedDelay(1 seconds, 20 minutes) {
       MonixTask
         .fromFuture {
           println(s"[${taskScheduler.currentTimeMillis}] Searching for solutions...")
@@ -52,19 +52,19 @@ object SolutionSearchManager {
             resourceConstraints = resourceConstraints,
             assignments = Map.empty,
             runs = 3000,
-            parallel = 4
+            parallel = 6
           )
         }
         .foreach {
           case ScheduleRunResult(incomplete, Nil) =>
-            println(incomplete.head)
+            println("no complete schedules: " + incomplete.head.toString)
           case ScheduleRunResult(_, completes) =>
-            val newCompletes: Map[String, Schedule] = completes
-              .map(schedule => {
-                val newName = findName(s"${schedule.totalScore}-auto-$scheduleName")
-                (newName -> schedule.copy(name = newName))
-              })
-              .toMap
+            println(s"found ${completes.size} solutions")
+            val newCompletes: Map[String, Schedule] = completes.foldLeft(Map[String, Schedule]()){
+              case (map, schedule) =>
+                val newName = findName(s"${schedule.totalScore}-auto-$scheduleName", map)
+                map + (newName -> schedule.copy(name = newName))
+            }
             val newViews: Map[String, ScheduleView] = newCompletes.map {
               case (name, schedule) => (name, ScheduleView.from(schedule))
             }
@@ -76,10 +76,10 @@ object SolutionSearchManager {
     })
   }
 
-  private def findName(proposal: String, iteration: Int = 0): String = {
+  private def findName(proposal: String, map: Map[String, Schedule], iteration: Int = 0): String = {
     val newProposal = if (iteration == 0) proposal else proposal + "-" + iteration.toString
-    if (calculatedSolutions.get(proposal).isEmpty) proposal
-    else findName(proposal, iteration + 1)
+    if (map.get(proposal).isEmpty) proposal
+    else findName(proposal, map, iteration + 1)
   }
 
   def stop = cancelable.foreach(_.cancel)

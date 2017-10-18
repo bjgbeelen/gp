@@ -2486,13 +2486,55 @@ object Data2018 {
       ConnectionConstraint(connectionDesired = desired, hard = desired == false)
     }
 
+    case class ShiftNumbers(wac: Int, wav: Int, wan: Int, vrac: Int, vrav: Int, zaoc: Int,
+        zaov: Int, zaac: Int, zaav: Int, zooc: Int, zoov: Int, zoac: Int, zoav: Int, wkndn: Int, feest: Int) {
+        def toCounterConstraints = counters.map { counter =>
+            val desiredNumber = counter.id match {
+                case "visite_weekend_avond_vrijdag" => vrav
+                case "visite_weekend_ochtend_zaterdag" => zaov
+                case "visite_weekend_avond_zaterdag" => zaav
+                case "visite_weekend_ochtend_zondag" => zoov
+                case "visite_weekend_avond_zondag" => zoav
+                case "consult_weekend_avond_vrijdag" => vrac
+                case "consult_weekend_ochtend_zaterdag" => zaoc
+                case "consult_weekend_avond_zaterdag" => zaac
+                case "consult_weekend_ochtend_zondag" => zooc
+                case "consult_weekend_avond_zondag" => zoac
+                case "week_consult" => wac
+                case "week_visite" => wav
+                case "week_nacht" => wan
+                case "weekend_nacht" => wkndn
+                case "weekend_feest" => feest
+            }
+            CounterConstraint(counter, desiredNumber = desiredNumber, hard = true)
+        }
+    }
+    // counter consraint numbers
+    def calcCounterConstraints(resource: Resource): List[CounterConstraint] = (resource.id match {
+        case "acker_vd"     => ShiftNumbers(wac = 5,  wav = 5,  wan = 3, vrac = 2, vrav = 2, zaoc = 2, zaov = 1, zaac = 1, zaav = 1, zooc = 1, zoov = 1, zoac = 1, zoav = 1, wkndn = 0, feest = 1)
+        case "ambachtsheer" => ShiftNumbers(wac = 7,  wav = 7,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 1, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 1, zoav = 2, wkndn = 1, feest = 2)
+        case "baars"        => ShiftNumbers(wac = 12, wav = 12, wan = 8, vrac = 3, vrav = 3, zaoc = 3, zaov = 3, zaac = 3, zaav = 3, zooc = 3, zoov = 3, zoac = 3, zoav = 3, wkndn = 2, feest = 4)
+        case "beelen"       => ShiftNumbers(wac = 8,  wav = 8,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 2, wkndn = 2, feest = 2)
+        case "daamen"       => ShiftNumbers(wac = 7,  wav = 7,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 1, zoav = 2, wkndn = 2, feest = 2)
+        case "dooren_van"   => ShiftNumbers(wac = 9,  wav = 9,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 2, wkndn = 2, feest = 3)
+        case "gielen"       => ShiftNumbers(wac = 9,  wav = 9,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 3, zaav = 2, zooc = 2, zoov = 3, zoac = 2, zoav = 3, wkndn = 2, feest = 3)
+        case "heho"         => ShiftNumbers(wac = 8,  wav = 8,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 2, wkndn = 1, feest = 2)
+        case "heeden_vd"    => ShiftNumbers(wac = 7,  wav = 7,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 1, zoav = 2, wkndn = 2, feest = 2)
+        case "hoeks"        => ShiftNumbers(wac = 9,  wav = 9,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 3, zoav = 2, wkndn = 2, feest = 3)
+        case "homa"         => ShiftNumbers(wac = 9,  wav = 8,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 3, zoav = 2, wkndn = 2, feest = 3)
+        case "houppermans"  => ShiftNumbers(wac = 6,  wav = 6,  wan = 4, vrac = 2, vrav = 1, zaoc = 1, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 2, wkndn = 1, feest = 2)
+        case "marcelis"     => ShiftNumbers(wac = 5,  wav = 5,  wan = 3, vrac = 1, vrav = 1, zaoc = 1, zaov = 2, zaac = 1, zaav = 1, zooc = 2, zoov = 1, zoac = 1, zoav = 2, wkndn = 1, feest = 2)
+        case "nierop_van"   => ShiftNumbers(wac = 6,  wav = 6,  wan = 4, vrac = 1, vrav = 1, zaoc = 1, zaov = 1, zaac = 2, zaav = 1, zooc = 2, zoov = 1, zoac = 1, zoav = 2, wkndn = 1, feest = 2)
+        case "pruijssen"    => ShiftNumbers(wac = 5,  wav = 5,  wan = 4, vrac = 1, vrav = 1, zaoc = 2, zaov = 1, zaac = 1, zaav = 1, zooc = 1, zoov = 1, zoac = 1, zoav = 2, wkndn = 1, feest = 2)
+        case "onderwater"   => ShiftNumbers(wac = 7,  wav = 7,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 1, wkndn = 1, feest = 2)
+        case "rens_van"     => ShiftNumbers(wac = 7,  wav = 7,  wan = 5, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 1, wkndn = 2, feest = 2)
+        case "rekkers"      => ShiftNumbers(wac = 8,  wav = 8,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 3, zoav = 2, wkndn = 2, feest = 3)
+        case "sluijs_vd"    => ShiftNumbers(wac = 9,  wav = 9,  wan = 6, vrac = 2, vrav = 2, zaoc = 2, zaov = 2, zaac = 2, zaav = 2, zooc = 2, zoov = 2, zoac = 2, zoav = 3, wkndn = 2, feest = 3)
+    }).toCounterConstraints
+
     val otherResourceConstraints = others.map {
       case resource @ Resource(_, _, nrOfPatients) =>
-        val counterConstraints: List[CounterConstraint] =
-          calculateDesiredNumberOfTasks(applicableTasks, counters, nrOfPatients * 1F / totalPatients).map {
-            case (counter, desiredNumber) =>
-              CounterConstraint(counter, desiredNumber)
-          }.toList
+        val counterConstraints: List[CounterConstraint] = calcCounterConstraints(resource)
         val constraints: List[Constraint] = counterConstraints ++ List(
           overlappingTasksConstraint,
           absenceConstraint(resource),
@@ -2504,27 +2546,20 @@ object Data2018 {
     }.toMap
 
     val firstResourceConstraints = {
-      val counterConstraints = calculateDesiredNumberOfTasks(
-        applicableTasks,
-        counters,
-        1
-      ).map {
-        case (counter, totalDesiredNumber) =>
-          val desiredNumber = totalDesiredNumber - otherResourceConstraints.values.flatten.collect {
-            case CounterConstraint(c, number, _) if c == counter => number
-          }.sum
-          CounterConstraint(counter, desiredNumber)
-      }.toList
+      val counterConstraints = calcCounterConstraints(first)
       val constraints: List[Constraint] = List(overlappingTasksConstraint,
                                                connectingConstraint(first),
                                                absenceConstraint(first),
                                                weekendTasksConstraint(first),
-                                               weekendGapConstraint) ++ counterConstraints
+                                               weekendGapConstraint
+                                           ) ++ counterConstraints
       (first -> constraints)
     }
 
     otherResourceConstraints + firstResourceConstraints
   }
+
+
 
   val feestAssignments = Map(
     "20180510_consult_weekend_donderdag_feest_avond"  -> "sluijs_vd",
@@ -2739,6 +2774,13 @@ object Data2018 {
     name = "Feest",
     calendar = calendar,
     assignments = feestAssignments,
+    resourceConstraints = resourceConstraints
+  )(TaskContext(applicableTasks.toList))
+
+  val emptySchedule = Schedule(
+    name = "Empty",
+    calendar = calendar,
+    assignments = Map.empty,
     resourceConstraints = resourceConstraints
   )(TaskContext(applicableTasks.toList))
 
